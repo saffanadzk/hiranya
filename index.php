@@ -4,7 +4,7 @@ if (!isset($_SESSION['login'])) { header("Location: login.php"); exit; }
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Dashboard Hiranya</title>
 </head>
 <body>

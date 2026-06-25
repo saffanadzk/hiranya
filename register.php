@@ -9,7 +9,7 @@ if (isset($_POST['register'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Register - Hiranya</title>
 </head>
 <body>

@@ -9,7 +9,7 @@ if (isset($_POST['update'])) {
 ?>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="style.css"></head>
+<head><link rel="stylesheet" href="assets/css/style.css"></head>
 <body>
     <div class="container">
         <h2>Edit Karya</h2>
