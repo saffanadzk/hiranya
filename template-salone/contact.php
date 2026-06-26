@@ -1,3 +1,10 @@
+<?php 
+include 'config.php';
+if (!isset($_SESSION['login'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +67,7 @@
                     <a href="index.html" class="nav-item nav-link">Home</a>
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link active">Price</a>
+                    <a href="price.html" class="nav-item nav-link">Price</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu bg-light mt-2">
@@ -71,7 +78,7 @@
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="contact.html" class="nav-item nav-link active">Contact</a>
                 </div>
                 <div class="d-flex">
                     <a class="btn btn-primary btn-sm-square me-3" href=""><i class="fab fa-facebook-f"></i></a>
@@ -85,14 +92,14 @@
 
 
     <!-- Hero Start -->
-    <div class="container-fluid bg-light page-header py-5">
+    <div class="container-fluid bg-light page-header py-5 mb-5">
         <div class="container text-center py-5">
-            <h1 class="display-1 animated slideInLeft">Price</h1>
+            <h1 class="display-1 animated slideInLeft">Contact</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center animated slideInLeft mb-0">
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Price</li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
             </nav>
         </div>
@@ -100,85 +107,62 @@
     <!-- Hero End -->
 
 
-    <!-- Pricing Start -->
-    <div class="container-fluid price px-0">
-        <div class="row g-0">
-            <div class="col-md-6">
-                <div class="d-flex align-items-center h-100 bg-primary p-5">
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="font-dancing-script text-primary">Contact</h1>
+                <h1 class="mb-5">Have Any Query? Contact Us</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working
+                        contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code
+                        and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
                     <div class="wow fadeIn" data-wow-delay="0.3s">
-                        <h1 class="font-dancing-script text-white">Pricing</h1>
-                        <h1 class="mb-0">Beauty Salon</h1>
-                        <h1 class="display-1 text-uppercase mb-5" style="letter-spacing: 10px;">Pricing</h1>
-                        <div class="row g-4 align-items-center">
-                            <div class="col-lg-6">
-                                <div class="text-center bg-dark p-5">
-                                    <h4 class="text-white">Enjoy</h4>
-                                    <h1 class="display-1 font-work-sans text-white">20%</h1>
-                                    <p class="fs-2 text-white mb-0">Off</p>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                        <label for="subject">Subject</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Leave a message here" id="message"
+                                            style="height: 150px"></textarea>
+                                        <label for="message">Message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3 ms-0" type="submit">SEND MESSAGE</button>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <p>Lorem ipsum dolor sit, consectetur adipiscing elit. Maecenas eget libero lobortis,
-                                    auctor nisi quis, aliquet nunc. Nam dapibus lacus.</p>
-                                <a class="btn btn-dark" href="">Get 20% Off</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="h-100 bg-dark p-5">
-                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.1s">
-                        <img class="img-fluid flex-shrink-0" src="img/price-1.jpg" alt="">
-                        <div class="text-end px-4">
-                            <h6 class="text-uppercase text-primary">Haircut</h6>
-                            <h3 class="text-white font-work-sans mb-0">$49</h3>
-                        </div>
-                    </div>
-                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.2s">
-                        <img class="img-fluid flex-shrink-0" src="img/price-2.jpg" alt="">
-                        <div class="text-end px-4">
-                            <h6 class="text-uppercase text-primary">Makeup</h6>
-                            <h3 class="text-white font-work-sans mb-0">$79</h3>
-                        </div>
-                    </div>
-                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.3s">
-                        <img class="img-fluid flex-shrink-0" src="img/price-3.jpg" alt="">
-                        <div class="text-end px-4">
-                            <h6 class="text-uppercase text-primary">Manicure</h6>
-                            <h3 class="text-white font-work-sans mb-0">$59</h3>
-                        </div>
-                    </div>
-                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.4s">
-                        <img class="img-fluid flex-shrink-0" src="img/price-4.jpg" alt="">
-                        <div class="text-end px-4">
-                            <h6 class="text-uppercase text-primary">Pedicure</h6>
-                            <h3 class="text-white font-work-sans mb-0">$49</h3>
-                        </div>
-                    </div>
-                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.5s">
-                        <img class="img-fluid flex-shrink-0" src="img/price-5.jpg" alt="">
-                        <div class="text-end px-4">
-                            <h6 class="text-uppercase text-primary">Massage</h6>
-                            <h3 class="text-white font-work-sans mb-0">$39</h3>
-                        </div>
-                    </div>
-                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.6s">
-                        <img class="img-fluid flex-shrink-0" src="img/price-6.jpg" alt="">
-                        <div class="text-end px-4">
-                            <h6 class="text-uppercase text-primary">Skin Care</h6>
-                            <h3 class="text-white font-work-sans mb-0">$99</h3>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Pricing End -->
+    <!-- Contact End -->
 
 
     <!-- Footer Start -->
-    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 mt-5 wow fadeIn"
+        data-wow-delay="0.2s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 pe-lg-5">

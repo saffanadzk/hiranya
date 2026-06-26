@@ -1,3 +1,10 @@
+<?php 
+include 'config.php';
+if (!isset($_SESSION['login'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,11 +71,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu bg-light mt-2">
-                            <a href="gallery.html" class="dropdown-item active">Photo Gallery</a>
+                            <a href="gallery.html" class="dropdown-item">Photo Gallery</a>
                             <a href="blog.html" class="dropdown-item">Beauty Blog</a>
                             <a href="team.html" class="dropdown-item">Our Team</a>
                             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
+                            <a href="404.html" class="dropdown-item active">404 Page</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -87,12 +94,12 @@
     <!-- Hero Start -->
     <div class="container-fluid bg-light page-header py-5 mb-5">
         <div class="container text-center py-5">
-            <h1 class="display-1 animated slideInLeft">Gallery</h1>
+            <h1 class="display-1 animated slideInLeft">404 Error</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center animated slideInLeft mb-0">
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+                    <li class="breadcrumb-item active" aria-current="page">404 Error</li>
                 </ol>
             </nav>
         </div>
@@ -100,72 +107,22 @@
     <!-- Hero End -->
 
 
-    <!-- Gallery Start -->
-    <div class="container-fluid gallery py-5">
-        <div class="container">
-            <div class="text-center wow fadeIn" data-wow-delay="0.2s">
-                <h1 class="font-dancing-script text-primary">Gallery</h1>
-                <h1 class="mb-5">Explore Our Gallery</h1>
-            </div>
-            <div class="row g-0">
-                <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                    <div class="gallery-item h-100">
-                        <img src="img/gallery-1.jpg" class="img-fluid w-100 h-100" alt="">
-                        <div class="gallery-icon">
-                            <a href="img/gallery-1.jpg" class="btn btn-primary btn-lg-square"
-                                data-lightbox="Gallery-1"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 wow fadeIn" data-wow-delay="0.4s">
-                    <div class="gallery-item h-100">
-                        <img src="img/gallery-2.jpg" class="img-fluid w-100 h-100" alt="">
-                        <div class="gallery-icon">
-                            <a href="img/gallery-2.jpg" class="btn btn-primary btn-lg-square"
-                                data-lightbox="Gallery-2"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 wow fadeIn" data-wow-delay="0.6s">
-                    <div class="gallery-item h-100">
-                        <img src="img/gallery-3.jpg" class="img-fluid w-100 h-100" alt="">
-                        <div class="gallery-icon">
-                            <a href="img/gallery-3.jpg" class="btn btn-primary btn-lg-square"
-                                data-lightbox="Gallery-3"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 wow fadeIn" data-wow-delay="0.2s">
-                    <div class="gallery-item h-100">
-                        <img src="img/gallery-4.jpg" class="img-fluid w-100 h-100" alt="">
-                        <div class="gallery-icon">
-                            <a href="img/gallery-4.jpg" class="btn btn-primary btn-lg-square"
-                                data-lightbox="Gallery-4"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 wow fadeIn" data-wow-delay="0.4s">
-                    <div class="gallery-item h-100">
-                        <img src="img/gallery-5.jpg" class="img-fluid w-100 h-100" alt="">
-                        <div class="gallery-icon">
-                            <a href="img/gallery-5.jpg" class="btn btn-primary btn-lg-square"
-                                data-lightbox="Gallery-5"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 wow fadeIn" data-wow-delay="0.6s">
-                    <div class="gallery-item h-100">
-                        <img src="img/gallery-6.jpg" class="img-fluid w-100 h-100" alt="">
-                        <div class="gallery-icon">
-                            <a href="img/gallery-6.jpg" class="btn btn-primary btn-lg-square"
-                                data-lightbox="Gallery-6"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
+    <!-- 404 Start -->
+    <div class="container-fluid py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
+                    <h1 class="display-1">404</h1>
+                    <h1 class="mb-4">Page Not Found</h1>
+                    <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to
+                        our home page or try to use a search?</p>
+                    <a class="btn btn-primary py-3 px-4" href="">Go Back To Home</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Gallery End -->
+    <!-- 404 End -->
 
 
     <!-- Footer Start -->
@@ -231,9 +188,6 @@
                     &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
                     Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>.
                     Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
                 </div>
@@ -246,7 +200,6 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -257,7 +210,6 @@
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
 

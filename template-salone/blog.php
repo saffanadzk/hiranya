@@ -1,3 +1,10 @@
+<?php 
+include 'config.php';
+if (!isset($_SESSION['login'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,16 +69,16 @@
                     <a href="service.html" class="nav-item nav-link">Service</a>
                     <a href="price.html" class="nav-item nav-link">Price</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu bg-light mt-2">
                             <a href="gallery.html" class="dropdown-item">Photo Gallery</a>
-                            <a href="blog.html" class="dropdown-item">Beauty Blog</a>
+                            <a href="blog.html" class="dropdown-item active">Beauty Blog</a>
                             <a href="team.html" class="dropdown-item">Our Team</a>
                             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-flex">
                     <a class="btn btn-primary btn-sm-square me-3" href=""><i class="fab fa-facebook-f"></i></a>
@@ -85,14 +92,14 @@
 
 
     <!-- Hero Start -->
-    <div class="container-fluid bg-light page-header py-5 mb-5">
+    <div class="container-fluid bg-light page-header py-5">
         <div class="container text-center py-5">
-            <h1 class="display-1 animated slideInLeft">Contact</h1>
+            <h1 class="display-1 animated slideInLeft">Blog</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center animated slideInLeft mb-0">
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
                 </ol>
             </nav>
         </div>
@@ -100,62 +107,48 @@
     <!-- Hero End -->
 
 
-    <!-- Contact Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="font-dancing-script text-primary">Contact</h1>
-                <h1 class="mb-5">Have Any Query? Contact Us</h1>
+    <!-- Blog Start -->
+    <div class="container-fluid blog p-0">
+        <div class="row g-0">
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="h-100 d-flex flex-column justify-content-center bg-primary py-5 px-4">
+                    <p class="mb-2"><i class="fa fa-calendar-alt text-dark me-1"></i>Jan 01, 2045 | <i
+                            class="fa fa-folder-open text-dark me-1"></i>Hair Salon</p>
+                    <h3 class="mb-3">How to Extend The Life of Your Haircolor</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget libero lobortis, auctor
+                        nisi quis, aliquet nunc. Nam dapibus interdum lacus.</p>
+                    <a class="btn btn-dark align-self-start text-uppercase" href="">Read More <i
+                            class="bi bi-arrow-right"></i></a>
+                </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working
-                        contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code
-                        and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                    <div class="wow fadeIn" data-wow-delay="0.3s">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                        <label for="subject">Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message"
-                                            style="height: 150px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3 ms-0" type="submit">SEND MESSAGE</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="h-100">
+                    <img class="img-fluid w-100 h-100" src="img/blog-1.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                <div class="h-100 d-flex flex-column justify-content-center bg-primary py-5 px-4">
+                    <p class="mb-2"><i class="fa fa-calendar-alt text-dark me-1"></i>Jan 01, 2045 | <i
+                            class="fa fa-folder-open text-dark me-1"></i>Hair Salon</p>
+                    <h3 class="mb-3">Hottest Hairstyles and Haircuts in 2045</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget libero lobortis, auctor
+                        nisi quis, aliquet nunc. Nam dapibus interdum lacus.</p>
+                    <a class="btn btn-dark align-self-start text-uppercase" href="">Read More <i
+                            class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                <div class="h-100">
+                    <img class="img-fluid w-100 h-100" src="img/blog-2.jpg" alt="" style="object-fit: cover;">
                 </div>
             </div>
         </div>
     </div>
-    <!-- Contact End -->
+    <!-- Blog End -->
 
 
     <!-- Footer Start -->
-    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 mt-5 wow fadeIn"
-        data-wow-delay="0.2s">
+    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.2s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 pe-lg-5">

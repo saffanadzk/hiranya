@@ -1,3 +1,10 @@
+<?php 
+include 'config.php';
+if (!isset($_SESSION['login'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,9 +65,9 @@
             <div class="collapse navbar-collapse p-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link active">About</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
+                    <a href="price.html" class="nav-item nav-link active">Price</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu bg-light mt-2">
@@ -85,14 +92,14 @@
 
 
     <!-- Hero Start -->
-    <div class="container-fluid bg-light page-header py-5 mb-5">
+    <div class="container-fluid bg-light page-header py-5">
         <div class="container text-center py-5">
-            <h1 class="display-1 animated slideInLeft">About Us</h1>
+            <h1 class="display-1 animated slideInLeft">Price</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center animated slideInLeft mb-0">
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-primary" href="#">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    <li class="breadcrumb-item active" aria-current="page">Price</li>
                 </ol>
             </nav>
         </div>
@@ -100,149 +107,85 @@
     <!-- Hero End -->
 
 
-    <!-- About Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.2s">
-                    <img class="img-fluid mb-3" src="img/about.jpg" alt="">
-                    <div class="d-flex align-items-center bg-light">
-                        <div class="btn-square flex-shrink-0 bg-primary" style="width: 100px; height: 100px;">
-                            <i class="fa fa-phone fa-2x text-dark"></i>
-                        </div>
-                        <div class="px-3">
-                            <h3>+0123456789</h3>
-                            <span>Call us direct 24/7 for get a free consultation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="font-dancing-script text-primary">About Us</h1>
-                    <h1 class="mb-5">Why People Choose Us!</h1>
-                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget libero
-                        lobortis, auctor nisi quis, aliquet nunc. Nam dapibus interdum lacus, suscipit tempor odio
-                        viverra aliquam. Etiam non ex ex.</p>
-                    <div class="row g-3 mb-5">
-                        <div class="col-sm-6">
-                            <div class="bg-light text-center p-4">
-                                <i class="fas fa-calendar-alt fa-4x text-primary"></i>
-                                <h1 class="display-5" data-toggle="counter-up">25</h1>
-                                <p class="text-dark text-uppercase mb-0">Years experience</p>
+    <!-- Pricing Start -->
+    <div class="container-fluid price px-0">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center h-100 bg-primary p-5">
+                    <div class="wow fadeIn" data-wow-delay="0.3s">
+                        <h1 class="font-dancing-script text-white">Pricing</h1>
+                        <h1 class="mb-0">Beauty Salon</h1>
+                        <h1 class="display-1 text-uppercase mb-5" style="letter-spacing: 10px;">Pricing</h1>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-lg-6">
+                                <div class="text-center bg-dark p-5">
+                                    <h4 class="text-white">Enjoy</h4>
+                                    <h1 class="display-1 font-work-sans text-white">20%</h1>
+                                    <p class="fs-2 text-white mb-0">Off</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="bg-light text-center p-4">
-                                <i class="fas fa-users fa-4x text-primary"></i>
-                                <h1 class="display-5" data-toggle="counter-up">999</h1>
-                                <p class="text-dark text-uppercase mb-0">Happy Customers</p>
+                            <div class="col-lg-6">
+                                <p>Lorem ipsum dolor sit, consectetur adipiscing elit. Maecenas eget libero lobortis,
+                                    auctor nisi quis, aliquet nunc. Nam dapibus lacus.</p>
+                                <a class="btn btn-dark" href="">Get 20% Off</a>
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary text-uppercase px-5 py-3" href="">Read More</a>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- About End -->
-
-
-    <!-- Team Start -->
-    <div class="container-fluid overflow-hidden py-5">
-        <div class="container">
-            <div class="text-center wow fadeIn" data-wow-delay="0.2s">
-                <h1 class="font-dancing-script text-primary">Team Members</h1>
-                <h1 class="mb-5">Our Experienced Specialists</h1>
-            </div>
-            <div class="row g-4 team">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="team-item position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
-                        <div class="team-overlay">
-                            <p class="text-primary mb-1">Hair Specialist</p>
-                            <h4>Lily Taylor</h4>
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2" href="">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </div>
+            <div class="col-md-6">
+                <div class="h-100 bg-dark p-5">
+                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.1s">
+                        <img class="img-fluid flex-shrink-0" src="img/price-1.jpg" alt="">
+                        <div class="text-end px-4">
+                            <h6 class="text-uppercase text-primary">Haircut</h6>
+                            <h3 class="text-white font-work-sans mb-0">$49</h3>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="team-item position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
-                        <div class="team-overlay">
-                            <p class="text-primary mb-1">Nail Designer</p>
-                            <h4>Olivia Smith</h4>
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2" href="">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </div>
+                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.2s">
+                        <img class="img-fluid flex-shrink-0" src="img/price-2.jpg" alt="">
+                        <div class="text-end px-4">
+                            <h6 class="text-uppercase text-primary">Makeup</h6>
+                            <h3 class="text-white font-work-sans mb-0">$79</h3>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="team-item position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
-                        <div class="team-overlay">
-                            <p class="text-primary mb-1">Beauty Specialist</p>
-                            <h4>Ava Brown</h4>
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2" href="">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </div>
+                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.3s">
+                        <img class="img-fluid flex-shrink-0" src="img/price-3.jpg" alt="">
+                        <div class="text-end px-4">
+                            <h6 class="text-uppercase text-primary">Manicure</h6>
+                            <h3 class="text-white font-work-sans mb-0">$59</h3>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <div class="team-item position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
-                        <div class="team-overlay">
-                            <p class="text-primary mb-1">Spa Specialist</p>
-                            <h4>Amelia Jones</h4>
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2 me-3" href="">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a class="btn btn-dark btn-sm-square border-2" href="">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </div>
+                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.4s">
+                        <img class="img-fluid flex-shrink-0" src="img/price-4.jpg" alt="">
+                        <div class="text-end px-4">
+                            <h6 class="text-uppercase text-primary">Pedicure</h6>
+                            <h3 class="text-white font-work-sans mb-0">$49</h3>
+                        </div>
+                    </div>
+                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.5s">
+                        <img class="img-fluid flex-shrink-0" src="img/price-5.jpg" alt="">
+                        <div class="text-end px-4">
+                            <h6 class="text-uppercase text-primary">Massage</h6>
+                            <h3 class="text-white font-work-sans mb-0">$39</h3>
+                        </div>
+                    </div>
+                    <div class="price-item mb-3 wow fadeIn" data-wow-delay="0.6s">
+                        <img class="img-fluid flex-shrink-0" src="img/price-6.jpg" alt="">
+                        <div class="text-end px-4">
+                            <h6 class="text-uppercase text-primary">Skin Care</h6>
+                            <h3 class="text-white font-work-sans mb-0">$99</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Team End -->
+    <!-- Pricing End -->
 
 
     <!-- Footer Start -->
-    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 mt-5 wow fadeIn"
-        data-wow-delay="0.2s">
+    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.2s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 pe-lg-5">
