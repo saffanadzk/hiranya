@@ -1,5 +1,6 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "hiranya");
-if (!$conn) { die("Connection Defeat: " . mysqli_connect_error()); }
+if (session_status() === PHP_SESSION_NONE) {
 session_start();
+}
 ?>

@@ -1,32 +1,30 @@
-<?php include 'config.php';
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-    $user = mysqli_fetch_assoc($result);
-    
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['login'] = true;
-        header("Location: index.php");
-    } else { $error = true; }
-}
+<?php 
+include 'config.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Login - Hiranya</title>
+    <meta charset="UTF-8">
+    <title>Login - Hiranya&Co.</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        <?php if(isset($error)) echo "<p style='color:red;'>Login Gagal!</p>"; ?>
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="login">Welcome</button>
+    <div class="login-container">
+        <div class="logo">H</div>
+        <h2>Sign in to your account</h2>
+        <form action="login_process.php" method="POST">
+            <input type="text" name="username" placeholder="Username*" required>
+            <input type="password" name="password" placeholder="Password*" required>
+
+            <div style="text-align: left;">
+            <a href="#" class="forgot-pass">Forgot your password?</a>
+            </div>
+            
+            <button type="submit" class="btn-signin">SIGN IN</button>
         </form>
-        <a href="register.php">dont have an account? Register</a>
+
+        <a href="register.php" class="create-account">Create an account</a>
     </div>
 </body>
 </html>
