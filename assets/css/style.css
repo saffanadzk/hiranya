@@ -1,7 +1,7 @@
 .logo {
     font-family: 'Cinzel', serif;
-    font-size: 39px;
-    font-weight: 700;
+    font-size: 48px;
+    font-weight: 800;
     color: #1C2431;
     border: 2px solid #6A1F2B;
     border-radius: 50%;
@@ -62,13 +62,50 @@ input:focus {
     border-color: #8b0000;
 }
 
+.register-as-wrapper {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.register-as-wrapper label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1C2431;
+    margin-bottom: 8px;
+}
+
+.register-as-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #1C2431;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b0000' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.register-as-select:focus {
+    outline: none;
+    border-color: #6a1f2b;
+}
+
 .btn-signin {
     width: 100%;
     padding: 16px;
     margin-top: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #000;
+    background-color: #3a0f14;
     color: #E8ECEF;
     cursor: pointer;
     font-size: 13px;
@@ -739,5 +776,1326 @@ input:focus {
     margin-right: 10px;
 }
 body{
+    background: #6a1f2b !important;
+}
+
+/*** PROFILE PAGE — file terpisah, tidak menyentuh style.css yang sudah ada ***/
+
+.profile-hero {
+    background-color: #1C2431;
+    padding: 70px 0 110px;
+    position: relative;
+}
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #e7e2d8;
+    border-radius: 14px;
+    padding: 45px 40px;
+    margin-top: -90px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 45px rgba(28, 36, 49, 0.12);
+}
+
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #f3eae0;
+    color: #6a1f2b;
+    font-family: 'Cinzel', serif;
+    font-size: 68px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #1C2431;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+}
+
+.profile-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #1C2431;
+    margin: 0 0 4px;
+}
+
+.profile-username {
+    color: #8b8378;
+    font-size: 15px;
+    margin: 0 0 14px;
+}
+
+.role-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(139, 0, 0, 0.08);
+    color: #8b0000;
+    border: 1px solid rgba(139, 0, 0, 0.25);
+}
+
+.profile-divider {
+    border-top: 1px solid #ece7dc;
+    margin: 35px 0 30px;
+}
+
+.section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #515561;
+    margin-bottom: 18px;
+}
+
+.action-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px;
+    border: 1px solid #ece7dc;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #1C2431;
+    transition: all .25s ease;
+    height: 100%;
+}
+
+.action-card:hover {
+    border-color: #8b0000;
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.08);
+    transform: translateY(-2px);
+    color: #1C2431;
+}
+
+.action-card .icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: #1C2431;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.action-card h6 {
+    margin: 0 0 3px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.action-card p {
+    margin: 0;
+    font-size: 13px;
+    color: #8b8378;
+}
+
+.btn-logout-outline {
+    border: 1px solid #8b0000;
+    color: #8b0000;
+    background: transparent;
+    padding: 10px 26px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .25s ease;
+}
+
+.btn-logout-outline:hover {
+    background: #8b0000;
+    color: #fff;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3efe6;
+    font-size: 14px;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row span:first-child {
+    color: #8b8378;
+}
+
+.info-row span:last-child {
+    color: #1C2431;
+    font-weight: 600;
+}
+
+/*** AUCTIONS PAGE — file terpisah, tidak menyentuh style.css yang sudah ada ***/
+
+/* Override khusus halaman auction: body global punya background #3A0F14 !important
+   (disengaja untuk halaman lain), jadi di sini kita timpa ulang area konten auction
+   agar tetap krem, tanpa menghapus/mengubah rule body di style.css */
+body.auction-page,
+body:has(.auction-page-head) {
+    background: #fcfaf7 !important;
+}
+
+/* Pastikan checkbox filter auction selalu terlihat jelas, terlepas dari tema body */
+.filter-dropdown-body .form-check-input {
+    width: 1.1em;
+    height: 1.1em;
+    margin-top: 0.2em;
+    border: 1px solid #b9b2a4;
+    background-color: #fff;
+    opacity: 1;
+}
+
+.filter-dropdown-body .form-check-input:checked {
+    background-color: #8b0000;
+    border-color: #8b0000;
+}
+
+/* Pastikan tombol card auction tidak terkena efek border dekorasi ::before/::after
+   milik .btn-primary / .btn-dark di style.css (beda class, tapi dikunci eksplisit
+   di sini supaya aman bila markup berubah) */
+.btn-card-outline::before,
+.btn-card-outline::after,
+.btn-card-solid::before,
+.btn-card-solid::after,
+.btn-outline-cream::before,
+.btn-outline-cream::after {
+    content: none !important;
+    border: none !important;
+}
+
+/* Page heading + sub tabs */
+.auction-page-head {
+    background: #fcfaf7;
+    padding: 40px 0 0;
+    border-bottom: 1px solid #ece7dc;
+}
+
+.auction-page-head h1 {
+    font-family: 'Playfair Display', serif;
+    color: #1C2431;
+    font-size: 34px;
+}
+
+.auction-subtabs {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.auction-subtabs li a {
+    display: inline-block;
+    padding-bottom: 14px;
+    color: #8b8378;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    transition: all .2s ease;
+}
+
+.auction-subtabs li a:hover {
+    color: #1C2431;
+}
+
+.auction-subtabs li a.active {
+    color: #8b0000;
+    border-bottom-color: #8b0000;
+}
+
+/* Hero carousel */
+.auction-hero-carousel {
+    position: relative;
+}
+
+.auction-hero-carousel .carousel-item img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+}
+
+.auction-hero-carousel .carousel-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28,36,49,0) 35%, rgba(28,36,49,0.75) 100%);
+}
+
+.carousel-caption-custom {
+    position: absolute;
+    left: 60px;
+    bottom: 50px;
+    z-index: 2;
+    text-align: left;
+    max-width: 560px;
+}
+
+.carousel-caption-custom .eyebrow {
+    color: #e8c97a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.carousel-caption-custom h2 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.btn-outline-cream {
+    display: inline-block;
+    border: 1px solid #fcfaf7;
+    color: #fcfaf7;
+    padding: 10px 24px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.btn-outline-cream:hover {
+    background: #fcfaf7;
+    color: #1C2431;
+}
+
+.auction-hero-carousel .carousel-control-prev,
+.auction-hero-carousel .carousel-control-next {
+    width: 60px;
+    opacity: 1;
+}
+
+.carousel-arrow {
+    width: 42px;
+    height: 42px;
+    background: rgba(28, 36, 49, 0.55);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.carousel-indicators-custom {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.carousel-indicators-custom button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.45);
+    padding: 0;
+}
+
+.carousel-indicators-custom button.active {
+    background: #e8c97a;
+}
+
+/* Sidebar filter (dropdown style) */
+.filter-panel {
+    border: 1px solid #ece7dc;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.filter-title {
+    font-family: 'Work Sans', sans-serif;
+    color: #1C2431;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.clear-link {
+    font-size: 12px;
+    color: #8b0000;
+    text-decoration: none;
+}
+
+.clear-link:hover {
+    text-decoration: underline;
+}
+
+.filter-dropdown {
+    border-top: 1px solid #f0ece2;
+    padding: 14px 0;
+}
+
+.filter-dropdown:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.filter-dropdown-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #1C2431;
+}
+
+.filter-dropdown-toggle i {
+    font-size: 11px;
+    color: #8b8378;
+    transition: transform .25s ease;
+}
+
+.filter-dropdown-toggle[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+.filter-dropdown-body {
+    padding-top: 14px;
+}
+
+.filter-dropdown-body .form-check {
+    margin-bottom: 8px;
+}
+
+.filter-dropdown-body .form-check-label {
+    font-size: 13.5px;
+    color: #444;
+}
+
+.filter-dropdown-body .form-check-input:checked {
+    background-color: #8b0000;
+    border-color: #8b0000;
+}
+
+/* Result count + sort */
+.result-count {
+    font-size: 13.5px;
+    color: #8b8378;
+}
+
+.sort-select {
+    font-size: 13px;
+    border-color: #ece7dc;
+}
+
+/* Auction cards */
+.auction-card {
+    border: 1px solid #ece7dc;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow .25s ease, transform .25s ease;
+}
+
+.auction-card:hover {
+    box-shadow: 0 16px 35px rgba(28, 36, 49, 0.1);
+    transform: translateY(-3px);
+}
+
+.auction-card-img {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.auction-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.tag-upcoming {
+    background: #1C2431;
+}
+
+.tag-live {
+    background: #8b0000;
+}
+
+.tag-online {
+    background: #8b8378;
+}
+
+.auction-card-body {
+    padding: 18px 20px 20px;
+}
+
+.auction-card-body h5 {
+    font-family: 'Playfair Display', serif;
+    color: #1C2431;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.auction-card-body .meta {
+    font-size: 12.5px;
+    color: #8b8378;
+    margin-bottom: 16px;
+}
+
+.btn-card-outline {
+    display: block;
+    text-align: center;
+    border: 1px solid #1C2431;
+    color: #1C2431;
+    background: transparent;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.btn-card-outline:hover {
+    background: #1C2431;
+    color: #fff;
+}
+
+.btn-card-solid {
+    display: block;
+    text-align: center;
+    border: 1px solid #8b0000;
+    color: #fff;
+    background: #8b0000;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.btn-card-solid:hover {
+    background: #6e0000;
+    border-color: #6e0000;
+}
+
+/* Auction Results — list rows */
+.result-list {
+    border-top: 1px solid #ece7dc;
+}
+
+.result-row {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ece7dc;
+}
+
+.result-img {
+    width: 110px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.result-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.result-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.result-date {
+    font-size: 11.5px;
+    color: #8b8378;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.result-info h5 {
+    font-family: 'Playfair Display', serif;
+    color: #1C2431;
+    font-size: 17px;
+    margin: 4px 0 4px;
+}
+
+.result-artist {
+    font-size: 13px;
+    color: #777;
+    margin: 0;
+}
+
+.result-price {
+    text-align: right;
+    flex-shrink: 0;
+    min-width: 170px;
+}
+
+.price-label {
+    display: block;
+    font-size: 11px;
+    color: #8b8378;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 2px;
+}
+
+.price-value {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #1C2431;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.price-passed {
+    color: #aaa;
+}
+
+.tag-sold {
+    background: #1a7d3a;
+}
+
+.tag-passed {
+    background: #8b8378;
+}
+
+@media (max-width: 767.98px) {
+    .result-row {
+        flex-wrap: wrap;
+    }
+
+    .result-price {
+        text-align: left;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .carousel-caption-custom {
+        left: 24px;
+        right: 24px;
+        bottom: 30px;
+        max-width: none;
+    }
+
+    .carousel-caption-custom h2 {
+        font-size: 22px;
+    }
+
+    .auction-hero-carousel .carousel-item img {
+        height: 320px;
+    }
+}
+
+/*** DISCOVER / ARTISTS / COLLECTIONS / SELL WITH US — file terpisah,
+     tidak menyentuh style.css yang sudah ada ***/
+
+
+body.discover-page {
+    background: #fcfaf7 !important;
+}
+
+.discover-page-head {
+    background: #fcfaf7;
+    padding: 40px 0 30px;
+    border-bottom: 1px solid #ece7dc;
+}
+
+.discover-page-head h1 {
+    font-family: 'Playfair Display', serif;
+    color: #1C2431;
+    font-size: 34px;
+}
+
+.discover-sub {
+    color: #8b8378;
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+.result-count {
+    font-size: 13.5px;
+    color: #8b8378;
+}
+
+.shelf-select {
+    font-size: 13px;
+    border-color: #ece7dc;
+}
+
+/*** Goodreads-style shelf grid (Artists / Collections) ***/
+.shelf-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 28px 22px;
+}
+
+@media (max-width: 1199.98px) {
+    .shelf-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .shelf-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.shelf-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.shelf-cover {
+    display: block;
+    aspect-ratio: 3 / 4;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(28, 36, 49, 0.12);
+    margin-bottom: 12px;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.shelf-cover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(28, 36, 49, 0.18);
+}
+
+.shelf-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shelf-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1C2431;
+    margin: 0 0 2px;
+    line-height: 1.3;
+}
+
+.shelf-meta {
+    font-size: 12px;
+    color: #8b8378;
+    margin: 0 0 6px;
+}
+
+.shelf-rating {
+    font-size: 11px;
+    color: #e8c97a;
+}
+
+.shelf-rating i {
+    margin-right: 1px;
+}
+
+.shelf-rating span {
+    color: #8b8378;
+    margin-left: 4px;
+}
+
+/*** Discover / Art Stories ***/
+.story-feature {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0;
+    text-decoration: none;
+    border: 1px solid #ece7dc;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow .25s ease;
+}
+
+.story-feature:hover {
+    box-shadow: 0 18px 40px rgba(28, 36, 49, 0.12);
+}
+
+.story-feature-img {
+    height: 100%;
+    min-height: 320px;
+}
+
+.story-feature-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-feature-text {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.story-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #8b0000;
+    margin-bottom: 12px;
+}
+
+.story-feature-text h2 {
+    font-family: 'Playfair Display', serif;
+    color: #1C2431;
+    font-size: 26px;
+    margin-bottom: 14px;
+}
+
+.story-feature-text p {
+    color: #555;
+    font-size: 14.5px;
+    margin-bottom: 18px;
+}
+
+.story-read-more {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #1C2431;
+}
+
+.story-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid #ece7dc;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    height: 100%;
+    transition: box-shadow .25s ease, transform .25s ease;
+}
+
+.story-card:hover {
+    box-shadow: 0 14px 30px rgba(28, 36, 49, 0.1);
+    transform: translateY(-3px);
+}
+
+.story-card-img {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.story-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-tag-overlay {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(28, 36, 49, 0.85);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.story-card-body {
+    padding: 18px 20px;
+}
+
+.story-card-body h6 {
+    font-family: 'Playfair Display', serif;
+    color: #1C2431;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.story-card-body p {
+    font-size: 13px;
+    color: #777;
+    margin: 0;
+}
+
+@media (max-width: 767.98px) {
+    .story-feature {
+        grid-template-columns: 1fr;
+    }
+
+    .story-feature-img {
+        min-height: 220px;
+    }
+}
+
+/*** Sell With Us ***/
+.sell-step {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #8b0000;
+    margin-bottom: 10px;
+}
+
+.sell-section h2 {
+    color: #1C2431;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.sell-section p {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+.sell-section-img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.sell-divider {
+    margin: 60px 0;
+    border-top: 1px solid #ece7dc;
+}
+
+.testimonial-box {
+    background: #fff;
+    border: 1px solid #ece7dc;
+    border-radius: 10px;
+    padding: 28px;
+    height: 100%;
+}
+
+.testimonial-box p {
+    font-size: 14.5px;
+    color: #444;
+    font-style: italic;
+    margin-bottom: 14px;
+}
+
+.testimonial-box span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1C2431;
+}
+
+/*** SUBMIT ARTWORK PAGE ***/
+body.submit-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #3A0F14 !important;
+    padding: 40px 16px;
+}
+
+.submit-card {
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+.submit-card-header {
+    background: #1C2431;
+    padding: 36px 40px 28px;
+    text-align: center;
+}
+
+.submit-card-header .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 35px;
+    font-weight: 700;
+    color: #1c2431;
+    background: #f4f9fe;
+    border: 2px solid #8b0000;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.submit-card-header h2 {
+    font-family: 'Cinzel', serif;
+    color: #f4f9fe;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: 1px;
+}
+
+.submit-card-header p {
+    color: #b4ab97;
+    font-size: 13px;
+    margin: 0;
+}
+
+.submit-card-body {
+    padding: 36px 40px 40px;
+}
+
+.field-group {
+    margin-bottom: 18px;
+}
+
+.field-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8b8378;
+    margin-bottom: 7px;
+}
+
+.field-group input,
+.field-group textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1C2431;
+    background: #fafaf8;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    outline: none;
+    font-family: inherit;
+}
+
+.field-group input:focus,
+.field-group textarea:focus {
+    border-color: #8b0000;
+    background: #fff;
+}
+
+.field-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.file-upload-wrapper input[type="file"] {
+    display: none;
+}
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border: 1px dashed #c0bab0;
+    border-radius: 8px;
+    background: #fafaf8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload-label:hover {
+    border-color: #8b0000;
+    background: #fff;
+}
+
+.file-upload-label i {
+    color: #8b0000;
+    font-size: 18px;
+}
+
+.file-upload-label span {
+    font-size: 13.5px;
+    color: #8b8378;
+}
+
+#file-name {
+    font-size: 13px;
+    color: #555;
+    margin-top: 6px;
+    padding-left: 4px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 10px;
+    background: #1C2431;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #8b0000;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #8b8378;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #8b0000;
+    text-decoration: underline;
+}
+
+/*** MY ARTWORKS PAGE ***/
+body.my-artworks-page {
+    background: #f5f3ef !important;
+    min-height: 100vh;
+}
+
+.artworks-page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+}
+
+.artworks-page-head {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.artworks-page-head h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #1C2431;
+    margin-bottom: 10px;
+}
+
+.title-underline {
+    width: 48px;
+    height: 2px;
+    background: #8b0000;
+    margin: 0 auto;
+}
+
+/* Grid */
+.artworks-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+@media (max-width: 767px) {
+    .artworks-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .artworks-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card */
+.art-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(28,36,49,0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.art-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(28,36,49,0.13);
+}
+
+.art-card-img {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.art-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dropdown menu */
+.art-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.art-menu-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.92);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #1C2431;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.art-menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 36px;
+    background: #fff;
+    border: 1px solid #ece7dc;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    min-width: 110px;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.art-menu-dropdown.show {
+    display: block;
+}
+
+.art-menu-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #1C2431;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.art-menu-dropdown a:hover {
+    background: #f5f3ef;
+}
+
+.art-menu-dropdown a.delete-link {
+    color: #8b0000;
+}
+
+/* Card body */
+.art-card-body {
+    padding: 16px 18px 20px;
+}
+
+.art-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: #1C2431;
+    margin-bottom: 6px;
+}
+
+.art-desc {
+    font-size: 13px;
+    color: #8b8378;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.art-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: #8b0000;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.art-status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.art-status.available {
+    background: rgba(26,125,58,0.1);
+    color: #1a7d3a;
+    border: 1px solid rgba(26,125,58,0.25);
+}
+
+/* Navbar upload button */
+.btn-upload-nav {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #8b0000;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: background .25s ease;
+}
+
+.btn-upload-nav:hover {
+    background: #6e0000;
+    color: #fff;
 }

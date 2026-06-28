@@ -61,34 +61,104 @@ if(!isset($_SESSION['user_id'])){
                         </div>
                     </div>
                 </li>
-                <!-- ARTWORK -->
-                <li class="nav-item">
-                    <a class="nav-link" href="home.php">ARTWORKS</a>
-                </li>
-                <?php if ($_SESSION['role'] == 'artist') : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="submit_artwork.php">SUBMIT ARTWORK</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="my_artworks.php">MY ARTWORKS</a>
-                </li>
-                <?php endif; ?>
-                <?php if($_SESSION['role']=='artist') : ?>
+                <!-- PRIVATE SALES -->
                 <li class="nav-item dropdown dropdown-hover">
-                    <a class="nav-link dropdown-toggle" href="#">
-                        ARTIST PANEL
-                    </a>
-                    <div class="dropdown-menu border-0 shadow">
-                        <a class="dropdown-item" href="submit_artwork.php">
-                            Submit Artwork
-                        </a>
-                        <a class="dropdown-item" href="my_artworks.php">
-                            My Artworks
-                        </a>
+                    <a class="nav-link dropdown-toggle" href="#">PRIVATE SALES</a>
+                    <div class="dropdown-menu border-0 shadow p-4" style="min-width: 700px;">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-danger">AVAILABLE</h6>
+                                <a class="dropdown-item" href="available_works.php">AVAILABLE WORKS</a>
+                                <a class="dropdown-item" href="featured_collections.php">FEATURED COLLECTIONS</a>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="text-danger">BUY/SELL</h6>
+                                <a class="dropdown-item" href="buy_privately.php">BUY PRIVATELY</a>
+                                <a class="dropdown-item" href="sell_privately.php">SELL PRIVATELY</a>
+                            </div>
+                            <div class="col-4 border-start">
+                                <h6 class="text-danger">HIGHLIGHTS</h6>
+                                <p>Karya unggulan | Koleksi kurator | Karya baru masuk</p>
+                            </div>
+                        </div>
                     </div>
                 </li>
-                <?php endif; ?>
-
+                <!-- ARTISTS -->
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" href="#">ARTISTS</a>
+                    <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="dropdown-item" href="featured_artists.php">FEATURED ARTISTS</a>
+                                <a class="dropdown-item" href="emerging_artists.php">EMERGING ARTISTS</a>
+                                <a class="dropdown-item" href="all_artists.php">ALL ARTISTS</a>
+                                <a class="dropdown-item" href="become_artist.php">BECOME AN ARTIST</a>
+                            </div>
+                            <div class="col-6 border-start">
+                                <h6 class="text-danger">HIGHLIGHTS</h6>
+                                <p>Profil seniman pilihan | Karya terbaru mereka</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- DISCOVER -->
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" href="#">DISCOVER</a>
+                    <div class="dropdown-menu border-0 shadow p-4" style="min-width: 800px;">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-danger">EXPLORE</h6>
+                                <a class="dropdown-item" href="exhibitions.php">EXHIBITIONS</a>
+                                <a class="dropdown-item" href="art_stories.php">ART STORIES</a>
+                                <a class="dropdown-item" href="art_market.php">ART MARKET</a>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="text-danger">RESOURCES</h6>
+                                <a class="dropdown-item" href="collectors_guide.php">COLLECTOR'S GUIDE</a>
+                                <a class="dropdown-item" href="news.php">NEWS</a>
+                                <a class="dropdown-item" href="videos.php">VIDEOS</a>
+                            </div>
+                            <div class="col-4 border-start">
+                                <h6 class="text-danger">LATEST STORIES</h6>
+                                <small>The Rise of Emerging Indonesian Artists</small><br>
+                                <small>How to Start Collecting Art</small>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- SELL WITH US -->
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" href="#">SELL WITH US</a>
+                    <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="dropdown-item" href="submit_artwork.php">
+                                    SUBMIT ARTWORK
+                                </a>
+                                <a class="dropdown-item" href="request_valuation.php">
+                                    REQUEST VALUATION
+                                </a>
+                                <a class="dropdown-item" href="sell_auction.php">
+                                    SELL AT AUCTION
+                                </a>
+                                <a class="dropdown-item" href="sell_private.php">
+                                    SELL VIA PRIVATE SALES
+                                </a>
+                                <a class="dropdown-item" href="selling_guide.php">
+                                    SELLING GUIDE
+                                </a>
+                            </div>
+                            <div class="col-6 border-start">
+                                <h6 class="text-danger">GUIDANCE</h6>
+                                <p>
+                                    Get an estimate |
+                                    How Hiranya House works |
+                                    Success stories
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <!-- KANAN NAVBAR -->
             <div class="d-flex align-items-center ms-auto">
@@ -104,14 +174,10 @@ if(!isset($_SESSION['user_id'])){
                 <a href="profile.php" class="text-white me-3">
                     <i class="fa fa-user fa-lg"></i>
                 </a>
-                <a href="logout.php" class="btn btn-outline-light ms-2 px-4">
-                    LOGOUT
-                </a>
             </div>
         </div>
     </nav>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

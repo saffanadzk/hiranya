@@ -168,10 +168,11 @@ include 'config.php';
                             </button>
                         </form>
                             
-                        <?php if(!isset($_SESSION['user_id'])) : ?>
-                            <a href="login.php" class="btn btn-outline-light ms-4 px-4">SIGN IN</a>
                         
-                        <?php endif; ?>
+                             <a href="login.php" class="btn btn-outline-light ms-2 px-4" 
+                                style="white-space:nowrap; text-decoration:none;">
+                                SIGN IN
+                            </a>
                     </div>
                 </div>
             </nav>

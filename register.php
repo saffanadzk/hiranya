@@ -44,28 +44,19 @@ if (isset($_POST['register'])) {
         ?>
 
         <form method="POST">
-            <input type="text"
-                   name="username"
-                   placeholder="Username*"
-                   required>
-            <input type="email"
-                   name="email"
-                   placeholder="Email Address*"
-                   required>
-            <input type="password"
-                   name="password"
-                   placeholder="Password*"
-                   required>
-            <select name="role_id" required>
-                <option value="">Register As</option>
-                <option value="1">Customer</option>
-                <option value="2">Artist</option>
-            </select>
-            <button type="submit"
-                    name="register"
-                    class="btn-signin">
-                REGISTER
-            </button>
+            <input type="text" name="username" placeholder="Username*" required>
+            <input type="email" name="email" placeholder="Email Address*" required>
+            <input type="password" name="password" placeholder="Password*" required>
+            <div class="register-as-wrapper">
+                <label for="registerAs">Register As</label>
+                <select id="registerAs" name="role_id" class="register-as-select" required>
+                    <option value="">— Select Role —</option>
+                    <option value="1">Customer</option>
+                    <option value="2">Artist</option>
+                </select>
+            </div>
+
+            <button type="submit" name="register" class="btn-signin">REGISTER</button>
         </form>
         <a href="login.php" class="footer-links">
             Already have an account? Login

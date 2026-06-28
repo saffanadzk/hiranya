@@ -7,42 +7,52 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'artist') {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $artist_id  = $_SESSION['user_id'];
-    $title      = trim($_POST['title']);
-    $description = trim($_POST['description']);
+    $title      = $_POST['title'];
+    $description = $_POST['description'];
     $price      = $_POST['price'];
+
+    // Folder upload
+    $upload_dir = "uploads/";
+
+    // Buat folder jika belum ada
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+
+    // Upload gambar
     $image_name = '';
 
-    if (!empty($_FILES['artwork_image']['name'])) {
-        $ext = strtolower(pathinfo(
-            $_FILES['artwork_image']['name'],
-            PATHINFO_EXTENSION
-        ));
-        $allowed = ['jpg','jpeg','png','webp'];
+    if (isset($_FILES['artwork_image']) && $_FILES['artwork_image']['error'] == 0) {
+
+        $ext = strtolower(pathinfo($_FILES['artwork_image']['name'], PATHINFO_EXTENSION));
+
+        $allowed = ['jpg', 'jpeg', 'png', 'webp'];
 
         if (!in_array($ext, $allowed)) {
-            die("Format gambar tidak valid.");
+            die("Format gambar harus JPG, JPEG, PNG, atau WEBP");
         }
+
         $image_name = time() . '_' . uniqid() . '.' . $ext;
-        move_uploaded_file(
+
+        if (!move_uploaded_file(
             $_FILES['artwork_image']['tmp_name'],
-            'uploads/' . $image_name
-        );
+            $upload_dir . $image_name
+        )) {
+            die("Gagal upload gambar.");
+        }
     }
-    $status = 'available';
+
+    $status = "available";
+
     $stmt = $conn->prepare("
         INSERT INTO artworks
-        (
-            artist_id,
-            title,
-            description,
-            price,
-            image_url,
-            status
-        )
+        (artist_id, title, description, price, image_url, status)
         VALUES (?, ?, ?, ?, ?, ?)
     ");
+
     $stmt->bind_param(
         "issdss",
         $artist_id,
@@ -57,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: my_artworks.php");
         exit;
     } else {
-        echo "Gagal menyimpan artwork.";
+        echo "Gagal menyimpan artwork: " . $conn->error;
     }
 }
 ?>
