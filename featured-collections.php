@@ -51,45 +51,45 @@ include 'config.php';
             <div class="shelf-grid">
                 <div class="shelf-item">
                     <a href="#" class="shelf-cover">
-                        <img src="img/artwork1.jpg" alt="Old Masters">
+                        <img src="assets/img/sold3.jpg" alt="Salvador Mundi">
                     </a>
-                    <h6 class="shelf-title">Old Masters</h6>
-                    <p class="shelf-meta">22 works</p>
+                    <h6 class="shelf-title">Salvador Mundi - Leonardo Da Vinci</h6>
+                    <p class="shelf-meta">32RB works</p>
                 </div>
                 <div class="shelf-item">
                     <a href="#" class="shelf-cover">
-                        <img src="img/artwork2.jpg" alt="Southeast Asian Modernists">
+                        <img src="assets/img/fear2.jpg" alt="Meiji Period Art">
                     </a>
-                    <h6 class="shelf-title">Southeast Asian Modernists</h6>
-                    <p class="shelf-meta">31 works</p>
+                    <h6 class="shelf-title">A Cloisonné Vase , Mark of the Hayashi Kodenji Workshop, Meiji Period (Late 19TH Century)</h6>
+                    <p class="shelf-meta">30RB works</p>
                 </div>
                 <div class="shelf-item">
                     <a href="#" class="shelf-cover">
-                        <img src="img/artwork3.jpg" alt="Contemporary Voices">
+                        <img src="assets/img/fear3.jpg" alt="Jewelry Collection">
                     </a>
-                    <h6 class="shelf-title">Contemporary Voices</h6>
-                    <p class="shelf-meta">17 works</p>
+                    <h6 class="shelf-title">Bulgari Eden The Garden Of Wonders</h6>
+                    <p class="shelf-meta">36JT works</p>
                 </div>
                 <div class="shelf-item">
                     <a href="#" class="shelf-cover">
-                        <img src="img/artwork1.jpg" alt="Heritage Jewels">
+                        <img src="assets/img/fear4.jpg" alt="Contemporary Art">
                     </a>
-                    <h6 class="shelf-title">Heritage Jewels</h6>
-                    <p class="shelf-meta">12 works</p>
+                    <h6 class="shelf-title">Street Vendors - Sudjana Kerton</h6>
+                    <p class="shelf-meta">34JT works</p>
                 </div>
                 <div class="shelf-item">
                     <a href="#" class="shelf-cover">
-                        <img src="img/artwork2.jpg" alt="Watches Through Time">
+                        <img src="assets/img/fear5.jpg" alt="Sculpture Collection">
                     </a>
-                    <h6 class="shelf-title">Watches Through Time</h6>
-                    <p class="shelf-meta">26 works</p>
+                    <h6 class="shelf-title">Steampunk Animal Sculptures Made Of Scrap Metal - Hasan Novrozi</h6>
+                    <p class="shelf-meta">26RB works</p>
                 </div>
                 <div class="shelf-item">
                     <a href="#" class="shelf-cover">
-                        <img src="img/artwork3.jpg" alt="Emerging Indonesian Artists">
+                        <img src="assets/img/fear6.jpg" alt="Jewelry Collection">
                     </a>
-                    <h6 class="shelf-title">Emerging Indonesian Artists</h6>
-                    <p class="shelf-meta">19 works</p>
+                    <h6 class="shelf-title">Cartier Unveils Four Maria Felix High-Jeweled Crocodile Masterpieces With Rare Colombian Emeralds</h6>
+                    <p class="shelf-meta">19JT works</p>
                 </div>
             </div>
         </div>

@@ -98,6 +98,10 @@ include 'config.php';
                                         <input class="form-check-input" type="checkbox" id="catWatches">
                                         <label class="form-check-label" for="catWatches">Watches</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catSculpture">
+                                        <label class="form-check-label" for="catSculpture">Sculpture</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -114,6 +118,10 @@ include 'config.php';
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="locBali">
                                         <label class="form-check-label" for="locBali">Bali</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="locSurakarta">
+                                        <label class="form-check-label" for="locSurakarta">Surakarta</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="locOnline">
@@ -138,41 +146,41 @@ include 'config.php';
                     <div class="result-list">
                         <div class="result-row">
                             <div class="result-img">
-                                <img src="img/artwork1.jpg" alt="Sunset Harmony">
+                                <img src="assets/img/sold1.jpg" alt="La Chasse au Tigre">
                             </div>
                             <div class="result-info">
-                                <span class="result-date">12 May 2026 &middot; Jakarta</span>
-                                <h5>Sunset Harmony</h5>
+                                <span class="result-date">6 May 2026 &middot; Jakarta</span>
+                                <h5>La Chasse au Tigre</h5>
                                 <p class="result-artist">Raden Saleh Studio &middot; Oil on canvas</p>
                             </div>
                             <div class="result-price">
                                 <span class="price-label">Sold for</span>
-                                <span class="price-value">Rp 185,000,000</span>
+                                <span class="price-value">Rp 85,000,000</span>
                                 <span class="tag tag-sold">SOLD</span>
                             </div>
                         </div>
                         <div class="result-row">
                             <div class="result-img">
-                                <img src="img/artwork2.jpg" alt="Golden Reflection">
+                                <img src="assets/img/sold2.jpg" alt="Salvador Dali - Swans Reflecting Elephants">
                             </div>
                             <div class="result-info">
-                                <span class="result-date">28 April 2026 &middot; Bali</span>
-                                <h5>Golden Reflection</h5>
-                                <p class="result-artist">Wayan Putra &middot; Acrylic on canvas</p>
+                                <span class="result-date">28 April 2026 &middot; Surakarta</span>
+                                <h5>Salvador Dali: Swans Reflecting Elephants</h5>
+                                <p class="result-artist">Private Collection &middot; Vintage artwork</p>
                             </div>
                             <div class="result-price">
                                 <span class="price-label">Sold for</span>
-                                <span class="price-value">Rp 92,500,000</span>
+                                <span class="price-value">Rp 1,400,000,000</span>
                                 <span class="tag tag-sold">SOLD</span>
                             </div>
                         </div>
                         <div class="result-row">
                             <div class="result-img">
-                                <img src="img/artwork3.jpg" alt="Contemporary Voices">
+                                <img src="assets/img/sold3.jpg" alt="Salvador mundi - Leonardo da Vinci">
                             </div>
                             <div class="result-info">
                                 <span class="result-date">15 April 2026 &middot; Online</span>
-                                <h5>Contemporary Voices</h5>
+                                <h5>Salvador mundi - Leonardo da Vinci</h5>
                                 <p class="result-artist">Group Collection &middot; Mixed media</p>
                             </div>
                             <div class="result-price">
@@ -183,11 +191,11 @@ include 'config.php';
                         </div>
                         <div class="result-row">
                             <div class="result-img">
-                                <img src="img/artwork1.jpg" alt="Heritage Jewels">
+                                <img src="assets/img/sold4.jpg" alt="Antique Snake Hair Comb">
                             </div>
                             <div class="result-info">
                                 <span class="result-date">2 April 2026 &middot; Jakarta</span>
-                                <h5>Heritage Jewels Collection</h5>
+                                <h5>Antique Snake Hair Comb</h5>
                                 <p class="result-artist">Estate Collection &middot; Gold &amp; gemstone</p>
                             </div>
                             <div class="result-price">
@@ -198,27 +206,27 @@ include 'config.php';
                         </div>
                         <div class="result-row">
                             <div class="result-img">
-                                <img src="img/artwork2.jpg" alt="Watches Through Time">
+                                <img src="assets/img/sold5.jpg" alt="Classique Dragon 7145">
                             </div>
                             <div class="result-info">
-                                <span class="result-date">20 March 2026 &middot; Online</span>
-                                <h5>Watches Through Time</h5>
+                                <span class="result-date">20 March 2026 &middot; Surakarta</span>
+                                <h5>Classique Dragon 7145</h5>
                                 <p class="result-artist">Private Collection &middot; Vintage timepieces</p>
                             </div>
                             <div class="result-price">
                                 <span class="price-label">Sold for</span>
-                                <span class="price-value">Rp 58,000,000</span>
+                                <span class="price-value">Rp 68,000,000</span>
                                 <span class="tag tag-sold">SOLD</span>
                             </div>
                         </div>
                         <div class="result-row">
                             <div class="result-img">
-                                <img src="img/artwork3.jpg" alt="Modern Masters">
+                                <img src="assets/img/sold6.jpg" alt="Vase - Namikawa Sosuke">
                             </div>
                             <div class="result-info">
                                 <span class="result-date">8 March 2026 &middot; Bali</span>
-                                <h5>Modern Masters</h5>
-                                <p class="result-artist">Various Artists &middot; Oil &amp; acrylic</p>
+                                <h5>Vase - Namikawa Sosuke</h5>
+                                <p class="result-artist">V&A Collections &middot; Vase</p>
                             </div>
                             <div class="result-price">
                                 <span class="price-label">Sold for</span>

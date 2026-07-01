@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'artist') {
                 <button type="submit" class="btn-submit">Submit Artwork</button>
             </form>
 
-            <a href="dashboard.php" class="back-link">← Back to Dashboard</a>
+            <a href="profile.php" class="back-link">← Back to profile</a>
         </div>
 
     </div>

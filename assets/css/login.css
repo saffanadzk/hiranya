@@ -1,0 +1,191 @@
+/*** LOGIN PAGE — file terpisah, tidak menyentuh style.css ***/
+
+/* Pastikan body login full height dan centered */
+body {
+    min-height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #3A0F14 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Wrapper untuk center card */
+.main-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    box-sizing: border-box;
+}
+
+/* Login card */
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 50px 44px 44px;
+    background: #ece7e0;
+    border-radius: 24px;
+    border: 1px solid rgba(58, 15, 20, 0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Logo bulat H */
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #1C2431;
+    border: 2px solid #6A1F2B;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 2px;
+    background: transparent;
+}
+
+/* Judul */
+h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #1C2431;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border: 1px solid #d8d3cc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+    background: #f5f3f0;
+    color: #1C2431;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #6A1F2B;
+    box-shadow: 0 0 0 3px rgba(106, 31, 43, 0.1);
+    background: #fff;
+}
+
+/* Forgot password */
+.forgot-pass {
+    display: block;
+    text-align: left;
+    margin-bottom: 18px;
+    margin-top: -6px;
+    color: #333;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 550;
+}
+
+.forgot-pass:hover {
+    text-decoration: underline;
+}
+
+/* Tombol Sign In */
+.btn-signin {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3A0F14;
+    color: #F5F1E8;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background 0.25s ease;
+    margin-top: 4px;
+}
+
+.btn-signin:hover {
+    background-color: #6A1F2B;
+}
+
+/* Create account link */
+.create-account {
+    display: block;
+    margin-top: 20px;
+    color: #555;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.create-account:hover {
+    color: #3A0F14;
+    text-decoration: underline;
+}
+
+/* Register as select */
+.register-as-wrapper {
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.register-as-wrapper label {
+    display: block;
+    font-size: 13px;
+    font-weight: 550;
+    color: #1C2431;
+    margin-bottom: 6px;
+}
+
+.register-as-select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #d8d3cc;
+    border-radius: 10px;
+    background: #f5f3f0;
+    font-size: 14px;
+    color: #1C2431;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+}
+
+.register-as-select:focus {
+    border-color: #6A1F2B;
+    box-shadow: 0 0 0 3px rgba(106, 31, 43, 0.1);
+}
+
+/* Error message */
+p[style*="color:red"] {
+    font-size: 13px;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    background: rgba(139, 0, 0, 0.08);
+    border-radius: 8px;
+    border: 1px solid rgba(139, 0, 0, 0.2);
+    color: #8b0000 !important;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 40px 24px 32px;
+    }
+}

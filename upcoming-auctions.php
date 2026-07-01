@@ -50,26 +50,26 @@ include 'config.php';
         <div id="auctionCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/artwork1.jpg" alt="Old Masters">
+                    <img src="assets/img/artwork1.jpg" alt="Ibuku">
                     <div class="carousel-caption-custom">
-                        <span class="eyebrow">UPCOMING AUCTION &middot; 15&ndash;30 JUNE 2026</span>
-                        <h2>Old Masters: The Jakarta Sale</h2>
+                        <span class="eyebrow">UPCOMING AUCTION &middot; 15&ndash;25 December 2026</span>
+                        <h2>Ibuku: The Surakarta Sale</h2>
                         <a href="#" class="btn-outline-cream">Browse All Lots</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/artwork2.jpg" alt="Golden Reflection">
+                    <img src="assets/img/artwork2.jpg" alt="Pharaoh's Throne">
                     <div class="carousel-caption-custom">
-                        <span class="eyebrow">LIVE AUCTION &middot; 10 JULY 2026</span>
-                        <h2>Golden Reflection &mdash; Bali Pavilion</h2>
+                        <span class="eyebrow">LIVE AUCTION &middot; 10 JUNE 2027</span>
+                        <h2>Pharaoh's Throne &mdash; Bali Pavilion</h2>
                         <a href="#" class="btn-outline-cream">View Lots</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/artwork3.jpg" alt="Contemporary Voices">
+                    <img src="assets/img/artwork3.jpg" alt="Persistence of Memory">
                     <div class="carousel-caption-custom">
                         <span class="eyebrow">ONLINE AUCTION &middot; 1&ndash;14 AUGUST 2026</span>
-                        <h2>Contemporary Voices of Southeast Asia</h2>
+                        <h2>Salvador Dalí - The Persistence of Memory </h2>
                         <a href="#" class="btn-outline-cream">Explore Sale</a>
                     </div>
                 </div>
@@ -114,6 +114,10 @@ include 'config.php';
                                         <input class="form-check-input" type="checkbox" id="evLive">
                                         <label class="form-check-label" for="evLive">Live Auctions</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="evOffline">
+                                        <label class="form-check-label" for="evOffline">Offline Auctions</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +144,10 @@ include 'config.php';
                                         <input class="form-check-input" type="checkbox" id="catWatches">
                                         <label class="form-check-label" for="catWatches">Watches</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catSculpture">
+                                        <label class="form-check-label" for="catSculpture">Sculpture</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -159,8 +167,8 @@ include 'config.php';
                                         <label class="form-check-label" for="locBali">Bali</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="locOnline">
-                                        <label class="form-check-label" for="locOnline">Online Only</label>
+                                        <input class="form-check-input" type="checkbox" id="locSurakarta">
+                                        <label class="form-check-label" for="locSurakarta">Surakarta</label>
                                     </div>
                                 </div>
                             </div>
@@ -183,13 +191,13 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork1.jpg" alt="Sunset Harmony">
+                                    <img src="assets/img/artwork6.jpg" alt="Luristan (or Lorestan)">
                                     <span class="tag tag-upcoming">UPCOMING</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Sunset Harmony</h5>
-                                    <p class="meta">15&ndash;30 June 2026 &middot; Jakarta</p>
-                                    <a href="#" class="btn-card-outline w-100">BID NOW</a>
+                                    <h5>Painted Terracotta Vessel with Ibex Motif</h5>
+                                    <p class="meta">19 June 2027 &middot; Jakarta</p>
+                                    <a href="#" class="btn-card-outline w-100">VIEW LOTS</a>
                                 </div>
                             </div>
                         </div>
@@ -197,12 +205,12 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork2.jpg" alt="Golden Reflection">
+                                    <img src="assets/img/artwork5.jpg" alt="Balinese Dancer">
                                     <span class="tag tag-live">LIVE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Golden Reflection</h5>
-                                    <p class="meta">10 July 2026 &middot; Bali</p>
+                                    <h5>Balinese Dancer</h5>
+                                    <p class="meta">21 December 2026 &middot; 10.00 WIB</p>
                                     <a href="#" class="btn-card-solid w-100">VIEW LOTS</a>
                                 </div>
                             </div>
@@ -211,12 +219,12 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork3.jpg" alt="Contemporary Voices">
+                                    <img src="assets/img/artwork4.jpg" alt="The Scream">
                                     <span class="tag tag-online">ONLINE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Contemporary Voices</h5>
-                                    <p class="meta">1&ndash;14 August 2026 &middot; Online</p>
+                                    <h5>The Scream</h5>
+                                    <p class="meta">6&ndash;10 August 2026 &middot; Online</p>
                                     <a href="#" class="btn-card-outline w-100">BID NOW</a>
                                 </div>
                             </div>
@@ -225,13 +233,13 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork1.jpg" alt="Heritage Jewels">
+                                    <img src="assets/img/artwork7.jpg" alt="Heritage Jewels">
                                     <span class="tag tag-upcoming">UPCOMING</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Heritage Jewels</h5>
-                                    <p class="meta">22 August 2026 &middot; Jakarta</p>
-                                    <a href="#" class="btn-card-outline w-100">BID NOW</a>
+                                    <h5>The ancient jewels of Roman women</h5>
+                                    <p class="meta">19 June 2027 &middot; Jakarta</p>
+                                    <a href="#" class="btn-card-outline w-100">VIEW LOTS</a>
                                 </div>
                             </div>
                         </div>
@@ -239,12 +247,12 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork2.jpg" alt="Watches Through Time">
+                                    <img src="assets/img/artwork8.jpg" alt="Watches">
                                     <span class="tag tag-online">ONLINE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Watches Through Time</h5>
-                                    <p class="meta">5&ndash;19 September 2026 &middot; Online</p>
+                                    <h5>Patek Philippe Sky Moon Tourbillon rose gold 6002R</h5>
+                                    <p class="meta">1&ndash;5 July 2026 &middot; Online</p>
                                     <a href="#" class="btn-card-outline w-100">BID NOW</a>
                                 </div>
                             </div>
@@ -253,12 +261,12 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork3.jpg" alt="Modern Masters">
+                                    <img src="assets/img/artwork9.jpg" alt="Thunderstruck — Entang Wiharso">
                                     <span class="tag tag-live">LIVE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Modern Masters</h5>
-                                    <p class="meta">28 September 2026 &middot; Bali</p>
+                                    <h5>Thunderstruck — Entang Wiharso</h5>
+                                    <p class="meta">28 September 2026 &middot; 23.00 WIB</p>
                                     <a href="#" class="btn-card-solid w-100">VIEW LOTS</a>
                                 </div>
                             </div>

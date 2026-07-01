@@ -54,22 +54,30 @@ include 'config.php';
                             <a href="#" class="clear-link">Clear all</a>
                         </div>
                         <div class="filter-dropdown">
-                            <button class="filter-dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#filterMedium">
-                                MEDIUM <i class="fa fa-chevron-down"></i>
+                            <button class="filter-dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#filterCategory">
+                                CATEGORY <i class="fa fa-chevron-down"></i>
                             </button>
-                            <div class="collapse show" id="filterMedium">
+                            <div class="collapse" id="filterCategory">
                                 <div class="filter-dropdown-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="medPainting">
-                                        <label class="form-check-label" for="medPainting">Painting</label>
+                                        <input class="form-check-input" type="checkbox" id="catContemporary">
+                                        <label class="form-check-label" for="catContemporary">Contemporary Art</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="medSculpture">
-                                        <label class="form-check-label" for="medSculpture">Sculpture</label>
+                                        <input class="form-check-input" type="checkbox" id="catModern">
+                                        <label class="form-check-label" for="catModern">Modern Art</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="medJewelry">
-                                        <label class="form-check-label" for="medJewelry">Jewelry</label>
+                                        <input class="form-check-input" type="checkbox" id="catJewelry">
+                                        <label class="form-check-label" for="catJewelry">Jewelry</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catWatches">
+                                        <label class="form-check-label" for="catWatches">Watches</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catSculpture">
+                                        <label class="form-check-label" for="catSculpture">Sculpture</label>
                                     </div>
                                 </div>
                             </div>
@@ -112,84 +120,84 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork1.jpg" alt="Morning Mist">
+                                    <img src="assets/img/sale1.jpg" alt="War or Peace">
                                     <span class="tag tag-upcoming">AVAILABLE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Morning Mist</h5>
-                                    <p class="meta">Wayan Putra &middot; Oil on canvas</p>
+                                    <h5>War or Peace</h5>
+                                    <p class="meta">Heri Dono &middot; Contemporary Art</p>
                                     <p class="meta" style="margin-top:-12px;">Rp 145,000,000</p>
-                                    <a href="#" class="btn-card-outline w-100">INQUIRE</a>
+                                    <a href="#" class="btn-card-outline w-100">Acquire Artwork</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork2.jpg" alt="Silent Bay">
+                                    <img src="assets/img/sale2.jpg" alt="Silent Bay">
                                     <span class="tag tag-upcoming">AVAILABLE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Silent Bay</h5>
-                                    <p class="meta">Citra Dewanti &middot; Mixed media</p>
-                                    <p class="meta" style="margin-top:-12px;">Rp 78,500,000</p>
-                                    <a href="#" class="btn-card-outline w-100">INQUIRE</a>
+                                    <h5>Nita</h5>
+                                    <p class="meta">Jeihan Sukmantoro  &middot; Contemporary Art</p>
+                                    <p class="meta" style="margin-top:-12px;">Rp 36,500,000</p>
+                                    <a href="#" class="btn-card-outline w-100">Acquire Artwork</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork3.jpg" alt="Heritage Necklace">
+                                    <img src="assets/img/sale3.jpg" alt="Heritage Jewels">
                                     <span class="tag tag-online">JEWELRY</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Heritage Necklace</h5>
-                                    <p class="meta">Estate Collection &middot; Gold &amp; gemstone</p>
-                                    <p class="meta" style="margin-top:-12px;">Rp 320,000,000</p>
-                                    <a href="#" class="btn-card-outline w-100">INQUIRE</a>
+                                    <h5>Balenciaga Mega Ear Cuff</h5>
+                                    <p class="meta">Estate Collection &middot; Jewelry</p>
+                                    <p class="meta" style="margin-top:-12px;">Rp 10,000,000</p>
+                                    <a href="#" class="btn-card-outline w-100">Acquire Artwork</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork1.jpg" alt="Bronze Figure">
+                                    <img src="assets/img/sale4.jpg" alt="Bronze Figure">
                                     <span class="tag tag-online">SCULPTURE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Bronze Figure No. 4</h5>
-                                    <p class="meta">Bagus Santosa &middot; Bronze</p>
-                                    <p class="meta" style="margin-top:-12px;">Rp 64,000,000</p>
-                                    <a href="#" class="btn-card-outline w-100">INQUIRE</a>
+                                    <h5>Greek Cycladic Tall Figurine Bronze Statue</h5>
+                                    <p class="meta">Home Decor &middot; Bronze</p>
+                                    <p class="meta" style="margin-top:-12px;">Rp 13,000,000</p>
+                                    <a href="#" class="btn-card-outline w-100">Acquire Artwork</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork2.jpg" alt="Twilight Garden">
-                                    <span class="tag tag-upcoming">AVAILABLE</span>
+                                    <img src="assets/img/sale5.jpg" alt="Watches Through Time">
+                                    <span class="tag tag-upcoming">WATCHES</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Twilight Garden</h5>
-                                    <p class="meta">Raden Saleh Studio &middot; Oil on canvas</p>
-                                    <p class="meta" style="margin-top:-12px;">Rp 210,000,000</p>
-                                    <a href="#" class="btn-card-outline w-100">INQUIRE</a>
+                                    <h5>Cartier. Crash Model</h5>
+                                    <p class="meta">Private Collection &middot; Watches</p>
+                                    <p class="meta" style="margin-top:-12px;">Rp 7,200,000,000</p>
+                                    <a href="#" class="btn-card-outline w-100">Acquire Artwork</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork3.jpg" alt="Vintage Chronograph">
-                                    <span class="tag tag-online">WATCH</span>
+                                    <img src="assets/img/sale6.jpg" alt="Jewelry Collection">
+                                    <span class="tag tag-online">AVAILABLE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Vintage Chronograph</h5>
-                                    <p class="meta">Private Collection &middot; Stainless steel</p>
-                                    <p class="meta" style="margin-top:-12px;">Rp 47,000,000</p>
-                                    <a href="#" class="btn-card-outline w-100">INQUIRE</a>
+                                    <h5>Balenciaga Women's Crystal Gifting Bow Keychain</h5>
+                                    <p class="meta">Private Collection &middot; Jewelry</p>
+                                    <p class="meta" style="margin-top:-12px;">Rp 15,000,000</p>
+                                    <a href="#" class="btn-card-outline w-100">Acquire Artwork</a>
                                 </div>
                             </div>
                         </div>

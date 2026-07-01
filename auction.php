@@ -86,8 +86,20 @@ include 'config.php';
                                         <label class="form-check-label" for="catContemporary">Contemporary Art</label>
                                     </div>
                                     <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catModern">
+                                        <label class="form-check-label" for="catModern">Modern Art</label>
+                                    </div>
+                                    <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="catJewelry">
                                         <label class="form-check-label" for="catJewelry">Jewelry</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catWatches">
+                                        <label class="form-check-label" for="catWatches">Watches</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="catSculpture">
+                                        <label class="form-check-label" for="catSculpture">Sculpture</label>
                                     </div>
                                 </div>
                             </div>
@@ -110,13 +122,13 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork1.jpg" alt="Sunset Harmony">
-                                    <span class="tag tag-upcoming">UPCOMING</span>
+                                    <img src="assets/img/join1.jpg" alt="Luigi Pichler">
+                                    <span class="tag tag-upcoming">ONLINE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Sunset Harmony</h5>
-                                    <p class="meta">15&ndash;30 June 2026 &middot; Jakarta</p>
-                                    <a href="#" class="btn-card-outline w-100">BID NOW</a>
+                                    <h5>Luigi Pichler (1773-1854): VICTORIOUS YOUTH AS HERCULES</h5>
+                                    <p class="meta">2 July 2026 &middot; Online</p>
+                                    <a href="#" class="btn-card-outline w-100">JOIN AUCTION</a>
                                 </div>
                             </div>
                         </div>
@@ -124,13 +136,13 @@ include 'config.php';
                         <div class="col-md-6 col-lg-4">
                             <div class="auction-card h-100">
                                 <div class="auction-card-img">
-                                    <img src="img/artwork2.jpg" alt="Golden Reflection">
+                                    <img src="assets/img/join2.jpg" alt="to See the White Land">
                                     <span class="tag tag-live">LIVE</span>
                                 </div>
                                 <div class="auction-card-body">
-                                    <h5>Golden Reflection</h5>
-                                    <p class="meta">10 July 2026 &middot; Bali</p>
-                                    <a href="#" class="btn-card-solid w-100">VIEW LOTS</a>
+                                    <h5>to See the White Land by ChristineAy Tjoe</h5>
+                                    <p class="meta">2 July 2026 &middot; 08.00 WIB</p>
+                                    <a href="#" class="btn-card-solid w-100">JOIN AUCTION</a>
                                 </div>
                             </div>
                         </div>

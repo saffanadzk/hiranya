@@ -37,10 +37,10 @@ body {
 
 h2 {
     font-family: 'Cinzel', serif;
-    font-weight: 420;
-    font-size: 25px;
+    font-weight: 500 !important;
+    font-size: 22px;
     color: #1C2431;
-    margin-bottom: 35px;
+    margin-bottom: 35px !important;
     letter-spacing: 1px;
 }
 
@@ -122,9 +122,9 @@ input:focus {
 .create-account {
     display: block;
     margin-top: 18px;
-    color: #333;
+    color: #333 !important;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 13px !important;
     font-weight: 600;
 }
 
@@ -1023,14 +1023,20 @@ body:has(.auction-page-head) {
 }
 
 /* Hero carousel */
-.auction-hero-carousel {
-    position: relative;
+.auction-hero-carousel .carousel-item{
+    max-height: none;
 }
 
 .auction-hero-carousel .carousel-item img {
     width: 100%;
-    height: 460px;
-    object-fit: cover;
+    height: auto;
+    max-height: none;
+    object-fit: unset;   
+    display: block;
+}
+
+.auction-hero-carousel .carousel-inner {
+    overflow: visible !important;
 }
 
 .auction-hero-carousel .carousel-item::after {
@@ -2082,7 +2088,7 @@ body.my-artworks-page {
 }
 
 /* Navbar upload button */
-.btn-upload-nav {
+.btn-backprofile-nav {
     display: inline-block;
     padding: 8px 18px;
     background: #8b0000;
@@ -2095,7 +2101,7 @@ body.my-artworks-page {
     transition: background .25s ease;
 }
 
-.btn-upload-nav:hover {
+.btn-backprofile-nav:hover {
     background: #6e0000;
     color: #fff;
 }

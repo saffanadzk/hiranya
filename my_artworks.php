@@ -31,7 +31,7 @@ $result = mysqli_stmt_get_result($stmt);
 
 <nav class="navbar navbar-expand-lg sticky-top px-4 py-3" style="background:#1C2431;">
     <a href="index.php" class="navbar-brand">
-        <span style="font-family:'Cinzel',serif; color:#fff; font-size:20px; font-weight:700; letter-spacing:2px;">Hiranya & Co.</span>
+        <span style="font-family:'Cinzel',serif; color:#fff; font-size:20px; font-weight:700; letter-spacing:2px;">Hiranya</span>
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -39,10 +39,7 @@ $result = mysqli_stmt_get_result($stmt);
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center gap-2">
             <li class="nav-item">
-                <a href="upload_artwork.php" class="btn-upload-nav">+ Upload Artwork</a>
-            </li>
-            <li class="nav-item">
-                <a href="logout.php" class="nav-link text-white-50" style="font-size:13px;">Logout</a>
+                <a href="profile.php" class="btn-backprofile-nav">Back to Profile</a>
             </li>
         </ul>
     </div>
