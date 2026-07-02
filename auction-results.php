@@ -33,7 +33,6 @@ include 'config.php';
 
     <?php include 'partials/navbar.php'; ?>
 
-    <!-- Page Heading + Sub Tabs -->
     <div class="auction-page-head">
         <div class="container">
             <h1 class="font-playfair-display mb-3">Auction Results</h1>
@@ -48,7 +47,6 @@ include 'config.php';
         <div class="container">
             <div class="row">
 
-                <!-- Sidebar Filter: dropdown style -->
                 <div class="col-lg-3 mb-4">
                     <div class="filter-panel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -133,7 +131,6 @@ include 'config.php';
                     </div>
                 </div>
 
-                <!-- Results List -->
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="result-count mb-0">Showing 6 past auction results</p>

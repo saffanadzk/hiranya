@@ -115,6 +115,17 @@ if (!isset($_SESSION['user_id'])) {
                                 </a>
                             </div>
                         <?php endif; ?>
+                        <?php if ($_SESSION['role'] == 'admin') : ?>
+                            <div class="col-md-6">
+                                <a href="admin_dashboard.php" class="action-card">
+                                    <div class="icon-box"><i class="fa fa-cogs"></i></div>
+                                    <div>
+                                        <h6>Admin Dashboard</h6>
+                                        <p>Manage artworks, auctions & categories</p>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                         <div class="col-md-6">
                             <a href="home.php" class="action-card">
                                 <div class="icon-box"><i class="fa fa-th-large"></i></div>
