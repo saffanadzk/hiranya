@@ -85,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $start_bid = (double)$_POST['start_bid'];
         $start_time = $_POST['start_time'];
         $end_time = $_POST['end_time'];
+        $auction_type = isset($_POST['auction_type']) ? $_POST['auction_type'] : 'online';
 
         if ($artwork_id > 0 && $start_bid >= 0 && !empty($start_time) && !empty($end_time)) {
             mysqli_begin_transaction($conn);
@@ -95,9 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_stmt_bind_param($del_stmt, "i", $artwork_id);
                 mysqli_stmt_execute($del_stmt);
 
-                $ins_query = "INSERT INTO auctions (artwork_id, start_bid, current_bid, start_time, end_time, status) VALUES (?, ?, ?, ?, ?, 'active')";
+                $ins_query = "INSERT INTO auctions (artwork_id, start_bid, current_bid, start_time, end_time, status, auction_type) VALUES (?, ?, ?, ?, ?, 'active', ?)";
                 $ins_stmt = mysqli_prepare($conn, $ins_query);
-                mysqli_stmt_bind_param($ins_stmt, "iddss", $artwork_id, $start_bid, $start_bid, $start_time, $end_time);
+                mysqli_stmt_bind_param($ins_stmt, "iddsss", $artwork_id, $start_bid, $start_bid, $start_time, $end_time, $auction_type);
                 mysqli_stmt_execute($ins_stmt);
 
                 $upd_query = "UPDATE artworks SET status = 'in_auction' WHERE id = ?";
@@ -116,6 +117,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $_SESSION['message'] = "Data lelang tidak lengkap atau tidak valid!";
             $_SESSION['message_type'] = "warning";
+        }
+    }
+
+    elseif ($action === 'buy_artwork') {
+        $artwork_id = (int)$_POST['artwork_id'];
+        $hiranya_price = (double)$_POST['hiranya_price'];
+
+        if ($artwork_id > 0 && $hiranya_price >= 0) {
+            mysqli_begin_transaction($conn);
+            try {
+                // Get artwork title and artist_id
+                $art_query = mysqli_query($conn, "SELECT title, artist_id, price FROM artworks WHERE id = $artwork_id");
+                $art_data = mysqli_fetch_assoc($art_query);
+                $title = $art_data['title'];
+                $artist_id = $art_data['artist_id'];
+                $artist_price = $art_data['price'];
+
+                // Update artwork
+                $upd_query = "UPDATE artworks SET is_purchased_by_hiranya = 1, hiranya_price = ?, price = ? WHERE id = ?";
+                $stmt = mysqli_prepare($conn, $upd_query);
+                mysqli_stmt_bind_param($stmt, "ddi", $hiranya_price, $hiranya_price, $artwork_id);
+                mysqli_stmt_execute($stmt);
+
+                // Send notification to artist
+                $message = "Hiranya membeli karya Anda yang berjudul '$title' seharga Rp " . number_format($artist_price, 0, ',', '.') . "! Karya Anda kini masuk ke listing Hiranya dengan harga jual Rp " . number_format($hiranya_price, 0, ',', '.') . ".";
+                $notif_query = "INSERT INTO notifications (user_id, message) VALUES (?, ?)";
+                $notif_stmt = mysqli_prepare($conn, $notif_query);
+                mysqli_stmt_bind_param($notif_stmt, "is", $artist_id, $message);
+                mysqli_stmt_execute($notif_stmt);
+
+                mysqli_commit($conn);
+                $_SESSION['message'] = "Karya seni berhasil dibeli oleh Hiranya!";
+                $_SESSION['message_type'] = "success";
+            } catch (Exception $e) {
+                mysqli_rollback($conn);
+                $_SESSION['message'] = "Gagal membeli karya: " . $e->getMessage();
+                $_SESSION['message_type'] = "danger";
+            }
+        }
+    }
+
+    elseif ($action === 'verify_payment') {
+        $order_id = (int)$_POST['order_id'];
+        $status = $_POST['status']; // 'verified' or 'rejected'
+
+        if ($order_id > 0 && in_array($status, ['verified', 'rejected'])) {
+            mysqli_begin_transaction($conn);
+            try {
+                // Update order status
+                $upd_query = "UPDATE orders SET payment_status = ? WHERE id = ?";
+                $stmt = mysqli_prepare($conn, $upd_query);
+                mysqli_stmt_bind_param($stmt, "si", $status, $order_id);
+                mysqli_stmt_execute($stmt);
+
+                if ($status === 'verified') {
+                    // Get artwork_id from order
+                    $order_query = mysqli_query($conn, "SELECT artwork_id FROM orders WHERE id = $order_id");
+                    $order_data = mysqli_fetch_assoc($order_query);
+                    $artwork_id = $order_data['artwork_id'];
+
+                    // Update artwork status to sold
+                    $art_upd = "UPDATE artworks SET status = 'sold' WHERE id = ?";
+                    $art_stmt = mysqli_prepare($conn, $art_upd);
+                    mysqli_stmt_bind_param($art_stmt, "i", $artwork_id);
+                    mysqli_stmt_execute($art_stmt);
+
+                    // If it is in auction, also set auction to ended
+                    mysqli_query($conn, "UPDATE auctions SET status = 'ended' WHERE artwork_id = $artwork_id");
+                }
+
+                mysqli_commit($conn);
+                $_SESSION['message'] = "Pembayaran berhasil diverifikasi (" . ucfirst($status) . ")!";
+                $_SESSION['message_type'] = "success";
+            } catch (Exception $e) {
+                mysqli_rollback($conn);
+                $_SESSION['message'] = "Gagal memverifikasi pembayaran: " . $e->getMessage();
+                $_SESSION['message_type'] = "danger";
+            }
         }
     }
 }

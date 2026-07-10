@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once 'config.php';
 
-// Validasi admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     $_SESSION['message'] = "Akses ditolak! Anda harus masuk sebagai admin.";
     $_SESSION['message_type'] = "danger";

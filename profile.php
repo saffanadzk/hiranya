@@ -8,6 +8,33 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
 }
+
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role'];
+
+$bank_name = '';
+$bank_account = '';
+$bank_holder = '';
+$notifications = [];
+
+if ($role === 'artist') {
+    // Get or create artist profile
+    $prof_query = mysqli_query($conn, "SELECT * FROM artist_profiles WHERE user_id = $user_id");
+    if (mysqli_num_rows($prof_query) > 0) {
+        $prof_data = mysqli_fetch_assoc($prof_query);
+        $bank_name = $prof_data['bank_name'] ?? '';
+        $bank_account = $prof_data['bank_account'] ?? '';
+        $bank_holder = $prof_data['bank_holder'] ?? '';
+    } else {
+        mysqli_query($conn, "INSERT INTO artist_profiles (user_id) VALUES ($user_id)");
+    }
+
+    // Fetch notifications
+    $notif_query = mysqli_query($conn, "SELECT * FROM notifications WHERE user_id = $user_id ORDER BY id DESC");
+    while ($row = mysqli_fetch_assoc($notif_query)) {
+        $notifications[] = $row;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +103,13 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
             <div class="profile-divider"></div>
+            <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert alert-<?= $_SESSION['message_type'] ?> alert-dismissible fade show" role="alert">
+                    <?= $_SESSION['message'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <?php unset($_SESSION['message']); unset($_SESSION['message_type']); ?>
+                </div>
+            <?php endif; ?>
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="section-label">Account Information</div>
@@ -91,8 +125,27 @@ if (!isset($_SESSION['user_id'])) {
                         <span>Status</span>
                         <span style="color:#1a7d3a;">Active</span>
                     </div>
+
+                    <?php if ($role === 'artist') : ?>
+                        <div class="section-label mt-4">Rekening Transfer Bank</div>
+                        <form action="update_bank_details.php" method="POST" class="mt-2">
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Nama Bank</label>
+                                <input type="text" name="bank_name" class="form-control form-control-sm" placeholder="Contoh: BCA, Mandiri" value="<?= htmlspecialchars($bank_name) ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Nomor Rekening</label>
+                                <input type="text" name="bank_account" class="form-control form-control-sm" placeholder="Nomor rekening" value="<?= htmlspecialchars($bank_account) ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small text-muted">Nama Pemilik Rekening</label>
+                                <input type="text" name="bank_holder" class="form-control form-control-sm" placeholder="Nama lengkap pemilik" value="<?= htmlspecialchars($bank_holder) ?>" required>
+                            </div>
+                            <button type="submit" class="btn btn-sm w-100" style="background-color: #ab8e5b; color: white;">Simpan Detail Bank</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
-                <div class="col-lg-8">
+
                     <div class="section-label">Quick Actions</div>
                     <div class="row g-3">
                         <?php if ($_SESSION['role'] == 'artist') : ?>
@@ -144,6 +197,17 @@ if (!isset($_SESSION['user_id'])) {
                                 </div>
                             </a>
                         </div>
+                        <div class="col-lg-8">
+                        <?php if ($role === 'artist') : ?>
+                            <div class="section-label">Pemberitahuan</div>
+                            <a href="notifications.php" class="action-card mb-4" style="background-color: #fffbeb; border: 1px solid #fef3c7;">
+                                <div class="icon-box" style="background-color: #fef3c7; color: #d97706;"><i class="fa fa-bell"></i></div>
+                                <div>
+                                    <h6>Notifikasi Layanan</h6>
+                                    <p>Lihat pemberitahuan karya yang dibeli oleh Hiranya (Ada <?= count($notifications); ?> notifikasi)</p>
+                                </div>
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

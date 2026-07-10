@@ -38,7 +38,6 @@
                             <div class="col-4">
                                     <h6 class="text-danger">BUY/SELL</h6>
                                     <a class="dropdown-item" href="#">BUY PRIVATELY</a>
-                                    <a class="dropdown-item" href="#">SELL PRIVATELY</a>
                                 </div>
                                 <div class="col-4 border-start">
                                     <h6 class="text-danger">HIGHLIGHTS</h6>
@@ -113,15 +112,20 @@
             </ul>
             <!-- KANAN NAVBAR -->
             <div class="d-flex align-items-center ms-auto">
-                <form class="d-flex align-items-center me-4">
+                <form action="search.php" method="GET" class="d-flex align-items-center me-4">
                     <input class="form-control me-2"
                            type="search"
-                           placeholder="Search..."
-                           style="width:180px;border:none;border-bottom:1px solid #f5f5f5;border-radius:0;box-shadow:none;background:transparent;">
-                    <button type="submit" class="btn p-0" style="background:none;border:none;">
+                           name="q"
+                           placeholder="Search artworks, artists..."
+                           value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>"
+                           style="width:180px;border:none;border-bottom:1px solid #f5f5f5;border-radius:0;box-shadow:none;background:transparent;color:white;">
+                    <button type="submit" class="btn p-0" style="background:none;border:none;color:white;">
                         <i class="fa fa-search"></i>
                     </button>
                 </form>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <span class="text-white-50 me-3 small font-monospace">Hi, @<?= htmlspecialchars($_SESSION['username']); ?></span>
+                <?php endif; ?>
                 <a href="profile.php" class="text-white me-3">
                     <i class="fa fa-user fa-lg"></i>
                 </a>
@@ -129,3 +133,18 @@
         </div>
     </nav>
 </div>
+
+<?php if (isset($_SESSION['message'])): ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: '<?= htmlspecialchars($_SESSION['message_type'] == 'success' ? 'Success' : 'Notification'); ?>',
+            text: '<?= htmlspecialchars($_SESSION['message']); ?>',
+            icon: '<?= $_SESSION['message_type'] == 'danger' ? 'error' : ($_SESSION['message_type'] == 'success' ? 'success' : 'info'); ?>',
+            confirmButtonColor: '#ab8e5b'
+        });
+    });
+    </script>
+    <?php unset($_SESSION['message']); unset($_SESSION['message_type']); ?>
+<?php endif; ?>

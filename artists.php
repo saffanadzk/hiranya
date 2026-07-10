@@ -7,6 +7,14 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 include 'config.php';
+
+$artists_query = mysqli_query($conn, "
+    SELECT users.id, users.username, artist_profiles.profile_image, artist_profiles.bio
+    FROM users
+    LEFT JOIN artist_profiles ON users.id = artist_profiles.user_id
+    WHERE users.role_id = 2
+");
+$artists_count = mysqli_num_rows($artists_query);
 ?>
 
 <!DOCTYPE html>
@@ -40,113 +48,31 @@ include 'config.php';
     <div class="container-fluid py-5">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-                <p class="result-count mb-0">128 artists</p>
-                <div class="d-flex gap-2">
-                    <select class="form-select shelf-select" style="width:auto;">
-                        <option>All Categories</option>
-                        <option>Contemporary Art</option>
-                        <option>Modern Art</option>
-                        <option>Sculpture</option>
-                    </select>
-                    <select class="form-select shelf-select" style="width:auto;">
-                        <option>Sort: Most Followed</option>
-                        <option>Sort: A&ndash;Z</option>
-                        <option>Sort: Newest</option>
-                    </select>
-                </div>
+                <p class="result-count mb-0"><?= $artists_count; ?> artist(s)</p>
             </div>
             <div class="shelf-grid">
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork1.jpg" alt="Wayan Putra">
-                    </a>
-                    <h6 class="shelf-title">Wayan Putra</h6>
-                    <p class="shelf-meta">Contemporary Art</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
-                        <span>32 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork2.jpg" alt="Raden Saleh Studio">
-                    </a>
-                    <h6 class="shelf-title">Raden Saleh Studio</h6>
-                    <p class="shelf-meta">Old Masters</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                        <span>18 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork3.jpg" alt="Citra Dewanti">
-                    </a>
-                    <h6 class="shelf-title">Citra Dewanti</h6>
-                    <p class="shelf-meta">Mixed Media</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i>
-                        <span>21 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork1.jpg" alt="Bagus Santosa">
-                    </a>
-                    <h6 class="shelf-title">Bagus Santosa</h6>
-                    <p class="shelf-meta">Sculpture</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i><i class="far fa-star"></i>
-                        <span>9 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork2.jpg" alt="Estate Collection">
-                    </a>
-                    <h6 class="shelf-title">Estate Collection</h6>
-                    <p class="shelf-meta">Jewelry &amp; Heritage</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                        <span>14 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork3.jpg" alt="Group Collection">
-                    </a>
-                    <h6 class="shelf-title">Group Collection</h6>
-                    <p class="shelf-meta">Modern Art</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                        <span>27 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork1.jpg" alt="Private Collection">
-                    </a>
-                    <h6 class="shelf-title">Private Collection</h6>
-                    <p class="shelf-meta">Vintage Timepieces</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                        <span>11 works</span>
-                    </div>
-                </div>
-                <div class="shelf-item">
-                    <a href="#" class="shelf-cover">
-                        <img src="img/artwork2.jpg" alt="Various Artists">
-                    </a>
-                    <h6 class="shelf-title">Various Artists</h6>
-                    <p class="shelf-meta">Oil &amp; Acrylic</p>
-                    <div class="shelf-rating">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i>
-                        <span>40 works</span>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-5">
-                <a href="#" class="btn-card-outline" style="display:inline-block; padding: 12px 36px;">LOAD MORE ARTISTS</a>
+                <?php if ($artists_count === 0): ?>
+                    <p class="text-muted py-4">Belum ada artist terdaftar di Hiranya.</p>
+                <?php else: ?>
+                    <?php while ($artist = mysqli_fetch_assoc($artists_query)): ?>
+                        <div class="shelf-item" style="box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; background: #fff; padding: 15px; text-align: center;">
+                            <a href="artist_profile.php?id=<?= $artist['id']; ?>" class="shelf-cover" style="display: block; height: 200px; overflow: hidden; margin-bottom: 15px;">
+                                <?php if (!empty($artist['profile_image'])): ?>
+                                    <img src="uploads/<?= htmlspecialchars($artist['profile_image']); ?>" alt="<?= htmlspecialchars($artist['username']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                <?php else: ?>
+                                    <div class="bg-dark text-white d-flex align-items-center justify-content-center" style="height: 100%; font-size: 36px; font-family: 'Cinzel', serif;">
+                                        <?= strtoupper(substr($artist['username'], 0, 1)); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </a>
+                            <h6 class="shelf-title" style="font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 5px; color: #1C2431;"><?= htmlspecialchars($artist['username']); ?></h6>
+                            <p class="shelf-meta" style="font-size: 13px; color: #666; height: 40px; overflow: hidden;"><?= !empty($artist['bio']) ? htmlspecialchars(substr($artist['bio'], 0, 60)) . '...' : 'Artist represented by Hiranya'; ?></p>
+                            <div class="shelf-rating" style="margin-top: 10px;">
+                                <a href="artist_profile.php?id=<?= $artist['id']; ?>" class="btn btn-sm text-white w-100" style="background-color: #ab8e5b; font-size: 13px; letter-spacing: 1px;">KUNJUNGI PROFIL</a>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

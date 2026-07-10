@@ -15,8 +15,8 @@ if (isset($_POST['submit_change'])) {
         // Enkripsi password baru
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         
-        // Update admin pertama (role_id = 1 atau role = 'admin')
-        $query = "UPDATE users SET username = ?, password = ? WHERE role = 'admin' OR role_id = 1 LIMIT 1";
+        // Update admin pertama (role_id = 3 atau role = 'admin')
+        $query = "UPDATE users SET username = ?, password = ? WHERE role = 'admin' OR role_id = 3 LIMIT 1";
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "ss", $new_username, $hashed_password);
         

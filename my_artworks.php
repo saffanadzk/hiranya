@@ -68,7 +68,7 @@ $result = mysqli_stmt_get_result($stmt);
                         <a href="edit_artwork.php?id=<?php echo $art['id']; ?>">
                             <i class="fas fa-pencil-alt"></i> Edit
                         </a>
-                        <a href="delete_artwork.php?id=<?php echo $art['id']; ?>"
+                        <a href="delete.php?id=<?php echo $art['id']; ?>"
                            onclick="return confirm('Hapus artwork ini?')"
                            class="delete-link">
                             <i class="fas fa-trash-alt"></i> Delete

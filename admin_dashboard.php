@@ -6,7 +6,7 @@ require_once 'config.php';
 
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    $_SESSION['message'] = "Akses ditolak! Anda harus masuk sebagai admin.";
+    $_SESSION['message'] = "Access denied! Admin Login required.";
     $_SESSION['message_type'] = "danger";
     header("Location: login.php");
     exit;
@@ -44,6 +44,17 @@ $auc_sql = "
     ORDER BY auctions.id DESC
 ";
 $auc_res = mysqli_query($conn, $auc_sql);
+
+// Query for orders / payment verification
+$orders_sql = "
+    SELECT orders.*, artworks.title AS art_title, artworks.image_url, buyers.username AS buyer_name, artists.username AS artist_name
+    FROM orders
+    JOIN artworks ON orders.artwork_id = artworks.id
+    JOIN users AS buyers ON orders.buyer_id = buyers.id
+    LEFT JOIN users AS artists ON artworks.artist_id = artists.id
+    ORDER BY orders.id DESC
+";
+$orders_res = mysqli_query($conn, $orders_sql);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -106,6 +117,11 @@ $auc_res = mysqli_query($conn, $auc_sql);
                     <i class="fa fa-gavel me-2"></i>Manage Auctions
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-pane" type="button" role="tab" aria-controls="orders-pane" aria-selected="false">
+                    <i class="fa fa-receipt me-2"></i>Payment Verifications
+                </button>
+            </li>
         </ul>
 
         <div class="tab-content" id="adminTabsContent">
@@ -124,7 +140,7 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                 <th>Artist</th>
                                 <th>Price</th>
                                 <th>Categories</th>
-                                <th>Status</th>
+                                <th>Status / Owner</th>
                                 <th style="width: 250px;">Allocation Action</th>
                                 <th>Management</th>
                             </tr>
@@ -167,33 +183,49 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                             <?php elseif ($art['status'] === 'in_auction'): ?>
                                                 <span class="badge badge-status badge-auction">In Auction</span>
                                             <?php endif; ?>
+                                            
+                                            <div class="mt-1">
+                                                <?php if ($art['is_purchased_by_hiranya']): ?>
+                                                    <span class="badge bg-success text-white">Owned Hiranya</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-secondary text-white">Owned Artist</span>
+                                                <?php endif; ?>
+                                            </div>
                                         </td>
                                         <td>
-                                            <form action="admin_actions.php?action=assign_category" method="POST" class="d-flex align-items-center gap-1 mb-2">
-                                                <input type="hidden" name="artwork_id" value="<?= $art['id']; ?>">
-                                                <select name="category_id" class="form-select form-select-sm" style="max-width: 140px;">
-                                                    <option value="0">— Categories —</option>
-                                                    <?php foreach ($categories as $cat): ?>
-                                                        <option value="<?= $cat['id']; ?>" <?= $art['category_id'] == $cat['id'] ? 'selected' : ''; ?>>
-                                                            <?= htmlspecialchars($cat['name']); ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                                <button type="submit" class="btn btn-navy btn-sm" title="Save Categories">
-                                                    <i class="fa fa-save"></i>
-                                                </button>
-                                            </form>
+                                            <?php if ($art['is_purchased_by_hiranya']): ?>
+                                                <form action="admin_actions.php?action=assign_category" method="POST" class="d-flex align-items-center gap-1 mb-2">
+                                                    <input type="hidden" name="artwork_id" value="<?= $art['id']; ?>">
+                                                    <select name="category_id" class="form-select form-select-sm" style="max-width: 140px;">
+                                                        <option value="0">— Categories —</option>
+                                                        <?php foreach ($categories as $cat): ?>
+                                                            <option value="<?= $cat['id']; ?>" <?= $art['category_id'] == $cat['id'] ? 'selected' : ''; ?>>
+                                                                <?= htmlspecialchars($cat['name']); ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <button type="submit" class="btn btn-navy btn-sm" title="Save Categories">
+                                                        <i class="fa fa-save"></i>
+                                                    </button>
+                                                </form>
 
-                                            <?php if ($art['status'] !== 'in_auction'): ?>
-                                                <button type="button" class="btn btn-gold btn-sm w-100" data-bs-toggle="modal" data-bs-target="#auctionModal<?= $art['id']; ?>">
-                                                    <i class="fa fa-gavel me-1"></i> Put into Auction
-                                                </button>
+                                                <?php if ($art['status'] !== 'in_auction' && $art['status'] !== 'sold'): ?>
+                                                    <button type="button" class="btn btn-gold btn-sm w-100" data-bs-toggle="modal" data-bs-target="#auctionModal<?= $art['id']; ?>">
+                                                        <i class="fa fa-gavel me-1"></i> Put into Auction
+                                                    </button>
+                                                <?php elseif ($art['status'] === 'in_auction'): ?>
+                                                    <a href="admin_actions.php?action=remove_auction&artwork_id=<?= $art['id']; ?>" 
+                                                       class="btn btn-outline-danger btn-sm w-100"
+                                                       onclick="return confirm('Remove this artwork from the active auction list?')">
+                                                        <i class="fa fa-ban me-1"></i> Withdraw from Auctions
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="text-muted small">Sold</span>
+                                                <?php endif; ?>
                                             <?php else: ?>
-                                                <a href="admin_actions.php?action=remove_auction&artwork_id=<?= $art['id']; ?>" 
-                                                   class="btn btn-outline-danger btn-sm w-100"
-                                                   onclick="return confirm('Remove this artwork from the active auction list?')">
-                                                    <i class="fa fa-ban me-1"></i> Withdraw from Auctions
-                                                </a>
+                                                <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#buyModal<?= $art['id']; ?>">
+                                                    <i class="fa fa-shopping-cart me-1"></i> Buy for Hiranya
+                                                </button>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -211,7 +243,48 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                         </td>
                                     </tr>
 
-                                    <?php if ($art['status'] !== 'in_auction'): ?>
+                                    <!-- Beli Modal -->
+                                    <?php if (!$art['is_purchased_by_hiranya']): ?>
+                                        <div class="modal fade" id="buyModal<?= $art['id']; ?>" tabindex="-1" aria-labelledby="buyModalLabel<?= $art['id']; ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <form action="admin_actions.php?action=buy_artwork" method="POST">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="background-color: #1C2431; color: white;">
+                                                            <h5 class="modal-title" id="buyModalLabel<?= $art['id']; ?>">Buy Artwork for Artist</h5>
+                                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="artwork_id" value="<?= $art['id']; ?>">
+                                                            
+                                                            <div class="mb-3 text-center">
+                                                                <img src="uploads/<?= htmlspecialchars($art['image_url']); ?>" class="img-thumbnail mb-2" style="max-height: 180px;" alt="">
+                                                                <h6><?= htmlspecialchars($art['title']); ?></h6>
+                                                                <small class="text-muted">oleh @<?= htmlspecialchars($art['artist_name']); ?></small>
+                                                            </div>
+                                                            
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Price from Artist (Rp)</label>
+                                                                <input type="text" class="form-control bg-light" value="Rp <?= number_format($art['price'], 0, ',', '.'); ?>" readonly>
+                                                            </div>
+                                                            
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Price from hiranya (Rp)</label>
+                                                                <input type="number" name="hiranya_price" class="form-control" value="<?= $art['price']; ?>" min="0" required>
+                                                                <div class="form-text">Enter the selling price for private sale or auction</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary">Buy</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <!-- Auction Modal -->
+                                    <?php if ($art['is_purchased_by_hiranya'] && $art['status'] !== 'in_auction'): ?>
                                         <div class="modal fade" id="auctionModal<?= $art['id']; ?>" tabindex="-1" aria-labelledby="auctionModalLabel<?= $art['id']; ?>" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <form action="admin_actions.php?action=assign_auction" method="POST">
@@ -230,23 +303,31 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                                             </div>
                                                             
                                                             <div class="mb-3">
-                                                                <label class="form-label">Harga Penawaran Awal (Rp)</label>
+                                                                <label class="form-label">Auction Type</label>
+                                                                <select name="auction_type" class="form-select" required>
+                                                                    <option value="online">Online Auction</option>
+                                                                    <option value="live">Live Auction</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Starting Bid (Rp)</label>
                                                                 <input type="number" name="start_bid" class="form-control" value="<?= $art['price']; ?>" min="0" required>
                                                             </div>
                                                             
                                                             <div class="mb-3">
-                                                                <label class="form-label">Waktu Mulai Lelang</label>
+                                                                <label class="form-label">Start Time</label>
                                                                 <input type="datetime-local" name="start_time" class="form-control" value="<?= date('Y-m-d\TH:i'); ?>" required>
                                                             </div>
                                                             
                                                             <div class="mb-3">
-                                                                <label class="form-label">Waktu Berakhir Lelang</label>
-                                                                <input type="datetime-local" name="end_time" class="form-control" value="<?= date('Y-m-d\TH:i', strtotime('+1 day')); ?>" required>
+                                                                <label class="form-label">End Time</label>
+                                                                <input type="datetime-local" name="end_time" class="form-control" value="<?= date('Y-m-d\TH:i', strtotime('+3 days')); ?>" required>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-gold">Mulai Lelang</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-gold">Start Auction</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -255,7 +336,7 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                     <?php endif; ?>
 
                                 <?php endwhile; ?>
-                            <?php endif; ?>
+                            <?php endif; ?>; ?>
                         </tbody>
                     </table>
                 </div>
@@ -266,15 +347,15 @@ $auc_res = mysqli_query($conn, $auc_sql);
                     <div class="col-md-4 mb-4">
                         <div class="card card-custom">
                             <div class="card-header py-3" style="background-color: #1C2431; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px;">
-                                <h5 class="card-title mb-0">Tambah Kategori Baru</h5>
+                                <h5 class="card-title mb-0">Add New Categories</h5>
                             </div>
                             <div class="card-body">
                                 <form action="admin_actions.php?action=add_category" method="POST">
                                     <div class="mb-3">
-                                        <label for="new_category_name" class="form-label">Nama Kategori</label>
+                                        <label for="new_category_name" class="form-label">Category Name</label>
                                         <input type="text" class="form-control" id="new_category_name" name="name" placeholder="Contoh: Modern Art" required>
                                     </div>
-                                    <button type="submit" class="btn btn-gold w-100">Tambah Kategori</button>
+                                    <button type="submit" class="btn btn-gold w-100">Add Category</button>
                                 </form>
                             </div>
                         </div>
@@ -282,20 +363,20 @@ $auc_res = mysqli_query($conn, $auc_sql);
                     
                     <div class="col-md-8">
                         <div class="table-responsive">
-                            <h5 class="mb-3">Daftar Kategori Terdaftar</h5>
+                            <h5 class="mb-3">Listed Categories</h5>
                             <table class="table table-hover align-middle">
                                 <thead class="table-light">
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nama Kategori</th>
+                                        <th>Category Name</th>
                                         <th>Slug URL</th>
-                                        <th class="text-end">Aksi</th>
+                                        <th class="text-end">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if (count($categories) === 0): ?>
                                         <tr>
-                                            <td colspan="4" class="text-center py-4 text-muted">Belum ada kategori terdaftar. Silakan tambahkan kategori baru.</td>
+                                            <td colspan="4" class="text-center py-4 text-muted">There are no listed categories. Please add new categories.</td>
                                         </tr>
                                     <?php else: ?>
                                         <?php foreach ($categories as $cat): ?>
@@ -313,8 +394,8 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                                     </button>
                                                     <a href="admin_actions.php?action=delete_category&id=<?= $cat['id']; ?>" 
                                                        class="btn btn-outline-danger btn-sm"
-                                                       onclick="return confirm('Hapus kategori ini? Semua karya seni dengan kategori ini akan diset menjadi Uncategorized.')">
-                                                        <i class="fa fa-trash"></i> Hapus
+                                                       onclick="return confirm('Delete category? All artworks in this category will be set to Uncategorized.')">
+                                                        <i class="fa fa-trash"></i> Delete
                                                     </a>
                                                 </td>
                                             </tr>
@@ -324,18 +405,18 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                                     <form action="admin_actions.php?action=edit_category" method="POST">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="background-color: #1C2431; color: white;">
-                                                                <h5 class="modal-title" id="editCatModalLabel<?= $cat['id']; ?>">Edit Kategori</h5>
+                                                                <h5 class="modal-title" id="editCatModalLabel<?= $cat['id']; ?>">Edit Category</h5>
                                                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="id" value="<?= $cat['id']; ?>">
                                                                 <div class="mb-3">
-                                                                    <label class="form-label">Nama Kategori</label>
+                                                                    <label class="form-label">Category Name</label>
                                                                     <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($cat['name']); ?>" required>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                                 <button type="submit" class="btn btn-gold">Simpan Perubahan</button>
                                                             </div>
                                                         </div>
@@ -353,8 +434,8 @@ $auc_res = mysqli_query($conn, $auc_sql);
 
             <div class="tab-pane fade" id="auctions-pane" role="tabpanel" aria-labelledby="auctions-tab">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h3 class="mb-0">Daftar Lelang Aktif</h3>
-                    <span class="text-muted">Total: <?= mysqli_num_rows($auc_res); ?> lelang</span>
+                    <h3 class="mb-0">Active Auctions</h3>
+                    <span class="text-muted">Total: <?= mysqli_num_rows($auc_res); ?> auctions</span>
                 </div>
                 
                 <div class="table-responsive">
@@ -362,19 +443,19 @@ $auc_res = mysqli_query($conn, $auc_sql);
                         <thead class="table-light">
                             <tr>
                                 <th>ID</th>
-                                <th>Karya Seni</th>
-                                <th>Penawaran Awal</th>
-                                <th>Penawaran Saat Ini</th>
-                                <th>Waktu Mulai</th>
-                                <th>Waktu Berakhir</th>
-                                <th>Status Lelang</th>
-                                <th>Aksi</th>
+                                <th>Artworks</th>
+                                <th>Starting Price</th>
+                                <th>Current Bid</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Auction Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (mysqli_num_rows($auc_res) == 0): ?>
                                 <tr>
-                                    <td colspan="8" class="text-center py-4 text-muted">Belum ada karya seni yang sedang dilelang saat ini.</td>
+                                    <td colspan="8" class="text-center py-4 text-muted">There are no artworks currently being auctioned.</td>
                                 </tr>
                             <?php else: ?>
                                 <?php while ($auc = mysqli_fetch_assoc($auc_res)): ?>
@@ -385,7 +466,7 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                                 <img src="uploads/<?= htmlspecialchars($auc['image_url']); ?>" class="art-thumbnail" alt="">
                                                 <div>
                                                     <h6 class="mb-0"><?= htmlspecialchars($auc['art_title']); ?></h6>
-                                                    <small class="text-muted">oleh @<?= htmlspecialchars($auc['artist_name']); ?></small>
+                                                    <small class="text-muted">by @<?= htmlspecialchars($auc['artist_name']); ?></small>
                                                 </div>
                                             </div>
                                         </td>
@@ -406,19 +487,125 @@ $auc_res = mysqli_query($conn, $auc_sql);
                                             $now = date('Y-m-d H:i:s');
                                             if ($now < $auc['start_time']): 
                                             ?>
-                                                <span class="badge text-bg-warning text-white">Segera Mulai</span>
+                                                <span class="badge text-bg-warning text-white">Starting</span>
                                             <?php elseif ($now > $auc['end_time'] || $auc['status'] === 'ended'): ?>
-                                                <span class="badge text-bg-secondary">Berakhir</span>
+                                                <span class="badge text-bg-secondary">Ended</span>
                                             <?php else: ?>
-                                                <span class="badge text-bg-success">Aktif</span>
+                                                <span class="badge text-bg-success">Active</span>
                                             <?php endif; ?>
                                         </td>
                                         <td>
                                             <a href="admin_actions.php?action=remove_auction&artwork_id=<?= $auc['artwork_id']; ?>" 
                                                class="btn btn-outline-danger btn-sm"
-                                               onclick="return confirm('Hapus lelang ini?')">
-                                                <i class="fa fa-trash me-1"></i> Batal Lelang
+                                               onclick="return confirm('Delete auction?')">
+                                                <i class="fa fa-trash me-1"></i> Cancel Auction
                                             </a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="orders-pane" role="tabpanel" aria-labelledby="orders-tab">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0">Payment Verification</h3>
+                    <span class="text-muted">Total: <?= mysqli_num_rows($orders_res); ?> Transactions</span>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Artworks</th>
+                                <th>Transaction Type</th>
+                                <th>Total Payment</th>
+                                <th>Buyer & Artist</th>
+                                <th>Proof of Transfer</th>
+                                <th>Status</th>
+                                <th>Verificationth>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (mysqli_num_rows($orders_res) == 0): ?>
+                                <tr>
+                                    <td colspan="8" class="text-center py-4 text-muted">There are no transactions pending verification.</td>
+                                </tr>
+                            <?php else: ?>
+                                <?php while ($ord = mysqli_fetch_assoc($orders_res)): ?>
+                                    <tr>
+                                        <td>#<?= $ord['id']; ?></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <img src="uploads/<?= htmlspecialchars($ord['image_url']); ?>" class="art-thumbnail" style="width: 40px; height: 40px; object-fit: cover;" alt="">
+                                                <div>
+                                                    <h6 class="mb-0 small text-dark"><?= htmlspecialchars($ord['art_title']); ?></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <?php if ($ord['order_type'] === 'direct'): ?>
+                                                <span class="badge text-bg-warning text-white">Direct Artist Sale</span>
+                                            <?php elseif ($ord['order_type'] === 'private_sale'): ?>
+                                                <span class="badge text-bg-info text-white">Private Sale</span>
+                                            <?php elseif ($ord['order_type'] === 'auction'): ?>
+                                                <span class="badge text-bg-primary text-white">Auction Win</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <span class="fw-semibold text-dark">Rp <?= number_format($ord['amount'], 0, ',', '.'); ?></span>
+                                            <?php if ($ord['commission_amount'] > 0): ?>
+                                                <div class="small text-muted font-monospace" style="font-size:10px;">(Hiranya Fee: Rp <?= number_format($ord['commission_amount'], 0, ',', '.'); ?>)</div>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <small class="d-block text-dark">Buyer: @<?= htmlspecialchars($ord['buyer_name']); ?></small>
+                                            <?php if ($ord['order_type'] === 'direct'): ?>
+                                                <small class="d-block text-muted">Artist: @<?= htmlspecialchars($ord['artist_name']); ?></small>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if (!empty($ord['payment_proof'])): ?>
+                                                <a href="uploads/<?= htmlspecialchars($ord['payment_proof']); ?>" target="_blank" class="btn btn-outline-secondary btn-xs p-1 px-2 font-monospace" style="font-size: 11px;">
+                                                    <i class="fa fa-image me-1"></i> Proof Transfer
+                                                </a>
+                                            <?php else: ?>
+                                                <span class="text-danger small">No Uploaded</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($ord['payment_status'] === 'pending'): ?>
+                                                <span class="badge text-bg-warning text-white">Pending</span>
+                                            <?php elseif ($ord['payment_status'] === 'verified'): ?>
+                                                <span class="badge text-bg-success">Verified</span>
+                                            <?php else: ?>
+                                                <span class="badge text-bg-danger">Rejected</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($ord['payment_status'] === 'pending' && !empty($ord['payment_proof'])): ?>
+                                                <div class="d-flex gap-1">
+                                                    <form action="admin_actions.php?action=verify_payment" method="POST" class="d-inline">
+                                                        <input type="hidden" name="order_id" value="<?= $ord['id']; ?>">
+                                                        <input type="hidden" name="status" value="verified">
+                                                        <button type="submit" class="btn btn-success btn-sm p-1 px-2 text-white" onclick="return confirm('Verifikasi pembayaran ini?')">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form action="admin_actions.php?action=verify_payment" method="POST" class="d-inline">
+                                                        <input type="hidden" name="order_id" value="<?= $ord['id']; ?>">
+                                                        <input type="hidden" name="status" value="rejected">
+                                                        <button type="submit" class="btn btn-danger btn-sm p-1 px-2 text-white" onclick="return confirm('Tolak pembayaran ini?')">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            <?php else: ?>
+                                                <span class="text-muted small">-</span>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>

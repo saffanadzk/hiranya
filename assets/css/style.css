@@ -2270,3 +2270,212 @@ body.my-artworks-page {
     background-color: #1C2431;
     color: white;
 }
+
+/*** EXPLORE GALLERY SECTION (homepage) ***/
+.gallery-section {
+    background: #fcfaf7;
+}
+
+.gallery-section-head {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.gallery-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8b0000;
+    margin-bottom: 12px;
+}
+
+.gallery-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #1C2431;
+    margin-bottom: 12px;
+}
+
+.gallery-sub {
+    font-size: 15px;
+    color: #8b8378;
+    margin: 0;
+}
+
+/* Grid */
+.gallery-browse-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 52px;
+}
+
+@media (max-width: 991px) {
+    .gallery-browse-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .gallery-browse-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card */
+.gallery-browse-card {
+    background: #fff;
+    border: 1px solid #ece7dc;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.gallery-browse-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(28,36,49,0.12);
+}
+
+/* Image */
+.gallery-browse-img {
+    display: block;
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.gallery-browse-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.gallery-browse-card:hover .gallery-browse-img img {
+    transform: scale(1.06);
+}
+
+.gallery-browse-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(28,36,49,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.gallery-browse-card:hover .gallery-browse-overlay {
+    opacity: 1;
+}
+
+.gallery-browse-view {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+}
+
+/* Body */
+.gallery-browse-body {
+    padding: 18px 20px 22px;
+}
+
+.gallery-browse-cat {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8b0000;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.gallery-browse-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.gallery-browse-title a {
+    color: #1C2431;
+    text-decoration: none;
+}
+
+.gallery-browse-title a:hover {
+    color: #8b0000;
+}
+
+.gallery-browse-artist {
+    font-size: 13px;
+    color: #8b8378;
+    margin-bottom: 16px;
+}
+
+.gallery-browse-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gallery-browse-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1C2431;
+}
+
+.gallery-browse-btn {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8b0000;
+    text-decoration: none;
+    border-bottom: 1px solid #8b0000;
+    padding-bottom: 1px;
+    transition: opacity .2s ease;
+}
+
+.gallery-browse-btn:hover {
+    opacity: 0.7;
+    color: #8b0000;
+}
+
+/* Browse all button */
+.gallery-browse-more {
+    text-align: center;
+}
+
+.btn-browse-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1C2431;
+    text-decoration: none;
+    transition: gap .3s ease;
+}
+
+.btn-browse-all:hover {
+    gap: 20px;
+    color: #8b0000;
+}
+
+.btn-browse-line {
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+}
+

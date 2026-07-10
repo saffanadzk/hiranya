@@ -81,7 +81,6 @@ include 'config.php';
                                     <div class="col-4">
                                         <h6 class="text-danger">BUY/SELL</h6>
                                         <a class="dropdown-item" href="#">BUY PRIVATELY</a>
-                                        <a class="dropdown-item" href="#">SELL PRIVATELY</a>
                                     </div>
                                     <div class="col-4 border-start">
                                         <h6 class="text-danger">HIGHLIGHTS</h6>
