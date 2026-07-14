@@ -45,7 +45,6 @@ $auc_sql = "
 ";
 $auc_res = mysqli_query($conn, $auc_sql);
 
-// Query for orders / payment verification
 $orders_sql = "
     SELECT orders.*, artworks.title AS art_title, artworks.image_url, buyers.username AS buyer_name, artists.username AS artist_name
     FROM orders
@@ -73,13 +72,14 @@ $orders_res = mysqli_query($conn, $orders_sql);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="admin-page">
 
     <nav class="navbar navbar-expand-lg navbar-dark px-4 py-3" style="background-color: #1C2431;">
-        <a href="admin_dashboard.php" class="admin-brand me-auto">Hiranya <span style="font-size: 14px; font-family: 'Work Sans', sans-serif; color: #ab8e5b; letter-spacing: 0;">Admin Portal</span></a>
+        <a href="admin_dashboard.php" class="admin-brand me-auto">Hiranya <span style="font-size: 14px; font-family: 'Work Sans', sans-serif; color: #ab8e5b; letter-spacing: 20; display: flex; align-items: center; gap: 15px">Admin Portal</span></a>
         <div class="d-flex align-items-center">
-            <a href="profile.php" class="btn btn-outline-light btn-sm me-2"><i class="fa fa-user"></i>Profil</a>
+            <a href="profile.php" class="btn btn-outline-light btn-sm me-2"><i class="fa fa-user"></i>Profile</a>
             <a href="logout.php" class="btn btn-danger btn-sm"><i class="fa fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>
@@ -94,12 +94,18 @@ $orders_res = mysqli_query($conn, $orders_sql);
     <div class="container my-5">
 
         <?php if (!empty($message)): ?>
-            <div class="alert alert-<?= $message_type; ?> alert-dismissible fade show shadow-sm" role="alert">
-                <i class="fa <?= $message_type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'; ?> me-2"></i>
-                <?= htmlspecialchars($message); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: '<?= htmlspecialchars($message_type == 'success' ? 'Success' : 'Notification'); ?>',
+                    text: '<?= htmlspecialchars($message); ?>',
+                    icon: '<?= $message_type == 'danger' ? 'error' : ($message_type == 'success' ? 'success' : 'info'); ?>',
+                    confirmButtonColor: '#ab8e5b'
+                });
+            });
+            </script>
+        <?php endif; 
+        ?>
 
         <ul class="nav nav-tabs nav-tabs-custom" id="adminTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -127,9 +133,14 @@ $orders_res = mysqli_query($conn, $orders_sql);
         <div class="tab-content" id="adminTabsContent">
 
             <div class="tab-pane fade show active" id="artworks-pane" role="tabpanel" aria-labelledby="artworks-tab">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <h3 class="mb-0">Artwork List</h3>
-                    <span class="text-muted">Total: <?= mysqli_num_rows($art_res); ?> Artworks </span>
+                    <div class="d-flex align-items-center gap-3">
+                        <button type="button" class="btn btn-gold btn-sm" data-bs-toggle="modal" data-bs-target="#uploadPrivateModal">
+                            <i class="fa fa-plus me-1"></i> Upload Private Collection
+                        </button>
+                        <span class="text-muted">Total: <?= mysqli_num_rows($art_res); ?> Artworks </span>
+                    </div>
                 </div>
                 
                 <div class="table-responsive">
@@ -215,8 +226,8 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                                     </button>
                                                 <?php elseif ($art['status'] === 'in_auction'): ?>
                                                     <a href="admin_actions.php?action=remove_auction&artwork_id=<?= $art['id']; ?>" 
-                                                       class="btn btn-outline-danger btn-sm w-100"
-                                                       onclick="return confirm('Remove this artwork from the active auction list?')">
+                                                       class="btn btn-outline-danger btn-sm w-100 btn-delete-swal"
+                                                       data-confirm-text="Remove this artwork from the active auction list?">
                                                         <i class="fa fa-ban me-1"></i> Withdraw from Auctions
                                                     </a>
                                                 <?php else: ?>
@@ -234,16 +245,15 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a href="admin_actions.php?action=delete_artwork&id=<?= $art['id']; ?>" 
-                                                   class="btn btn-outline-danger btn-sm" 
+                                                   class="btn btn-outline-danger btn-sm btn-delete-swal" 
                                                    title="Delete" 
-                                                   onclick="return confirm('Are you sure you want to delete this artwork?')">
+                                                   data-confirm-text="Are you sure you want to delete this artwork?">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
 
-                                    <!-- Beli Modal -->
                                     <?php if (!$art['is_purchased_by_hiranya']): ?>
                                         <div class="modal fade" id="buyModal<?= $art['id']; ?>" tabindex="-1" aria-labelledby="buyModalLabel<?= $art['id']; ?>" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -283,7 +293,6 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                         </div>
                                     <?php endif; ?>
 
-                                    <!-- Auction Modal -->
                                     <?php if ($art['is_purchased_by_hiranya'] && $art['status'] !== 'in_auction'): ?>
                                         <div class="modal fade" id="auctionModal<?= $art['id']; ?>" tabindex="-1" aria-labelledby="auctionModalLabel<?= $art['id']; ?>" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -336,9 +345,54 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                     <?php endif; ?>
 
                                 <?php endwhile; ?>
-                            <?php endif; ?>; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="modal fade" id="uploadPrivateModal" tabindex="-1" aria-labelledby="uploadPrivateModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="admin_actions.php?action=upload_private_artwork" method="POST" enctype="multipart/form-data">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: #1C2431; color: white;">
+                                    <h5 class="modal-title" id="uploadPrivateModalLabel">Upload Private Collection Artwork</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="private_title" class="form-label">Artwork Title</label>
+                                        <input type="text" class="form-control" id="private_title" name="title" placeholder="e.g. Indonesian Sunset" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="private_description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="private_description" name="description" rows="3" placeholder="Tell the story behind the artwork..."></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="private_price" class="form-label">Value / Price (Rp)</label>
+                                        <input type="number" class="form-control" id="private_price" name="price" min="0" required placeholder="e.g. 5000000">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="private_category" class="form-label">Category</label>
+                                        <select class="form-select" id="private_category" name="category_id">
+                                            <option value="0">— Select Category —</option>
+                                            <?php foreach ($categories as $cat): ?>
+                                                <option value="<?= $cat['id']; ?>"><?= htmlspecialchars($cat['name']); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="private_image" class="form-label">Artwork Image File</label>
+                                        <input class="form-control" type="file" id="private_image" name="artwork_image" accept="image/*" required>
+                                        <div class="form-text">Allowed formats: JPG, PNG, WEBP.</div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-gold">Upload Artwork</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -393,8 +447,8 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                                         <i class="fa fa-edit"></i> Edit
                                                     </button>
                                                     <a href="admin_actions.php?action=delete_category&id=<?= $cat['id']; ?>" 
-                                                       class="btn btn-outline-danger btn-sm"
-                                                       onclick="return confirm('Delete category? All artworks in this category will be set to Uncategorized.')">
+                                                       class="btn btn-outline-danger btn-sm btn-delete-swal"
+                                                       data-confirm-text="Delete category? All artworks in this category will be set to Uncategorized.">
                                                         <i class="fa fa-trash"></i> Delete
                                                     </a>
                                                 </td>
@@ -496,8 +550,8 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                         </td>
                                         <td>
                                             <a href="admin_actions.php?action=remove_auction&artwork_id=<?= $auc['artwork_id']; ?>" 
-                                               class="btn btn-outline-danger btn-sm"
-                                               onclick="return confirm('Delete auction?')">
+                                               class="btn btn-outline-danger btn-sm btn-delete-swal"
+                                               data-confirm-text="Cancel this auction?">
                                                 <i class="fa fa-trash me-1"></i> Cancel Auction
                                             </a>
                                         </td>
@@ -591,14 +645,14 @@ $orders_res = mysqli_query($conn, $orders_sql);
                                                     <form action="admin_actions.php?action=verify_payment" method="POST" class="d-inline">
                                                         <input type="hidden" name="order_id" value="<?= $ord['id']; ?>">
                                                         <input type="hidden" name="status" value="verified">
-                                                        <button type="submit" class="btn btn-success btn-sm p-1 px-2 text-white" onclick="return confirm('Verifikasi pembayaran ini?')">
+                                                        <button type="button" class="btn btn-success btn-sm p-1 px-2 text-white btn-confirm-submit-swal" data-confirm-text="Verifikasi pembayaran ini?">
                                                             <i class="fa fa-check"></i>
                                                         </button>
                                                     </form>
                                                     <form action="admin_actions.php?action=verify_payment" method="POST" class="d-inline">
                                                         <input type="hidden" name="order_id" value="<?= $ord['id']; ?>">
                                                         <input type="hidden" name="status" value="rejected">
-                                                        <button type="submit" class="btn btn-danger btn-sm p-1 px-2 text-white" onclick="return confirm('Tolak pembayaran ini?')">
+                                                        <button type="button" class="btn btn-danger btn-sm p-1 px-2 text-white btn-confirm-submit-swal" data-confirm-text="Tolak pembayaran ini?">
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                     </form>
@@ -637,6 +691,46 @@ $orders_res = mysqli_query($conn, $orders_sql);
             if(activeTab){
                 $('#' + activeTab).tab('show');
             }
+
+            $(document).on('click', '.btn-delete-swal', function(e) {
+                e.preventDefault();
+                var href = $(this).attr('href');
+                var text = $(this).data('confirm-text') || 'Are you sure you want to delete this data?';
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: text,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ab8e5b',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, proceed',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = href;
+                    }
+                });
+            });
+            
+            $(document).on('click', '.btn-confirm-submit-swal', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                var text = $(this).data('confirm-text') || 'Apakah Anda yakin?';
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: text,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ab8e5b',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, proceed',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
         });
     </script>
 </body>

@@ -3,16 +3,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'config.php';
-
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    $_SESSION['message'] = "Akses ditolak! Anda harus masuk sebagai admin.";
+    $_SESSION['message'] = "Access denied! You must be logged in as an admin.";
     $_SESSION['message_type'] = "danger";
     header("Location: login.php");
     exit;
 }
-
 $action = isset($_GET['action']) ? $_GET['action'] : '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'add_category') {
         $name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -22,18 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = mysqli_prepare($conn, $query);
             mysqli_stmt_bind_param($stmt, "ss", $name, $slug);
             if (mysqli_stmt_execute($stmt)) {
-                $_SESSION['message'] = "Kategori '$name' berhasil ditambahkan!";
+                $_SESSION['message'] = "Category '$name' added successfully!";
                 $_SESSION['message_type'] = "success";
             } else {
-                $_SESSION['message'] = "Gagal menambahkan kategori: " . mysqli_error($conn);
+                $_SESSION['message'] = "Failed to add category: " . mysqli_error($conn);
                 $_SESSION['message_type'] = "danger";
             }
         } else {
-            $_SESSION['message'] = "Nama kategori tidak boleh kosong!";
+            $_SESSION['message'] = "Category name cannot be empty!";
             $_SESSION['message_type'] = "warning";
         }
     }
-    
     elseif ($action === 'edit_category') {
         $id = (int)$_POST['id'];
         $name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -43,18 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = mysqli_prepare($conn, $query);
             mysqli_stmt_bind_param($stmt, "ssi", $name, $slug, $id);
             if (mysqli_stmt_execute($stmt)) {
-                $_SESSION['message'] = "Kategori berhasil diperbarui!";
+                $_SESSION['message'] = "Category updated successfully!";
                 $_SESSION['message_type'] = "success";
             } else {
-                $_SESSION['message'] = "Gagal memperbarui kategori: " . mysqli_error($conn);
+                $_SESSION['message'] = "Failed to update category: " . mysqli_error($conn);
                 $_SESSION['message_type'] = "danger";
             }
         } else {
-            $_SESSION['message'] = "Input tidak valid!";
+            $_SESSION['message'] = "Invalid input!";
             $_SESSION['message_type'] = "warning";
         }
     }
-
     elseif ($action === 'assign_category') {
         $artwork_id = (int)$_POST['artwork_id'];
         $category_id = isset($_POST['category_id']) && $_POST['category_id'] !== '' ? (int)$_POST['category_id'] : null;
@@ -71,10 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (mysqli_stmt_execute($stmt)) {
-                $_SESSION['message'] = "Kategori karya seni berhasil diperbarui!";
+                $_SESSION['message'] = "Artwork category updated successfully!";
                 $_SESSION['message_type'] = "success";
             } else {
-                $_SESSION['message'] = "Gagal memperbarui kategori karya seni: " . mysqli_error($conn);
+                $_SESSION['message'] = "Failed to update artwork category: " . mysqli_error($conn);
                 $_SESSION['message_type'] = "danger";
             }
         }
@@ -107,19 +102,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_stmt_execute($upd_stmt);
 
                 mysqli_commit($conn);
-                $_SESSION['message'] = "Karya seni berhasil dimasukkan ke lelang!";
+                $_SESSION['message'] = "Artwork added to auction successfully!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
                 mysqli_rollback($conn);
-                $_SESSION['message'] = "Gagal memasukkan ke lelang: " . $e->getMessage();
+                $_SESSION['message'] = "Failed to add to auction: " . $e->getMessage();
                 $_SESSION['message_type'] = "danger";
             }
         } else {
-            $_SESSION['message'] = "Data lelang tidak lengkap atau tidak valid!";
+            $_SESSION['message'] = "Incomplete or invalid auction data!";
             $_SESSION['message_type'] = "warning";
         }
     }
-
     elseif ($action === 'buy_artwork') {
         $artwork_id = (int)$_POST['artwork_id'];
         $hiranya_price = (double)$_POST['hiranya_price'];
@@ -127,20 +121,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($artwork_id > 0 && $hiranya_price >= 0) {
             mysqli_begin_transaction($conn);
             try {
-                // Get artwork title and artist_id
                 $art_query = mysqli_query($conn, "SELECT title, artist_id, price FROM artworks WHERE id = $artwork_id");
                 $art_data = mysqli_fetch_assoc($art_query);
                 $title = $art_data['title'];
                 $artist_id = $art_data['artist_id'];
                 $artist_price = $art_data['price'];
 
-                // Update artwork
                 $upd_query = "UPDATE artworks SET is_purchased_by_hiranya = 1, hiranya_price = ?, price = ? WHERE id = ?";
                 $stmt = mysqli_prepare($conn, $upd_query);
                 mysqli_stmt_bind_param($stmt, "ddi", $hiranya_price, $hiranya_price, $artwork_id);
                 mysqli_stmt_execute($stmt);
 
-                // Send notification to artist
                 $message = "Hiranya membeli karya Anda yang berjudul '$title' seharga Rp " . number_format($artist_price, 0, ',', '.') . "! Karya Anda kini masuk ke listing Hiranya dengan harga jual Rp " . number_format($hiranya_price, 0, ',', '.') . ".";
                 $notif_query = "INSERT INTO notifications (user_id, message) VALUES (?, ?)";
                 $notif_stmt = mysqli_prepare($conn, $notif_query);
@@ -148,59 +139,134 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_stmt_execute($notif_stmt);
 
                 mysqli_commit($conn);
-                $_SESSION['message'] = "Karya seni berhasil dibeli oleh Hiranya!";
+                $_SESSION['message'] = "Artwork successfully bought by Hiranya!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
                 mysqli_rollback($conn);
-                $_SESSION['message'] = "Gagal membeli karya: " . $e->getMessage();
+                $_SESSION['message'] = "Failed to buy artwork: " . $e->getMessage();
                 $_SESSION['message_type'] = "danger";
             }
         }
     }
-
     elseif ($action === 'verify_payment') {
         $order_id = (int)$_POST['order_id'];
-        $status = $_POST['status']; // 'verified' or 'rejected'
+        $status = $_POST['status']; 
 
         if ($order_id > 0 && in_array($status, ['verified', 'rejected'])) {
             mysqli_begin_transaction($conn);
             try {
-                // Update order status
                 $upd_query = "UPDATE orders SET payment_status = ? WHERE id = ?";
                 $stmt = mysqli_prepare($conn, $upd_query);
                 mysqli_stmt_bind_param($stmt, "si", $status, $order_id);
                 mysqli_stmt_execute($stmt);
 
                 if ($status === 'verified') {
-                    // Get artwork_id from order
                     $order_query = mysqli_query($conn, "SELECT artwork_id FROM orders WHERE id = $order_id");
                     $order_data = mysqli_fetch_assoc($order_query);
                     $artwork_id = $order_data['artwork_id'];
 
-                    // Update artwork status to sold
                     $art_upd = "UPDATE artworks SET status = 'sold' WHERE id = ?";
                     $art_stmt = mysqli_prepare($conn, $art_upd);
                     mysqli_stmt_bind_param($art_stmt, "i", $artwork_id);
                     mysqli_stmt_execute($art_stmt);
 
-                    // If it is in auction, also set auction to ended
                     mysqli_query($conn, "UPDATE auctions SET status = 'ended' WHERE artwork_id = $artwork_id");
                 }
 
                 mysqli_commit($conn);
-                $_SESSION['message'] = "Pembayaran berhasil diverifikasi (" . ucfirst($status) . ")!";
+                $_SESSION['message'] = "Payment successfully verified (" . ucfirst($status) . ")!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
                 mysqli_rollback($conn);
-                $_SESSION['message'] = "Gagal memverifikasi pembayaran: " . $e->getMessage();
+                $_SESSION['message'] = "Failed to verify payment: " . $e->getMessage();
                 $_SESSION['message_type'] = "danger";
             }
+        }
+    }
+
+    elseif ($action === 'upload_private_artwork') {
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
+        $price = (double)$_POST['price'];
+        $category_id = isset($_POST['category_id']) && $_POST['category_id'] !== '' ? (int)$_POST['category_id'] : null;
+        $upload_dir = "uploads/";
+
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        $image_name = '';
+
+        if (isset($_FILES['artwork_image']) && $_FILES['artwork_image']['error'] == 0) {
+            $ext = strtolower(pathinfo($_FILES['artwork_image']['name'], PATHINFO_EXTENSION));
+            $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+
+            if (!in_array($ext, $allowed)) {
+                $_SESSION['message'] = "Image format must be JPG, JPEG, PNG, or WEBP";
+                $_SESSION['message_type'] = "danger";
+                header("Location: admin_dashboard.php");
+                exit;
+            }
+
+            $image_name = time() . '_' . uniqid() . '.' . $ext;
+            if (!move_uploaded_file($_FILES['artwork_image']['tmp_name'], $upload_dir . $image_name)) {
+                $_SESSION['message'] = "Failed to upload image.";
+                $_SESSION['message_type'] = "danger";
+                header("Location: admin_dashboard.php");
+                exit;
+            }
+        } else {
+            $_SESSION['message'] = "Image is required.";
+            $_SESSION['message_type'] = "danger";
+            header("Location: admin_dashboard.php");
+            exit;
+        }
+
+        mysqli_begin_transaction($conn);
+        try {
+            $check_user = mysqli_query($conn, "SELECT id FROM users WHERE username = 'Artist Private Collection'");
+            if (mysqli_num_rows($check_user) == 0) {
+                mysqli_query($conn, "INSERT INTO users (username, email, password, role_id, role) VALUES ('Artist Private Collection', 'admin@hiranya.com', '', 2, 'artist')");
+                $artist_id = mysqli_insert_id($conn);
+                mysqli_query($conn, "INSERT INTO artist_profiles (user_id, bio) VALUES ($artist_id, 'Hiranya House Private Collection')");
+            } else {
+                $user_row = mysqli_fetch_assoc($check_user);
+                $artist_id = $user_row['id'];
+            }
+
+            $status = "available";
+            $is_purchased_by_hiranya = 1;
+
+            if ($category_id === null || $category_id === 0) {
+                $stmt = $conn->prepare("
+                    INSERT INTO artworks
+                    (artist_id, title, description, price, hiranya_price, category_id, image_url, status, is_purchased_by_hiranya)
+                    VALUES (?, ?, ?, ?, ?, NULL, ?, ?, ?)
+                ");
+                $stmt->bind_param("issddssi", $artist_id, $title, $description, $price, $price, $image_name, $status, $is_purchased_by_hiranya);
+            } else {
+                $stmt = $conn->prepare("
+                    INSERT INTO artworks
+                    (artist_id, title, description, price, hiranya_price, category_id, image_url, status, is_purchased_by_hiranya)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ");
+                $stmt->bind_param("issdidssi", $artist_id, $title, $description, $price, $price, $category_id, $image_name, $status, $is_purchased_by_hiranya);
+            }
+
+            $stmt->execute();
+            mysqli_commit($conn);
+
+            $_SESSION['message'] = "Artwork Private Collection successfully uploaded!";
+            $_SESSION['message_type'] = "success";
+        } catch (Exception $e) {
+            mysqli_rollback($conn);
+            $_SESSION['message'] = "Failed to upload artwork: " . $e->getMessage();
+            $_SESSION['message_type'] = "danger";
         }
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST') {
-    
     if ($action === 'delete_category') {
         $id = (int)$_GET['id'];
         if ($id > 0) {
@@ -217,16 +283,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST
                 mysqli_stmt_execute($del_stmt);
 
                 mysqli_commit($conn);
-                $_SESSION['message'] = "Kategori berhasil dihapus!";
+                $_SESSION['message'] = "Category successfully deleted!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
                 mysqli_rollback($conn);
-                $_SESSION['message'] = "Gagal menghapus kategori: " . $e->getMessage();
+                $_SESSION['message'] = "Failed to delete category: " . $e->getMessage();
                 $_SESSION['message_type'] = "danger";
             }
         }
     }
-
     elseif ($action === 'remove_auction') {
         $artwork_id = (int)$_GET['artwork_id'];
         if ($artwork_id > 0) {
@@ -243,16 +308,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST
                 mysqli_stmt_execute($upd_stmt);
 
                 mysqli_commit($conn);
-                $_SESSION['message'] = "Karya seni berhasil dihapus dari daftar lelang!";
+                $_SESSION['message'] = "Artwork successfully removed from auction!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
                 mysqli_rollback($conn);
-                $_SESSION['message'] = "Gagal menghapus dari lelang: " . $e->getMessage();
+                $_SESSION['message'] = "Failed to remove from auction: " . $e->getMessage();
                 $_SESSION['message_type'] = "danger";
             }
         }
     }
-
     elseif ($action === 'delete_artwork') {
         $id = (int)$_GET['id'];
         if ($id > 0) {
@@ -289,17 +353,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST
                     }
                 }
 
-                $_SESSION['message'] = "Karya seni berhasil dihapus!";
+                $_SESSION['message'] = "Artwork successfully deleted!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
                 mysqli_rollback($conn);
-                $_SESSION['message'] = "Gagal menghapus karya seni: " . $e->getMessage();
+                $_SESSION['message'] = "Failed to delete artwork: " . $e->getMessage();
                 $_SESSION['message_type'] = "danger";
             }
         }
     }
 }
-
 header("Location: admin_dashboard.php");
 exit;
 ?>

@@ -14,27 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = $_POST['description'];
     $price      = $_POST['price'];
 
-    // Folder upload
     $upload_dir = "uploads/";
 
-    // Buat folder jika belum ada
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
 
-    // Upload gambar
     $image_name = '';
 
     if (isset($_FILES['artwork_image']) && $_FILES['artwork_image']['error'] == 0) {
-
         $ext = strtolower(pathinfo($_FILES['artwork_image']['name'], PATHINFO_EXTENSION));
-
         $allowed = ['jpg', 'jpeg', 'png', 'webp'];
 
         if (!in_array($ext, $allowed)) {
             die("Format gambar harus JPG, JPEG, PNG, atau WEBP");
         }
-
         $image_name = time() . '_' . uniqid() . '.' . $ext;
 
         if (!move_uploaded_file(

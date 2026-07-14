@@ -7,7 +7,6 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mx-auto">
 
-                <!-- AUCTIONS -->
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#">AUCTIONS</a>
                     <div class="dropdown-menu border-0 shadow p-4" style="min-width: 700px;">
@@ -26,7 +25,6 @@
                     </div>
                 </li>
 
-                <!-- PRIVATE SALES -->
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#">PRIVATE SALES</a>
                     <div class="dropdown-menu border-0 shadow p-4" style="min-width: 700px;">
@@ -41,31 +39,30 @@
                                 </div>
                                 <div class="col-4 border-start">
                                     <h6 class="text-danger">HIGHLIGHTS</h6>
-                                    <p>Karya unggulan | Koleksi kurator | Karya baru masuk</p>
+                                    <p>Featured Artworks | Curator's Collection | New Arrivals</p>
                                 </div>
                         </div>
                     </div>
                 </li>
 
-                <!-- ARTISTS -->
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#">ARTISTS</a>
                     <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
-                    <div class="row">
-                        <div class="col-6">
-                            <a class="dropdown-item" href="#">FEATURED ARTISTS</a>
-                            <a class="dropdown-item" href="#">EMERGING ARTISTS</a>
-                            <a class="dropdown-item" href="#">ALL ARTISTS</a>
-                            <a class="dropdown-item" href="#">BECOME AN ARTIST</a>
-                        </div>
-                        <div class="col-6 border-start">
-                            <h6 class="text-danger">HIGHLIGHTS</h6>
-                                <p>Profil seniman pilihan | Karya terbaru mereka</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="dropdown-item" href="#">FEATURED ARTISTS</a>
+                                <a class="dropdown-item" href="#">EMERGING ARTISTS</a>
+                                <a class="dropdown-item" href="#">ALL ARTISTS</a>
+                                <a class="dropdown-item" href="#">BECOME AN ARTIST</a>
+                            </div>
+                            <div class="col-6 border-start">
+                                <h6 class="text-danger">HIGHLIGHTS</h6>
+                                    <p>Featured Artist Profiles | Their Latest Works</p>
+                            </div>
                         </div>
                     </div>
                 </li>
 
-                <!-- DISCOVER -->
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#">DISCOVER</a>
                         <div class="dropdown-menu border-0 shadow p-4" style="min-width: 800px;">
@@ -90,7 +87,6 @@
                         </div>
                     </li>
 
-                <!-- SELL WITH US -->
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#">SELL WITH US</a>
                         <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
@@ -110,7 +106,7 @@
                             </div> 
                 </li>
             </ul>
-            <!-- KANAN NAVBAR -->
+
             <div class="d-flex align-items-center ms-auto">
                 <form action="search.php" method="GET" class="d-flex align-items-center me-4">
                     <input class="form-control me-2"

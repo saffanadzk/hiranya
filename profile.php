@@ -18,7 +18,6 @@ $bank_holder = '';
 $notifications = [];
 
 if ($role === 'artist') {
-    // Get or create artist profile
     $prof_query = mysqli_query($conn, "SELECT * FROM artist_profiles WHERE user_id = $user_id");
     if (mysqli_num_rows($prof_query) > 0) {
         $prof_data = mysqli_fetch_assoc($prof_query);
@@ -29,7 +28,6 @@ if ($role === 'artist') {
         mysqli_query($conn, "INSERT INTO artist_profiles (user_id) VALUES ($user_id)");
     }
 
-    // Fetch notifications
     $notif_query = mysqli_query($conn, "SELECT * FROM notifications WHERE user_id = $user_id ORDER BY id DESC");
     while ($row = mysqli_fetch_assoc($notif_query)) {
         $notifications[] = $row;
@@ -85,7 +83,6 @@ if ($role === 'artist') {
             </div>
         </nav>
     </div>
-<!-- Profile hero background -->
     <div class="profile-hero"></div>
     <div class="container" style="margin-top: -90px;">
         <div class="profile-card">
@@ -180,7 +177,7 @@ if ($role === 'artist') {
                             </div>
                         <?php endif; ?>
                         <div class="col-md-6">
-                            <a href="home.php" class="action-card">
+                            <a href="featured-collections.php" class="action-card">
                                 <div class="icon-box"><i class="fa fa-th-large"></i></div>
                                 <div>
                                     <h6>Browse Artworks</h6>
@@ -199,12 +196,12 @@ if ($role === 'artist') {
                         </div>
                         <div class="col-lg-8">
                         <?php if ($role === 'artist') : ?>
-                            <div class="section-label">Pemberitahuan</div>
+                            <div class="section-label">Notifications</div>
                             <a href="notifications.php" class="action-card mb-4" style="background-color: #fffbeb; border: 1px solid #fef3c7;">
                                 <div class="icon-box" style="background-color: #fef3c7; color: #d97706;"><i class="fa fa-bell"></i></div>
                                 <div>
-                                    <h6>Notifikasi Layanan</h6>
-                                    <p>Lihat pemberitahuan karya yang dibeli oleh Hiranya (Ada <?= count($notifications); ?> notifikasi)</p>
+                                    <h6>Service Notifications</h6>
+                                    <p>View notifications about artworks purchased by Hiranya (There are <?= count($notifications); ?> notifications)</p>
                                 </div>
                             </a>
                         <?php endif; ?>

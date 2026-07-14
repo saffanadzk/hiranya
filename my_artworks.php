@@ -26,8 +26,23 @@ $result = mysqli_stmt_get_result($stmt);
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="my-artworks-page">
+
+<?php if (isset($_SESSION['message'])): ?>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: '<?= htmlspecialchars($_SESSION['message_type'] == 'success' ? 'Success' : 'Notification'); ?>',
+            text: '<?= htmlspecialchars($_SESSION['message']); ?>',
+            icon: '<?= $_SESSION['message_type'] == 'danger' ? 'error' : ($_SESSION['message_type'] == 'success' ? 'success' : 'info'); ?>',
+            confirmButtonColor: '#ab8e5b'
+        });
+    });
+    </script>
+    <?php unset($_SESSION['message']); unset($_SESSION['message_type']); ?>
+<?php endif; ?>
 
 <nav class="navbar navbar-expand-lg sticky-top px-4 py-3" style="background:#1C2431;">
     <a href="index.php" class="navbar-brand">
@@ -69,8 +84,8 @@ $result = mysqli_stmt_get_result($stmt);
                             <i class="fas fa-pencil-alt"></i> Edit
                         </a>
                         <a href="delete.php?id=<?php echo $art['id']; ?>"
-                           onclick="return confirm('Hapus artwork ini?')"
-                           class="delete-link">
+                           class="delete-link btn-delete-swal"
+                           data-confirm-text="Hapus artwork ini?">
                             <i class="fas fa-trash-alt"></i> Delete
                         </a>
                     </div>
@@ -104,6 +119,27 @@ function toggleMenu(btn) {
 document.addEventListener('click', function(e) {
     if (!e.target.closest('.art-menu')) {
         document.querySelectorAll('.art-menu-dropdown.show').forEach(d => d.classList.remove('show'));
+    }
+    
+    const swalBtn = e.target.closest('.btn-delete-swal');
+    if (swalBtn) {
+        e.preventDefault();
+        const href = swalBtn.getAttribute('href');
+        const text = swalBtn.getAttribute('data-confirm-text') || 'Apakah Anda yakin ingin menghapus data ini?';
+        Swal.fire({
+            title: 'Are you sure?',
+            text: text,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ab8e5b',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, proceed',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = href;
+            }
+        });
     }
 });
 </script>

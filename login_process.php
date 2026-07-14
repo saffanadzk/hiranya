@@ -26,9 +26,9 @@ if (mysqli_num_rows($query) == 1) {
         }
         exit();
     } else {
-        echo "Password salah!";
+        echo "Password Denied!";
     }
 } else {
-    echo "Username tidak ditemukan!";
+    echo "Username not found!";
 }
 ?>

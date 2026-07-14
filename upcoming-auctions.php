@@ -21,7 +21,6 @@ $auc_sql = "
 $auc_res = mysqli_query($conn, $auc_sql);
 $auc_count = mysqli_num_rows($auc_res);
 
-// Fetch categories for sidebar filter
 $cat_query = mysqli_query($conn, "SELECT * FROM categories ORDER BY name ASC");
 $categories = [];
 while ($row = mysqli_fetch_assoc($cat_query)) {
@@ -53,7 +52,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
 
     <?php include 'partials/navbar.php'; ?>
 
-    <!-- Page Heading + Sub Tabs -->
     <div class="auction-page-head">
         <div class="container">
             <h1 class="font-playfair-display mb-3">Upcoming Auctions</h1>
@@ -65,7 +63,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
         </div>
     </div>
 
-    <!-- Hero Carousel -->
     <div class="auction-hero-carousel">
         <div id="auctionCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -112,14 +109,14 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
         <div class="container">
             <div class="row">
 
-                <!-- Sidebar Filter: dropdown style -->
                 <div class="col-lg-3 mb-4">
                     <div class="filter-panel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="filter-title mb-0">Filter By</h6>
                             <a href="#" class="clear-link">Clear all</a>
                         </div>
-                        <div class="filter-dropdown">
+
+                        <div class="filter-dropdown">
                             <button class="filter-dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#filterEvents">
                                 EVENTS <i class="fa fa-chevron-down"></i>
                             </button>
@@ -159,7 +156,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                     </div>
                 </div>
 
-                <!-- Auction Cards -->
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="result-count mb-0">Showing <?= $auc_count; ?> upcoming auction(s)</p>

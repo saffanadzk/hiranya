@@ -42,7 +42,6 @@ include 'config.php';
 
     <div class="container py-5">
 
-        <!-- Section 1: Submit Artwork -->
         <div id="submit-artwork" class="sell-section row align-items-center g-5">
             <div class="col-lg-6">
                 <span class="sell-step">STEP 01</span>
@@ -58,7 +57,6 @@ include 'config.php';
 
         <hr class="sell-divider">
 
-        <!-- Section 2: Request Valuation -->
         <div id="request-valuation" class="sell-section row align-items-center g-5 flex-lg-row-reverse">
             <div class="col-lg-6">
                 <span class="sell-step">STEP 02</span>
@@ -74,7 +72,6 @@ include 'config.php';
 
         <hr class="sell-divider">
 
-        <!-- Section 3: Sell at Auction -->
         <div id="sell-at-auction" class="sell-section row align-items-center g-5">
             <div class="col-lg-6">
                 <span class="sell-step">STEP 03</span>
@@ -88,7 +85,6 @@ include 'config.php';
             </div>
         </div>
 
-        <!-- Success stories -->
         <div class="text-center mt-5 pt-4">
             <span class="sell-step">SUCCESS STORIES</span>
             <h2 class="font-playfair-display mb-4">Trusted by Artists and Collectors</h2>

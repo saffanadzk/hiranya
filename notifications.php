@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Handle Actions (Delete / Clear All)
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action === 'delete') {
@@ -28,7 +27,6 @@ if (isset($_GET['action'])) {
     exit();
 }
 
-// Fetch all notifications for the user
 $notif_query = mysqli_query($conn, "SELECT * FROM notifications WHERE user_id = $user_id ORDER BY id DESC");
 $notifications = [];
 while ($row = mysqli_fetch_assoc($notif_query)) {
@@ -46,49 +44,7 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@500&family=Work+Sans&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .notif-card {
-            border: 1px solid rgba(0,0,0,0.06);
-            background: #fff;
-            border-radius: 8px;
-        }
-        .notif-item {
-            padding: 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: background 0.3s;
-            position: relative;
-        }
-        .notif-item:hover {
-            background-color: #fafbfc;
-        }
-        .notif-item:last-child {
-            border-bottom: none;
-        }
-        .btn-clear-all {
-            border: 1px solid #ab8e5b;
-            color: #ab8e5b;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            background: transparent;
-            transition: all 0.3s;
-        }
-        .btn-clear-all:hover {
-            background: #ab8e5b;
-            color: #fff;
-        }
-        .delete-btn {
-            color: #ccc;
-            background: none;
-            border: none;
-            font-size: 18px;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-        .delete-btn:hover {
-            color: #dc3545;
-        }
-    </style>
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
@@ -97,11 +53,11 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
     <div class="container py-5" style="max-width: 800px;">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 style="font-family: 'Playfair Display', serif; font-weight:700; color: #1c2431; margin-bottom: 5px;">Notifikasi Platform</h2>
-                <p class="text-muted small mb-0">Kelola semua pemberitahuan dan informasi penting dari Hiranya.</p>
+                <h2 style="font-family: 'Playfair Display', serif; font-weight:700; color: #1c2431; margin-bottom: 5px;">Platform Notification</h2>
+                <p class="text-muted small mb-0">Manage all notifications and important information from Hiranya.</p>
             </div>
             <?php if (!empty($notifications)): ?>
-                <a href="notifications.php?action=clear_all" class="btn btn-sm btn-clear-all font-monospace px-3 py-2" onclick="return confirm('Bersihkan semua notifikasi?')">BERSIHKAN SEMUA</a>
+                <a href="notifications.php?action=clear_all" class="btn btn-sm btn-clear-all font-monospace px-3 py-2" onclick="return confirm('Clear all notifications?')">CLEAR ALL</a>
             <?php endif; ?>
         </div>
 
@@ -109,8 +65,8 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
             <?php if (empty($notifications)): ?>
                 <div class="text-center py-5">
                     <i class="fa fa-bell-slash fa-3x text-muted mb-3" style="opacity: 0.5;"></i>
-                    <h5 class="text-secondary" style="font-family: 'Playfair Display', serif;">Tidak ada notifikasi</h5>
-                    <p class="text-muted small mb-0">Semua pemberitahuan baru akan muncul di sini.</p>
+                    <h5 class="text-secondary" style="font-family: 'Playfair Display', serif;">No notifications available</h5>
+                    <p class="text-muted small mb-0">All new notifications will appear here.</p>
                 </div>
             <?php else: ?>
                 <div class="list-group list-group-flush">
@@ -125,7 +81,7 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
                                     <small class="text-muted font-monospace" style="font-size: 10px;"><?= date('d M Y, H:i', strtotime($notif['created_at'])); ?></small>
                                 </div>
                             </div>
-                            <a href="notifications.php?action=delete&id=<?= $notif['id']; ?>" class="delete-btn" title="Hapus Notifikasi">
+                            <a href="notifications.php?action=delete&id=<?= $notif['id']; ?>" class="delete-btn" title="Delete Notification">
                                 <i class="fa fa-times-circle"></i>
                             </a>
                         </div>
@@ -139,7 +95,6 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="container-fluid footer bg-dark text-white-50 py-5 mt-5">
         <div class="container py-4 text-center">
             <p class="mb-0">&copy; Hiranya Art House. All Rights Reserved.</p>

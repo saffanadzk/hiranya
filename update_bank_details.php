@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bank_account = mysqli_real_escape_string($conn, $_POST['bank_account']);
     $bank_holder = mysqli_real_escape_string($conn, $_POST['bank_holder']);
 
-    // Check if artist_profiles exists
     $check = mysqli_query($conn, "SELECT id FROM artist_profiles WHERE user_id = $user_id");
     if (mysqli_num_rows($check) > 0) {
         $query = "UPDATE artist_profiles SET bank_name = ?, bank_account = ?, bank_holder = ? WHERE user_id = ?";
@@ -26,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (mysqli_stmt_execute($stmt)) {
-        $_SESSION['message'] = "Detail transfer bank berhasil diperbarui!";
+        $_SESSION['message'] = "Bank transfer details updated successfully!";
         $_SESSION['message_type'] = "success";
     } else {
-        $_SESSION['message'] = "Gagal memperbarui detail bank: " . mysqli_error($conn);
+        $_SESSION['message'] = "Failed to update bank details: " . mysqli_error($conn);
         $_SESSION['message_type'] = "danger";
     }
 }

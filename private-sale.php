@@ -19,7 +19,6 @@ $art_sql = "
 $art_res = mysqli_query($conn, $art_sql);
 $art_count = mysqli_num_rows($art_res);
 
-// Fetch categories for sidebar filter
 $cat_query = mysqli_query($conn, "SELECT * FROM categories ORDER BY name ASC");
 $categories = [];
 while ($row = mysqli_fetch_assoc($cat_query)) {
@@ -64,7 +63,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
         <div class="container">
             <div class="row">
 
-                <!-- Sidebar Filter -->
                 <div class="col-lg-3 mb-4">
                     <div class="filter-panel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -114,7 +112,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                     </div>
                 </div>
 
-                <!-- Works Grid -->
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="result-count mb-0">Showing <?= $art_count; ?> available work(s)</p>
@@ -123,7 +120,7 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                         <?php if ($art_count === 0): ?>
                             <div class="col-12 text-center py-5">
                                 <i class="fa fa-box-open fa-3x text-muted mb-3"></i>
-                                <p class="text-muted">Belum ada karya seni yang tersedia di Private Sale saat ini.</p>
+                                <p class="text-muted">No artworks available for private sale at the moment.</p>
                             </div>
                         <?php else: ?>
                             <?php while ($art = mysqli_fetch_assoc($art_res)): ?>
@@ -135,7 +132,7 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                                         </div>
                                         <div class="auction-card-body">
                                             <h5 style="font-family: 'Playfair Display', serif; font-weight: 600;"><?= htmlspecialchars($art['title']); ?></h5>
-                                            <p class="meta">oleh @<?= htmlspecialchars($art['artist_name']); ?> &middot; <?= htmlspecialchars($art['category_name'] ?? 'Uncategorized'); ?></p>
+                                            <p class="meta">by <?= htmlspecialchars($art['artist_name']); ?> &middot; <?= htmlspecialchars($art['category_name'] ?? 'Uncategorized'); ?></p>
                                             <p class="meta" style="margin-top:-12px; font-weight: bold; color: #ab8e5b;">Rp <?= number_format($art['price'], 0, ',', '.'); ?></p>
                                             <a href="checkout.php?artwork_id=<?= $art['id']; ?>" class="btn-card-outline w-100 text-center">Acquire Artwork</a>
                                         </div>

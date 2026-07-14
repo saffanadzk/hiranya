@@ -39,40 +39,6 @@ $artworks_query = mysqli_query($conn, "
     <link href="assets/css/profile.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@500&family=Work+Sans&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .art-card {
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
-            transition: all 0.3s ease;
-        }
-        .art-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-        .art-image-wrapper {
-            height: 250px;
-            overflow: hidden;
-            background-color: #f8f9fa;
-        }
-        .art-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .btn-buy-direct {
-            background-color: #ab8e5b;
-            color: #fff;
-            border: none;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        .btn-buy-direct:hover {
-            background-color: #927546;
-            color: #fff;
-        }
-    </style>
 </head>
 <body class="bg-light">
     <?php include 'partials/navbar.php'; ?>
@@ -97,13 +63,11 @@ $artworks_query = mysqli_query($conn, "
             </div>
             
             <div class="profile-divider my-4"></div>
-            
             <div class="row g-4">
-
                 <div class="col-lg-4 border-end">
-                    <div class="section-label mb-3 text-uppercase small tracking-wide font-monospace" style="color: #ab8e5b;">Tentang Seniman</div>
+                    <div class="section-label mb-3 text-uppercase small tracking-wide font-monospace" style="color: #ab8e5b;">About the Artist</div>
                     <p class="text-secondary small mb-3">
-                        <?= !empty($artist_profile['bio']) ? nl2br(htmlspecialchars($artist_profile['bio'])) : 'Seniman profesional yang memamerkan karya seni eksklusifnya di Hiranya Art House.'; ?>
+                        <?= !empty($artist_profile['bio']) ? nl2br(htmlspecialchars($artist_profile['bio'])) : 'Professional artist showcasing exclusive artworks at Hiranya Art House.'; ?>
                     </p>
                     <?php if (!empty($artist_profile['website'])): ?>
                         <div class="info-row d-flex justify-content-between border-top py-2">
@@ -112,24 +76,24 @@ $artworks_query = mysqli_query($conn, "
                         </div>
                     <?php endif; ?>
                     <div class="info-row d-flex justify-content-between border-top py-2 mb-3">
-                        <span class="text-muted small">Hubungi</span>
+                        <span class="text-muted small">Contact</span>
                         <span class="small text-dark font-monospace"><?= htmlspecialchars($artist_user['email']); ?></span>
                     </div>
                 </div>
                 
                 <div class="col-lg-8">
-                    <h4 class="mb-4" style="font-family: 'Playfair Display', serif; font-weight: 600; color: #1C2431;">Karya Seni yang Tersedia (Direct Sale)</h4>
+                    <h4 class="mb-4" style="font-family: 'Playfair Display', serif; font-weight: 600; color: #1C2431;">Available Artworks (Direct Sale)</h4>
                     
                     <?php if (mysqli_num_rows($artworks_query) === 0): ?>
                         <div class="text-center py-5 bg-light rounded">
                             <i class="fa fa-image fa-3x text-muted mb-3"></i>
-                            <p class="text-muted mb-0">Belum ada karya seni mandiri yang dijual langsung oleh artist ini saat ini.</p>
+                            <p class="text-muted mb-0">There are no direct sale artworks available from this artist at the moment.</p>
                         </div>
                     <?php else: ?>
                         <div class="row g-4">
                             <?php while ($art = mysqli_fetch_assoc($artworks_query)): 
                                 $artist_price = $art['price'];
-                                $commission = $artist_price * 0.05; // 5% commission
+                                $commission = $artist_price * 0.05; 
                                 $total_checkout = $artist_price + $commission;
                             ?>
                                 <div class="col-md-6">
@@ -144,11 +108,11 @@ $artworks_query = mysqli_query($conn, "
                                             
                                             <div class="border-top pt-2 mt-2">
                                                 <div class="d-flex justify-content-between small text-muted">
-                                                    <span>Harga Artist:</span>
+                                                    <span>Price from Artist:</span>
                                                     <span>Rp <?= number_format($artist_price, 0, ',', '.'); ?></span>
                                                 </div>
                                                 <div class="d-flex justify-content-between small text-muted mb-1">
-                                                    <span>Komisi Platform (5%):</span>
+                                                    <span>Platform Commission (5%):</span>
                                                     <span>Rp <?= number_format($commission, 0, ',', '.'); ?></span>
                                                 </div>
                                                 <div class="d-flex justify-content-between fw-bold text-dark border-top pt-1">
@@ -158,7 +122,7 @@ $artworks_query = mysqli_query($conn, "
                                             </div>
                                             
                                             <a href="checkout.php?artwork_id=<?= $art['id']; ?>" class="btn btn-buy-direct btn-sm w-100 mt-3 py-2">
-                                                <i class="fa fa-shopping-bag me-1"></i> BELI SEKARANG
+                                                <i class="fa fa-shopping-bag me-1"></i> BUY NOW
                                             </a>
                                         </div>
                                     </div>

@@ -6,7 +6,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 include 'config.php';
 
-// Ambil semua artist yang punya karya available (direct sale, bukan dibeli Hiranya)
 $artists_query = mysqli_query($conn, "
     SELECT DISTINCT u.id, u.username, u.email,
            ap.profile_image, ap.bio, ap.website,
@@ -66,7 +65,7 @@ $artists_query = mysqli_query($conn, "
         <?php if (mysqli_num_rows($artists_query) === 0): ?>
             <div class="text-center py-5">
                 <i class="fa fa-palette fa-3x mb-3" style="color: #ab8e5b; opacity:.5;"></i>
-                <p class="text-muted">Belum ada artist yang tersedia untuk private sale saat ini.</p>
+                <p class="text-muted">Not available at the moment.</p>
                 <a href="register.php" class="btn-card-solid mt-3" style="display:inline-block; padding:12px 28px;">Daftar Sebagai Artist</a>
             </div>
         <?php else: ?>
@@ -75,7 +74,6 @@ $artists_query = mysqli_query($conn, "
                     <div class="bp-artist-card">
                         <a href="artist_profile.php?id=<?= $artist['id']; ?>" class="bp-card-link">
 
-                            <!-- Foto / Avatar -->
                             <div class="bp-card-photo">
                                 <?php if (!empty($artist['profile_image'])): ?>
                                     <img src="uploads/<?= htmlspecialchars($artist['profile_image']); ?>"
@@ -86,10 +84,7 @@ $artists_query = mysqli_query($conn, "
                                     </div>
                                 <?php endif; ?>
 
-                                <!-- Garis aksen kiri seperti referensi -->
                                 <div class="bp-card-accent"></div>
-
-                                <!-- Overlay bawah: nama + role + ikon sosial -->
                                 <div class="bp-card-overlay">
                                     <div class="bp-card-role">Hiranya Artist</div>
                                     <h5 class="bp-card-name"><?= htmlspecialchars($artist['username']); ?></h5>
@@ -105,7 +100,6 @@ $artists_query = mysqli_query($conn, "
                                 </div>
                             </div>
 
-                            <!-- Info bawah card -->
                             <div class="bp-card-body">
                                 <p class="bp-card-bio">
                                     <?= !empty($artist['bio'])
@@ -128,7 +122,6 @@ $artists_query = mysqli_query($conn, "
         <?php endif; ?>
     </div>
 
-    <!-- CTA section -->
     <div class="bp-cta-section">
         <div class="container text-center">
             <span class="bp-cta-eyebrow">ARE YOU AN ARTIST?</span>

@@ -19,8 +19,6 @@ $auc_sql = "
 ";
 $auc_res = mysqli_query($conn, $auc_sql);
 $auc_count = mysqli_num_rows($auc_res);
-
-// Fetch categories for sidebar filter
 $cat_query = mysqli_query($conn, "SELECT * FROM categories ORDER BY name ASC");
 $categories = [];
 while ($row = mysqli_fetch_assoc($cat_query)) {
@@ -38,21 +36,16 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="assets/img/favicon.ico" rel="icon">
-
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/auctions.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@500&family=Work+Sans&family=Cinzel:wght@700&display=swap" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body class="auction-page">
 
     <?php include 'partials/navbar.php'; ?>
-
-    <!-- Page Heading + Sub Tabs -->
     <div class="auction-page-head">
         <div class="container">
             <h1 class="font-playfair-display mb-3">Current Auctions</h1>
@@ -67,8 +60,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
-
-                <!-- Sidebar Filter: dropdown style -->
                 <div class="col-lg-3 mb-4">
                     <div class="filter-panel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -116,7 +107,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                     </div>
                 </div>
 
-                <!-- Auction Cards -->
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="result-count mb-0">Showing <?= $auc_count; ?> active auction(s)</p>
@@ -126,7 +116,7 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                         <?php if ($auc_count === 0): ?>
                             <div class="col-12 text-center py-5">
                                 <i class="fa fa-gavel fa-3x text-muted mb-3"></i>
-                                <p class="text-muted">Belum ada lelang aktif saat ini.</p>
+                                <p class="text-muted">There are no active auctions at the moment.</p>
                             </div>
                         <?php else: ?>
                             <?php while ($auc = mysqli_fetch_assoc($auc_res)): ?>
@@ -177,7 +167,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Countdown Timers
         function updateTimers() {
             const timers = document.querySelectorAll(".countdown-timer");
             timers.forEach(timer => {
@@ -206,7 +195,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
         updateTimers();
         setInterval(updateTimers, 1000);
 
-        // Sidebar Filters
         const typeChecks = document.querySelectorAll(".filter-type-chk");
         const catChecks = document.querySelectorAll(".filter-category-chk");
         const cards = document.querySelectorAll(".auction-item-card");

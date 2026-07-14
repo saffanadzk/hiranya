@@ -84,13 +84,12 @@ include 'config.php';
                                     </div>
                                     <div class="col-4 border-start">
                                         <h6 class="text-danger">HIGHLIGHTS</h6>
-                                        <p>Karya unggulan | Koleksi kurator | Karya baru masuk</p>
+                                        <p>Featured Works | Curator Collections | New Arrivals</p>
                                     </div>
                                 </div>
                             </div>
                         </li>
 
-                    <!-- 3. ARTISTS -->
                     <li class="nav-item dropdown dropdown-hover">
                         <a class="nav-link dropdown-toggle" href="#">ARTISTS</a>
                             <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
@@ -103,13 +102,12 @@ include 'config.php';
                                     </div>
                                     <div class="col-6 border-start">
                                         <h6 class="text-danger">HIGHLIGHTS</h6>
-                                        <p>Profil seniman pilihan | Karya terbaru mereka</p>
+                                        <p>Featured Artists | Their Latest Works</p>
                                     </div>
                                 </div>
                             </div>
                         </li>
 
-                    <!-- 4. DISCOVER -->
                     <li class="nav-item dropdown dropdown-hover">
                         <a class="nav-link dropdown-toggle" href="#">DISCOVER</a>
                             <div class="dropdown-menu border-0 shadow p-4" style="min-width: 800px;">
@@ -135,7 +133,6 @@ include 'config.php';
                             </div>
                         </li>
 
-                    <!-- 5. SELL WITH US -->
                     <li class="nav-item dropdown dropdown-hover">
                         <a class="nav-link dropdown-toggle" href="#">SELL WITH US</a>
                             <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
@@ -243,9 +240,7 @@ include 'config.php';
             </div>
         </div>
     </div>    
-    <!-- About End -->
-    
-    <!-- Service Start -->
+
     <div class="container-fluid service py-5">
         <div class="container">
             <div class="text-center wow fadeIn" data-wow-delay="0.1s">
@@ -336,7 +331,6 @@ include 'config.php';
             </div>
         </div>
     </div>
-    <!-- Service End -->
 
         <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">

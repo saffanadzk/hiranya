@@ -10,7 +10,6 @@ if ($id <= 0) {
     exit();
 }
 
-// Fetch artwork and auction details
 $art_query = mysqli_query($conn, "
     SELECT artworks.*, users.username AS artist_name 
     FROM artworks 
@@ -18,44 +17,37 @@ $art_query = mysqli_query($conn, "
     WHERE artworks.id = $id
 ");
 if (mysqli_num_rows($art_query) === 0) {
-    die("Karya seni tidak ditemukan.");
+    die("Artwork not found.");
 }
 $artwork = mysqli_fetch_assoc($art_query);
 
 $auc_query = mysqli_query($conn, "SELECT * FROM auctions WHERE artwork_id = $id");
 if (mysqli_num_rows($auc_query) === 0) {
-    die("Detail lelang tidak ditemukan.");
+    die("Auction details not found.");
 }
 $auction = mysqli_fetch_assoc($auc_query);
 $auction_id = $auction['id'];
 
-// Check if auction is ended based on end_time
 $now = date('Y-m-d H:i:s');
 $is_ended = ($now > $auction['end_time'] || $auction['status'] === 'ended');
 
-// If ended but status is active, update in DB and determine winner
 if ($is_ended && $auction['status'] === 'active') {
     mysqli_begin_transaction($conn);
     try {
-        // Find highest bidder
         $top_bid_query = mysqli_query($conn, "SELECT user_id FROM bids WHERE auction_id = $auction_id ORDER BY bid_amount DESC LIMIT 1");
         if (mysqli_num_rows($top_bid_query) > 0) {
             $top_bid = mysqli_fetch_assoc($top_bid_query);
             $winner_id = $top_bid['user_id'];
             
-            // Set winner and status in auctions
             mysqli_query($conn, "UPDATE auctions SET winner_id = $winner_id, status = 'ended' WHERE id = $auction_id");
             
-            // Insert notification for winner
-            $msg_winner = "Selamat! Anda memenangkan lelang '" . $artwork['title'] . "' dengan penawaran Rp " . number_format($auction['current_bid'], 0, ',', '.') . ". Silakan selesaikan pembayaran.";
+            $msg_winner = "Congratulations! You have won the auction for '" . $artwork['title'] . "' with a bid of Rp " . number_format($auction['current_bid'], 0, ',', '.') . ". Please complete the payment.";
             mysqli_query($conn, "INSERT INTO notifications (user_id, message) VALUES ($winner_id, '$msg_winner')");
         } else {
-            // End without winner
             mysqli_query($conn, "UPDATE auctions SET status = 'ended' WHERE id = $auction_id");
         }
         mysqli_commit($conn);
         
-        // Refresh auction array
         $auc_query = mysqli_query($conn, "SELECT * FROM auctions WHERE artwork_id = $id");
         $auction = mysqli_fetch_assoc($auc_query);
     } catch (Exception $e) {
@@ -63,7 +55,6 @@ if ($is_ended && $auction['status'] === 'active') {
     }
 }
 
-// Fetch bids for leaderboard
 $bids_query = mysqli_query($conn, "
     SELECT bids.*, users.username 
     FROM bids 
@@ -76,7 +67,6 @@ while ($row = mysqli_fetch_assoc($bids_query)) {
     $bids[] = $row;
 }
 
-// Find winner name if ended
 $winner_name = '';
 if ($auction['winner_id'] > 0) {
     $win_u_query = mysqli_query($conn, "SELECT username FROM users WHERE id = " . $auction['winner_id']);
@@ -95,53 +85,7 @@ if ($auction['winner_id'] > 0) {
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@500&family=Work+Sans&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .leaderboard-list {
-            max-height: 350px;
-            overflow-y: auto;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.08);
-        }
-        .leaderboard-item {
-            padding: 12px 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            background: #fff;
-            transition: background 0.3s;
-        }
-        .leaderboard-item:hover {
-            background: #f8f9fa;
-        }
-        .leaderboard-item:first-child {
-            background: #fffdf5;
-            border-left: 4px solid #ab8e5b;
-        }
-        .leaderboard-item:last-child {
-            border-bottom: none;
-        }
-        .rank-badge {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .rank-1 {
-            background: #ab8e5b;
-            color: #fff;
-        }
-        .rank-other {
-            background: #eee;
-            color: #666;
-        }
-        .info-card {
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.05);
-            background: #fff;
-        }
-    </style>
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
@@ -157,16 +101,15 @@ if ($auction['winner_id'] > 0) {
             </div>
         <?php endif; ?>
 
-        <!-- Auction end notification banners -->
         <?php if ($is_ended): ?>
             <div class="alert alert-dark border-0 p-4 mb-4 rounded shadow-sm d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3" style="background-color: #1C2431; color: white;">
                 <div>
-                    <h5 class="mb-1 text-warning" style="font-family: 'Playfair Display', serif;"><i class="fa fa-info-circle me-2"></i>Lelang Telah Berakhir</h5>
+                    <h5 class="mb-1 text-warning" style="font-family: 'Playfair Display', serif;"><i class="fa fa-info-circle me-2"></i>Auction Has Ended</h5>
                     <p class="mb-0 small text-light">
                         <?php if (!empty($winner_name)): ?>
-                            Pemenang lelang ini adalah <strong class="text-warning">@<?= htmlspecialchars($winner_name); ?></strong> dengan tawaran tertinggi sebesar <strong>Rp <?= number_format($auction['current_bid'], 0, ',', '.'); ?></strong>.
+                            The winner of this auction is <strong class="text-warning">@<?= htmlspecialchars($winner_name); ?></strong> with the highest bid of <strong>Rp <?= number_format($auction['current_bid'], 0, ',', '.'); ?></strong>.
                         <?php else: ?>
-                            Lelang berakhir tanpa ada penawaran masuk.
+                            The auction ended without any bids received.
                         <?php endif; ?>
                     </p>
                 </div>
@@ -177,20 +120,18 @@ if ($auction['winner_id'] > 0) {
         <?php endif; ?>
 
         <div class="row g-5">
-            <!-- Artwork image and details -->
             <div class="col-lg-6">
                 <div class="card border-0 shadow-sm rounded overflow-hidden">
                     <img src="uploads/<?= htmlspecialchars($artwork['image_url']); ?>" class="img-fluid" alt="<?= htmlspecialchars($artwork['title']); ?>" style="width:100%; max-height:autoject-fit:cover;">
                     <div class="p-4 bg-white">
                         <h2 style="font-family: 'Playfair Display', serif; font-weight: 700; color: #1C2431;"><?= htmlspecialchars($artwork['title']); ?></h2>
-                        <p class="text-muted small">oleh @<?= htmlspecialchars($artwork['artist_name']); ?></p>
+                        <p class="text-muted small">by @<?= htmlspecialchars($artwork['artist_name']); ?></p>
                         <hr>
                         <p class="text-secondary small mb-0"><?= nl2br(htmlspecialchars($artwork['description'])); ?></p>
                     </div>
                 </div>
             </div>
 
-            <!-- Bidding interactive panel -->
             <div class="col-lg-6">
                 <div class="info-card p-4 shadow-sm mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -200,9 +141,9 @@ if ($auction['winner_id'] > 0) {
                         <span class="text-danger small font-monospace">
                             <i class="fa fa-clock me-1"></i>
                             <?php if ($is_ended): ?>
-                                Selesai
+                                Ended
                             <?php else: ?>
-                                Sisa Waktu: <strong class="countdown-timer" data-end="<?= $auction['end_time']; ?>"><?= date('d M H:i', strtotime($auction['end_time'])); ?></strong>
+                                Time Remaining: <strong class="countdown-timer" data-end="<?= $auction['end_time']; ?>"><?= date('d M H:i', strtotime($auction['end_time'])); ?></strong>
                             <?php endif; ?>
                         </span>
                     </div>
@@ -222,28 +163,27 @@ if ($auction['winner_id'] > 0) {
                         <form action="process_bid.php" method="POST">
                             <input type="hidden" name="artwork_id" value="<?= $id; ?>">
                             <div class="mb-3">
-                                <label class="form-label small text-muted">Masukkan Penawaran Anda (Rupiah)</label>
+                                <label class="form-label small text-muted">Enter Your Bid (IDR)</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light text-muted">Rp</span>
-                                    <input type="number" name="bid_amount" class="form-control" placeholder="Harus lebih besar dari Rp <?= number_format($auction['current_bid'], 0, ',', '.'); ?>" min="<?= $auction['current_bid'] + 1; ?>" required>
+                                    <input type="number" name="bid_amount" class="form-control" placeholder="Must be higher than Rp <?= number_format($auction['current_bid'], 0, ',', '.'); ?>" min="<?= $auction['current_bid'] + 1; ?>" required>
                                 </div>
                             </div>
-                            <button type="submit" class="btn text-white w-100 py-3" style="background-color: #ab8e5b; letter-spacing: 1px; font-weight:600;">AJUKAN PENAWARAN (BID)</button>
+                            <button type="submit" class="btn text-white w-100 py-3" style="background-color: #ab8e5b; letter-spacing: 1px; font-weight:600;">SUBMIT BID</button>
                         </form>
                     <?php elseif (!$is_ended): ?>
                         <div class="alert alert-warning text-center small mb-0">
-                            Silakan <a href="login.php" class="fw-bold">Login</a> terlebih dahulu untuk ikut menawar dalam lelang ini.
+                            Please <a href="login.php" class="fw-bold">Login</a> first to participate in this auction.
                         </div>
                     <?php endif; ?>
                 </div>
 
-                <!-- Leaderboard Star Rating Style -->
                 <div class="bg-white p-4 rounded shadow-sm info-card">
                     <h5 class="mb-3" style="font-family: 'Playfair Display', serif; font-weight:600;"><i class="fa fa-trophy me-2 text-warning"></i>Leaderboard Bid</h5>
                     
                     <div class="leaderboard-list">
                         <?php if (empty($bids)): ?>
-                            <p class="text-muted text-center py-4 small mb-0">Belum ada penawaran. Jadilah yang pertama!</p>
+                            <p class="text-muted text-center py-4 small mb-0">No bids yet. Be the first to bid!</p>
                         <?php else: ?>
                             <?php 
                             $rank = 1;
@@ -275,7 +215,6 @@ if ($auction['winner_id'] > 0) {
 
     </div>
 
-    <!-- Footer -->
     <div class="container-fluid footer bg-dark text-white-50 py-5 mt-5">
         <div class="container py-4 text-center">
             <p class="mb-0">&copy; Hiranya Art House. All Rights Reserved.</p>

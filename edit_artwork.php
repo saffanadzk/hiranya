@@ -21,7 +21,13 @@ if (isset($_POST['update'])) {
 
     $upd = mysqli_prepare($conn, "UPDATE artworks SET title=?, description=?, price=? WHERE id=?");
     mysqli_stmt_bind_param($upd, "ssdi", $title, $desc, $price, $id);
-    mysqli_stmt_execute($upd);
+    if (mysqli_stmt_execute($upd)) {
+        $_SESSION['message'] = "Artwork updated successfully!";
+        $_SESSION['message_type'] = "success";
+    } else {
+        $_SESSION['message'] = "Failed to update artwork!";
+        $_SESSION['message_type'] = "danger";
+    }
 
     header("Location: my_artworks.php");
     exit;

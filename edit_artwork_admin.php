@@ -35,14 +35,14 @@ if (isset($_POST['update'])) {
         mysqli_stmt_bind_param($upd, "ssdi", $title, $desc, $price, $id);
         
         if (mysqli_stmt_execute($upd)) {
-            $_SESSION['message'] = "Metadata karya seni berhasil diperbarui!";
+            $_SESSION['message'] = "Artwork updated successfully!";
             $_SESSION['message_type'] = "success";
         } else {
-            $_SESSION['message'] = "Gagal memperbarui karya seni: " . mysqli_error($conn);
+            $_SESSION['message'] = "Failed to update artwork: " . mysqli_error($conn);
             $_SESSION['message_type'] = "danger";
         }
     } else {
-        $_SESSION['message'] = "Judul tidak boleh kosong!";
+        $_SESSION['message'] = "Title cannot be empty!";
         $_SESSION['message_type'] = "warning";
     }
 
@@ -71,8 +71,8 @@ if (isset($_POST['update'])) {
             <div class="edit-card">
                 
                 <div class="edit-header">
-                    <h2>Edit Detail Karya Seni</h2>
-                    <p class="mb-0 text-muted" style="color: #cbd5e1 !important;">Diunggah oleh @<?= htmlspecialchars($data['artist_name']); ?></p>
+                    <h2>Edit Artwork Details</h2>
+                    <p class="mb-0 text-muted" style="color: #cbd5e1 !important;">Uploaded by @<?= htmlspecialchars($data['artist_name']); ?></p>
                 </div>
                 
                 <div class="edit-body">
@@ -83,17 +83,17 @@ if (isset($_POST['update'])) {
                         </div>
 
                         <div class="mb-3">
-                            <label for="title" class="form-label">Judul Karya Seni</label>
+                            <label for="title" class="form-label">Artwork Title</label>
                             <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($data['title']); ?>" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi</label>
+                            <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" id="description" name="description" rows="4"><?= htmlspecialchars($data['description']); ?></textarea>
                         </div>
 
                         <div class="mb-4">
-                            <label for="price" class="form-label">Harga (IDR)</label>
+                            <label for="price" class="form-label">Price (IDR)</label>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: #f1f3f5;">Rp</span>
                                 <input type="number" class="form-control" id="price" name="price" step="1" min="0" value="<?= $data['price']; ?>" required>
@@ -101,8 +101,8 @@ if (isset($_POST['update'])) {
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="admin_dashboard.php" class="btn btn-outline-navy"><i class="fa fa-arrow-left me-1"></i> Batal</a>
-                            <button type="submit" name="update" class="btn btn-gold"><i class="fa fa-save me-1"></i> Perbarui Karya Seni</button>
+                            <a href="admin_dashboard.php" class="btn btn-outline-navy"><i class="fa fa-arrow-left me-1"></i> Cancel</a>
+                            <button type="submit" name="update" class="btn btn-gold"><i class="fa fa-save me-1"></i> Update Artwork</button>
                         </div>
 
                     </form>

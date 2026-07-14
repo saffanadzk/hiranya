@@ -7,7 +7,6 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $role_id  = (int)$_POST['role_id'];
 
-    // Ambil role_name dari tabel roles berdasarkan role_id
     $role_query = mysqli_query($conn, "SELECT role_name FROM roles WHERE id = $role_id");
     $role_data  = mysqli_fetch_assoc($role_query);
     $role_name  = $role_data ? $role_data['role_name'] : 'customer';
