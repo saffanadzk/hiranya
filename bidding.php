@@ -82,12 +82,12 @@ if ($auction['winner_id'] > 0) {
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="assets/img/favicon.ico" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=1.3" rel="stylesheet">
+    <link href="assets/css/dark_mode.css?v=1.3" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@500&family=Work+Sans&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="<?= $theme_class; ?>">
 
     <?php include 'partials/navbar.php'; ?>
 
@@ -126,10 +126,10 @@ if ($auction['winner_id'] > 0) {
                     <div class="p-4 bg-white">
                         <h2 style="font-family: 'Playfair Display', serif; font-weight: 700; color: #1C2431;"><?= htmlspecialchars($artwork['title']); ?></h2>
                         <p class="text-muted small">by @<?= htmlspecialchars($artwork['artist_name']); ?></p>
-                        <hr>
+                        <div class="my-3"></div>
                         <p class="text-secondary small mb-0"><?= nl2br(htmlspecialchars($artwork['description'])); ?></p>
                         
-                        <div class="d-flex align-items-center gap-3 mt-4 pt-3 border-top">
+                        <div class="d-flex align-items-center gap-3 mt-4 pt-3 border-0">
                             <div id="artwork-qrcode" style="width: 80px; height: 80px;" class="border p-1 bg-white rounded"></div>
                             <div>
                                 <h6 class="mb-1 text-dark" style="font-size: 13px; font-weight: 600;">Scan to Share</h6>

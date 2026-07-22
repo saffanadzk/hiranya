@@ -1,0 +1,258 @@
+/* Stylesheet for Buy Privately page - Hiranya House */
+
+.bp-artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.bp-artist-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f0ebe2;
+}
+
+.bp-artist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.bp-card-link {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
+.bp-card-photo {
+    height: 240px;
+    position: relative;
+    background: #fcfaf7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bp-card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bp-card-initials {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #1C2431;
+    color: #ffffff;
+    font-size: 38px;
+    font-family: 'Cinzel', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ab8e5b;
+}
+
+.bp-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(28, 36, 49, 0.95) 0%, rgba(28, 36, 49, 0.4) 60%, transparent 100%);
+    padding: 20px 15px 15px;
+    color: #ffffff;
+}
+
+.bp-card-role {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ab8e5b;
+    margin-bottom: 2px;
+}
+
+.bp-card-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 1.15rem;
+}
+
+.bp-card-socials {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.bp-social-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #ffffff;
+    transition: background 0.25s;
+}
+
+.bp-social-btn:hover {
+    background: #ab8e5b;
+}
+
+.bp-card-body {
+    padding: 18px 15px 20px;
+}
+
+.bp-card-bio {
+    font-size: 13px;
+    color: #6c757d;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    height: 38px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.bp-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0ebe2;
+    padding-top: 12px;
+    font-size: 12px;
+}
+
+.bp-works-count {
+    color: #ab8e5b;
+    font-weight: 600;
+}
+
+.bp-view-profile {
+    font-weight: 700;
+    color: #1C2431;
+    transition: color 0.25s;
+}
+
+.bp-view-profile:hover {
+    color: #ab8e5b;
+}
+
+/* Introduction block style */
+.bp-intro-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #1C2431;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.bp-intro-sub {
+    font-size: 14.5px;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.bp-count-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 20px;
+    background: rgba(171, 142, 91, 0.1);
+    color: #ab8e5b;
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+}
+
+/* Call to Action Section */
+.bp-cta-section {
+    background-color: #1C2431;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.bp-cta-eyebrow {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #ab8e5b;
+    margin-bottom: 10px;
+}
+
+.bp-cta-title {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.bp-cta-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 14.5px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.bp-cta-btn {
+    display: inline-block;
+    background: #ab8e5b;
+    color: #ffffff;
+    padding: 12px 34px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-decoration: none !important;
+    border-radius: 4px;
+    transition: background 0.25s;
+}
+
+.bp-cta-btn:hover {
+    background: #927546;
+    color: #ffffff;
+}
+
+/* Dark Mode Overrides */
+.dark-mode .bp-intro-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .bp-intro-sub {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .bp-artist-card {
+    background-color: #1E293B !important;
+    border-color: #334155 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+}
+
+.dark-mode .bp-card-photo {
+    background-color: #0F172A !important;
+}
+
+.dark-mode .bp-card-bio {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .bp-card-footer {
+    border-top-color: #334155 !important;
+}
+
+.dark-mode .bp-view-profile {
+    color: #ffffff !important;
+}
+
+.dark-mode .bp-view-profile:hover {
+    color: #FBBF24 !important;
+}

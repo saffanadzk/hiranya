@@ -41,15 +41,7 @@ if (mysqli_num_rows($query) === 1) {
     $user = mysqli_fetch_assoc($query);
     if (password_verify($password, $user['password'])) {
         
-        // Check verification
-        if ($user['role_name'] !== 'admin' && (int)$user['email_verified'] === 0) {
-            http_response_code(403);
-            echo json_encode([
-                "success" => false,
-                "message" => "Email address not verified."
-            ]);
-            exit();
-        }
+        // Email verification check bypassed for API access
 
         echo json_encode([
             "success" => true,

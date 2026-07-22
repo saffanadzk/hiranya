@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css?v=1.2">
 </head>
-<body class="bg-light checkout-page">
+<body class="checkout-page <?= $theme_class; ?>">
 
     <?php include 'partials/navbar.php'; ?>
 
@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </table>
 
                     <?php if ($order_id === 0): ?>
-                        <div class="alert alert-info py-3 mb-4" style="background-color: #fcfbf7; border-left: 4px solid #ab8e5b; border-radius: 4px;">
+                        <div class="alert checkout-alert-info py-3 mb-4">
                             <h6 class="mb-2 fw-bold text-dark"><i class="fa fa-info-circle text-primary me-2"></i> Confirm Purchase</h6>
                             <p class="mb-0 text-secondary small">Press the button below to confirm your order officially. The destination bank account and unique transaction code will be generated securely after your order is registered in the system.</p>
                         </div>
@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </button>
                         </form>
                     <?php else: ?>
-                        <div class="alert alert-warning py-3 mb-3" style="background-color: #fffdf5; border-left: 4px solid #c69c6d; border-radius: 4px;">
+                        <div class="alert checkout-alert-warning py-3 mb-3">
                             <h6 class="mb-2 fw-bold text-dark"><i class="fa fa-exclamation-triangle text-warning me-2"></i> Secure Payment via Unique Code</h6>
                             <p class="mb-0 text-secondary small">To minimize payment data leakage, please transfer exactly <strong>Rp <?= number_format($amount, 0, ',', '.'); ?></strong> (including the 3-digit unique code). This code uniquely identifies your transaction.</p>
                         </div>

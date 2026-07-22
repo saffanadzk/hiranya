@@ -109,9 +109,11 @@ while ($row = mysqli_fetch_assoc($orders_res)) {
 $sheet1->setCellValue('E' . $rowIdx, 'Total (Verified):');
 $sheet1->getStyle('E' . $rowIdx)->getFont()->setBold(true);
 $sheet1->setCellValue('F' . $rowIdx, $totalAmount);
-$sheet1->getStyle('F' . $rowIdx)->getNumberFormat()->setFormatCode('#,##0')->getFont()->setBold(true);
+$sheet1->getStyle('F' . $rowIdx)->getNumberFormat()->setFormatCode('#,##0');
+$sheet1->getStyle('F' . $rowIdx)->getFont()->setBold(true);
 $sheet1->setCellValue('G' . $rowIdx, $totalCommission);
-$sheet1->getStyle('G' . $rowIdx)->getNumberFormat()->setFormatCode('#,##0')->getFont()->setBold(true);
+$sheet1->getStyle('G' . $rowIdx)->getNumberFormat()->setFormatCode('#,##0');
+$sheet1->getStyle('G' . $rowIdx)->getFont()->setBold(true);
 
 // Auto size columns
 foreach (range('A', 'I') as $col) {

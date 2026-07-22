@@ -56,7 +56,8 @@
                                 <div class="col-6">
                                     <a class="dropdown-item" href="private-sale.php">AVAILABLE WORKS</a>
                                     <a class="dropdown-item" href="featured-collections.php">FEATURED COLLECTIONS</a>
-                                    <a class="dropdown-item" href="buy-privately.php">BUY PRIVATELY</a>
+                                    <a class="dropdown-item" href="artists.php">BUY PRIVATELY</a>
+                                    <a class="dropdown-item fw-bold text-warning" href="how-to-buy-privately.php"><i class="fa fa-question-circle me-1"></i> HOW TO BUY PRIVATELY</a>
                                 </div>
                                 <div class="col-6">
                                     <h6 class="text-danger">HIGHLIGHTS</h6>
@@ -226,7 +227,8 @@
                     <div class="accordion-body py-1 ps-4 d-flex flex-column gap-2">
                         <a href="private-sale.php" class="text-white-50 text-decoration-none small"><i class="fa fa-angle-right me-1"></i> Available Works</a>
                         <a href="featured-collections.php" class="text-white-50 text-decoration-none small"><i class="fa fa-angle-right me-1"></i> Featured Collections</a>
-                        <a href="buy-privately.php" class="text-white-50 text-decoration-none small"><i class="fa fa-angle-right me-1"></i> Buy Privately</a>
+                        <a href="artists.php" class="text-white-50 text-decoration-none small"><i class="fa fa-angle-right me-1"></i> Buy Privately</a>
+                        <a href="how-to-buy-privately.php" class="text-warning fw-bold text-decoration-none small"><i class="fa fa-question-circle me-1"></i> How to Buy Privately</a>
                     </div>
                 </div>
             </div>

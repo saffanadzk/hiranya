@@ -1,10 +1,17 @@
 /* Premium Dark Mode Overrides for Hiranya Art House */
 
 /* Base Body & Root Dark Mode Styling */
-.dark-mode, 
-.dark-mode body {
-    background-color: #0F172A !important;
-    color: #F8FAFC !important;
+.dark-mode,
+.dark-mode body,
+.dark-mode body.discover-page,
+.dark-mode body.auction-page,
+.dark-mode body.my-artworks-page,
+.dark-mode body.checkout-page,
+.dark-mode .discover-page-head,
+.dark-mode .auction-page-head {
+    background-color: #050B14 !important; /* Premium Luxury Midnight Navy Blue background */
+    background: #050B14 !important;
+    color: #F4EBEE !important;
 }
 
 /* Background Overrides for Cards, Containers, Modals and Utility Classes */
@@ -22,9 +29,9 @@
 .dark-mode .list-group-item,
 .dark-mode .shadow-sm,
 .dark-mode .shadow {
-    background-color: #1E293B !important;
-    color: #F8FAFC !important;
-    border-color: #334155 !important;
+    background-color: #0C1322 !important; /* Rich Dark Midnight Card background */
+    color: #F4EBEE !important;
+    border-color: rgba(171, 142, 91, 0.15) !important; /* Elegant champagne gold transparent border */
 }
 
 /* Headings & General Elements in Dark Mode */
@@ -92,7 +99,7 @@
 .dark-mode textarea,
 .dark-mode .form-control,
 .dark-mode .form-select {
-    background-color: #0F172A !important;
+    background-color: #1C2431 !important;
     color: #F8FAFC !important;
     border-color: #475569 !important;
 }
@@ -103,7 +110,7 @@
 .dark-mode .form-control:focus,
 .dark-mode .form-select:focus {
     border-color: #AB8E5B !important;
-    background-color: #0F172A !important;
+    background-color: #1C2431 !important;
     color: #FFFFFF !important;
 }
 
@@ -116,7 +123,7 @@
 .dark-mode table,
 .dark-mode .table,
 .dark-mode .table-light,
-.dark-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
+.dark-mode .table-striped>tbody>tr:nth-of-type(odd)>* {
     background-color: #1E293B !important;
     color: #F8FAFC !important;
     border-color: #334155 !important;
@@ -132,7 +139,7 @@
 .dark-mode .dropdown-menu {
     background-color: #1E293B !important;
     border: 1px solid #334155 !important;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
 }
 
 .dark-mode .dropdown-item {
@@ -186,7 +193,7 @@
 }
 
 .dark-mode .notif-item {
-    border-bottom: 1px solid #334155 !important;
+    border-bottom: none !important;
 }
 
 /* Spinners & Charts */
@@ -209,4 +216,392 @@
 
 #theme-toggle-btn:hover #theme-toggle-icon {
     transform: scale(1.15) rotate(15deg);
+}
+
+/* Mobile Offcanvas Drawer Accordion Styles */
+#mobileNavbarOffcanvas .accordion-button {
+    background-color: transparent !important;
+    color: #F1F5F9 !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+#mobileNavbarOffcanvas .accordion-button:not(.collapsed) {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #FBBF24 !important;
+}
+
+#mobileNavbarOffcanvas .accordion-item {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Dark Mode Overrides for Headers, Cards, and Lists */
+.dark-mode body.discover-page,
+.dark-mode .discover-page-head {
+    background-color: #0F172A !important;
+    color: #F4EBEE !important;
+    border-color: #D9D4CE !important;
+}
+
+.dark-mode .discover-page-head h1,
+.dark-mode .discover-page-head .discover-sub {
+    color: #F8FAFC !important;
+}
+
+.dark-mode .sg-rule-card,
+.dark-mode .testimonial-box,
+.dark-mode .story-feature,
+.dark-mode .story-card,
+.dark-mode .story-card-body,
+.dark-mode .shelf-item,
+.dark-mode .art-card,
+.dark-mode .auction-card {
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Card details/text readability in dark mode */
+.dark-mode .sg-rule-card h6,
+.dark-mode .testimonial-box p,
+.dark-mode .story-feature-text h2,
+.dark-mode .story-card-body h6,
+.dark-mode .auction-card-body h5,
+.dark-mode .art-card h5 {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .sg-rule-card p,
+.dark-mode .testimonial-box span,
+.dark-mode .story-feature-text p,
+.dark-mode .story-card-body p,
+.dark-mode .auction-card-body .meta,
+.dark-mode .art-card p {
+    color: #94A3B8 !important;
+}
+
+/* Sidebar filter panels in dark mode */
+.dark-mode .filter-panel {
+    background-color: #1E293B !important;
+    border: 1px solid #334155 !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .filter-title {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .filter-dropdown-toggle {
+    color: #F8FAFC !important;
+}
+
+.dark-mode .filter-dropdown-body label {
+    color: #CBD5E1 !important;
+}
+
+/* Tab active links */
+.dark-mode .auction-subtabs a {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .auction-subtabs a.active {
+    color: #FBBF24 !important;
+    border-bottom-color: #FBBF24 !important;
+}
+
+/* Artworks page classes */
+.dark-mode .artworks-page-wrapper,
+.dark-mode .artworks-page-head {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .artworks-page-head h1 {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .art-title {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .art-desc {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .art-price {
+    color: #EF4444 !important;
+    /* Red accent for price */
+}
+
+/* Navy & Red (Red Bull Style) Dark Mode Theme for Profiles */
+.dark-mode .profile-hero {
+    background: linear-gradient(135deg, #050B14 0%, #0C1322 45%, #6E0D1B 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-mode .profile-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(171, 142, 91, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.dark-mode .profile-card {
+    background-color: #0C1322 !important; /* Premium Midnight background */
+    border-top: 3px solid #C1121F !important; /* Bold Red top border */
+    border-left: 1px solid rgba(171, 142, 91, 0.15) !important;
+    border-right: 1px solid rgba(171, 142, 91, 0.15) !important;
+    border-bottom: 1px solid rgba(171, 142, 91, 0.15) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .profile-avatar {
+    border: 3px solid #AB8E5B !important; /* Luxurious Gold avatar border */
+    box-shadow: 0 0 20px rgba(193, 18, 31, 0.3) !important; /* Red avatar glow */
+    background-color: #050B14 !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .profile-name {
+    color: #FFFFFF !important;
+    font-family: 'Playfair Display', serif;
+}
+
+.dark-mode .profile-username {
+    color: #AB8E5B !important; /* Gold highlight for username */
+    font-family: 'Work Sans', sans-serif;
+}
+
+/* Role Badges with Red Bull energetic styling */
+.dark-mode .role-badge,
+.dark-mode .badge.bg-secondary {
+    background: linear-gradient(135deg, #8B0000 0%, #4A0E17 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid #AB8E5B !important; /* Gold border around badge */
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .section-label {
+    color: #AB8E5B !important; /* Luxury Gold section labels */
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    border-bottom: 1px solid rgba(171, 142, 91, 0.2) !important;
+    padding-bottom: 4px;
+}
+
+.dark-mode .info-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-mode .info-row span:first-child {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .info-row span:last-child,
+.dark-mode .info-row a {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .btn-logout-outline {
+    border-color: #C1121F !important;
+    color: #C1121F !important;
+    font-weight: 600;
+}
+
+.dark-mode .btn-logout-outline:hover {
+    background: #C1121F !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 0 12px rgba(193, 18, 31, 0.4) !important;
+}
+
+/* Action cards */
+.dark-mode .action-card {
+    background-color: #0C1322 !important;
+    border: 1px solid rgba(171, 142, 91, 0.15) !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .action-card:hover {
+    border-color: #C1121F !important;
+    box-shadow: 0 10px 25px rgba(193, 18, 31, 0.15) !important;
+    transform: translateY(-2px);
+    color: #C1121F !important;
+}
+
+.dark-mode .action-card .icon-box {
+    background-color: #C1121F !important;
+    color: #FFFFFF !important;
+}
+
+.dark-mode .action-card h6 {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .action-card p {
+    color: #94A3B8 !important;
+}
+
+/* Bootstrap borders in dark mode */
+.dark-mode .border-end,
+.dark-mode .border-start,
+.dark-mode .border-top,
+.dark-mode .border-bottom,
+.dark-mode .border {
+    border-color: #334155 !important;
+}
+
+/* Leaderboard Dark Mode Fixes */
+.dark-mode .leaderboard-list {
+    border: 1px solid #334155 !important;
+}
+
+.dark-mode .leaderboard-item {
+    background: #1E293B !important;
+    border-bottom: 1px solid #334155 !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .leaderboard-item:hover {
+    background: #2D3748 !important;
+}
+
+.dark-mode .leaderboard-item:first-child {
+    background: rgba(171, 142, 91, 0.15) !important;
+    /* Soft gold tint */
+    border-left: 4px solid #AB8E5B !important;
+}
+
+/* How to Bid Dark Mode Overrides */
+.dark-mode .step-card,
+.dark-mode #faqAccordion .accordion-item,
+.dark-mode #faqAccordion .accordion-button,
+.dark-mode #faqAccordion .accordion-body {
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
+}
+
+.dark-mode #faqAccordion .accordion-button:not(.collapsed) {
+    background-color: #2D3748 !important;
+    color: #FBBF24 !important;
+    /* Red Bull energetic yellow */
+}
+
+.dark-mode .step-card p.text-muted,
+.dark-mode .rule-box p.text-muted,
+.dark-mode #faqAccordion .accordion-body {
+    color: #CBD5E1 !important;
+}
+
+/* Checkout Page Dark Mode Overrides (Red Bull Theme style) */
+.dark-mode .checkout-card {
+    background-color: #1E293B !important;
+    border-color: #334155 !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15) !important;
+}
+
+.dark-mode .checkout-card h5,
+.dark-mode .checkout-card h4 {
+    color: #FFFFFF !important;
+}
+
+.dark-mode .checkout-card table.table {
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .checkout-card table tr.table-light {
+    background-color: #0F172A !important;
+    color: #FFFFFF !important;
+}
+
+.dark-mode .checkout-card table tr.table-light td {
+    background-color: #0F172A !important;
+    color: #FFFFFF !important;
+}
+
+.dark-mode .checkout-card td {
+    color: #F8FAFC !important;
+    border-bottom-color: #334155 !important;
+}
+
+.dark-mode .checkout-card td.text-muted {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .checkout-alert-info {
+    background-color: rgba(171, 142, 91, 0.15) !important;
+    /* Soft gold tint */
+    border-left: 4px solid #ab8e5b !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .checkout-alert-warning {
+    background-color: rgba(220, 38, 38, 0.15) !important;
+    /* Soft Red tint */
+    border-left: 4px solid #EF4444 !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .secure-payment-portal {
+    background-color: #1E293B !important;
+    border-top: 4px solid #EF4444 !important;
+    /* Bold Red Bull Red top border */
+    border-left: 1px solid #334155 !important;
+    border-right: 1px solid #334155 !important;
+    border-bottom: 1px solid #334155 !important;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.08) !important;
+}
+
+.dark-mode .secure-payment-portal .badge.text-bg-success {
+    background: linear-gradient(135deg, #EF4444 0%, #8B0000 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid #FF003C !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2) !important;
+}
+
+.dark-mode #btn-reveal-bank {
+    background-color: #FBBF24 !important;
+    /* Red Bull energetic yellow/gold */
+    color: #1C2431 !important;
+    border: 1px solid #FBBF24 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.dark-mode #btn-reveal-bank:hover {
+    background-color: #F59E0B !important;
+    transform: translateY(-1px) !important;
+}
+
+.dark-mode .bank-details-box {
+    background-color: #0F172A !important;
+    border-left: 4px solid #EF4444 !important;
+    /* Red Bull Red left accent line */
+    border-top: 1px solid #334155 !important;
+    border-right: 1px solid #334155 !important;
+    border-bottom: 1px solid #334155 !important;
+}
+
+.dark-mode .bank-details-box h6 {
+    color: #FBBF24 !important;
+    /* Red Bull gold/yellow header */
+}
+
+.dark-mode .bank-details-box td {
+    color: #F8FAFC !important;
+}
+
+.dark-mode .bank-details-box td.text-muted {
+    color: #94A3B8 !important;
 }

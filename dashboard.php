@@ -350,13 +350,12 @@ if(!isset($_SESSION['user_id'])){
             <div class="row g-5">
                 <div class="col-lg-6 pe-lg-5">
                     <a href="index.html" class="navbar-brand">
-                        <h1 class="display-5 text-primary mb-0"><i class="bi bi-scissors"></i>Hiranya</h1>
+                        <h1 class="display-5 text-primary mb-0">Hiranya</h1>
                     </a>
-                    <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam sed
-                        clita dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-2"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope me-2"></i>info@example.com</p>
+                    <p>Celebrating Indonesian art through curated exhibitions, private sales, and exclusive auctions. We connect artists with collectors in a trusted and inspiring marketplace.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-2"></i>123 Street, Surakarta, Indonesia</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-2"></i>+62 851 8317 0492</p>
+                    <p><i class="fa fa-envelope me-2"></i>info@hiranyaarthouse.com</p>
                     <div class="d-flex justify-content-start mt-4">
                         <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -368,17 +367,17 @@ if(!isset($_SESSION['user_id'])){
                     <div class="row g-4">
                         <div class="col-sm-6">
                             <h5 class="text-primary mb-4">Quick Links</h5>
-                            <a class="btn btn-link" href="">About Us</a>
-                            <a class="btn btn-link" href="">Contact Us</a>
-                            <a class="btn btn-link" href="">Our Services</a>
-                            <a class="btn btn-link" href="">Terms & Condition</a>
+                            <a class="btn btn-link" href="">Home</a>
+                            <a class="btn btn-link" href="">Auctions</a>
+                            <a class="btn btn-link" href="">Artist</a>
+                            <a class="btn btn-link" href="">Private Sales</a>
                         </div>
                         <div class="col-sm-6">
                             <h5 class="text-primary mb-4">Popular Links</h5>
-                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Sell With Us</a>
+                            <a class="btn btn-link" href="">Collector's Guide</a>
+                            <a class="btn btn-link" href="">Upcoming Auctions</a>
                             <a class="btn btn-link" href="">Contact Us</a>
-                            <a class="btn btn-link" href="">Our Services</a>
-                            <a class="btn btn-link" href="">Terms & Condition</a>
                         </div>
                         <div class="col-sm-12">
                             <h5 class="text-primary mb-4">Newsletter</h5>
@@ -388,25 +387,33 @@ if(!isset($_SESSION['user_id'])){
                                 <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-2 me-2"><i
                                         class="fa fa-paper-plane text-primary fs-4"></i></button>
                             </div>
-                            <p class="mb-0">Diam sed sed dolor stet amet eirmod</p>
+                            <p class="mb-0">Stay Connected with Hiranya</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+      <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-12 text-center">
+                        <p>&copy; Hiranya Art House. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="assets/lib/wow/wow.min.js"></script>
+    <script src="assets/lib/easing/easing.min.js"></script>
+    <script src="assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="assets/lib/counterup/counterup.min.js"></script>
+    <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="assets/lib/lightbox/js/lightbox.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="assets/lib/wow/wow.min.js"></script>
-<script src="assets/lib/easing/easing.min.js"></script>
-<script src="assets/lib/waypoints/waypoints.min.js"></script>
-<script src="assets/lib/counterup/counterup.min.js"></script>
-<script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="assets/lib/lightbox/js/lightbox.min.js"></script>
-
-<script src="assets/js/main.js"></script>
-
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

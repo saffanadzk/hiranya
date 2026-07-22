@@ -19,7 +19,7 @@ if (isset($_POST['register'])) {
         $verification_token = bin2hex(random_bytes(32));
         $stmt = mysqli_prepare($conn, "
             INSERT INTO users (username, email, password, role_id, role, verification_token, email_verified)
-            VALUES (?, ?, ?, ?, ?, ?, 0)
+            VALUES (?, ?, ?, ?, ?, ?, 1)
         ");
         mysqli_stmt_bind_param($stmt, "sssiss", $username, $email, $password, $role_id, $role_name, $verification_token);
         
@@ -28,7 +28,7 @@ if (isset($_POST['register'])) {
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
             $verify_link = $protocol . "://" . $_SERVER['HTTP_HOST'] . "/hiranya/verify_email.php?token=" . $verification_token;
             
-            $subject = "Verify Your Email - Hiranya Art House";
+            $subject = "Welcome to Hiranya Art House";
             $body = "
                 <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #fdfdfd;'>
                     <div style='text-align: center; border-bottom: 2px solid #ab8e5b; padding-bottom: 10px;'>
@@ -36,11 +36,8 @@ if (isset($_POST['register'])) {
                     </div>
                     <div style='padding: 20px 0;'>
                         <h3 style='color: #ab8e5b;'>Welcome to Hiranya, @$username!</h3>
-                        <p style='color: #555; line-height: 1.6;'>Thank you for registering on our platform. To activate your account and start exploring or selling art, please verify your email address by clicking the link below:</p>
-                        <div style='text-align: center; margin: 30px 0;'>
-                            <a href='$verify_link' style='background-color: #ab8e5b; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; display: inline-block;'>Verify Email Address</a>
-                        </div>
-                        <p style='color: #777; font-size: 12px; text-align: center;'>If the button above doesn't work, copy and paste this URL into your browser:<br><a href='$verify_link' style='color: #ab8e5b;'>$verify_link</a></p>
+                        <p style='color: #555; line-height: 1.6;'>Thank you for registering on our platform. Your account is successfully activated and verified.</p>
+                        <p style='color: #555;'>You can now explore, bid on auctions, and manage your art collections.</p>
                     </div>
                     <div style='border-top: 1px solid #eee; padding-top: 15px; text-align: center; color: #aaa; font-size: 11px;'>
                         <p>&copy; " . date('Y') . " Hiranya Art House. All rights reserved.</p>
@@ -48,9 +45,10 @@ if (isset($_POST['register'])) {
                 </div>
             ";
             
+            // Try sending welcome email (logged/sent but doesn't block login if SMTP fails)
             send_email($email, $subject, $body);
             
-            $_SESSION['message'] = "Registration successful! We have sent a verification link to your email. Please verify before logging in.";
+            $_SESSION['message'] = "Registration successful! Your account is active. You can now log in immediately.";
             $_SESSION['message_type'] = "success";
             header("Location: login.php");
             exit;
@@ -64,6 +62,7 @@ if (isset($_POST['register'])) {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Hiranya</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">

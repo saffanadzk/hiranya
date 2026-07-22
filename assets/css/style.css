@@ -776,7 +776,7 @@ input:focus {
 }
 
 body {
-    background: white !important;
+    background: #F4EBEE !important;
 }
 
 .profile-hero {
@@ -946,7 +946,7 @@ body {
    agar tetap krem, tanpa menghapus/mengubah rule body di style.css */
 body.auction-page,
 body:has(.auction-page-head) {
-    background: #fcfaf7 !important;
+    background: #F4EBEE !important;
 }
 
 /* Pastikan checkbox filter auction selalu terlihat jelas, terlepas dari tema body */
@@ -1143,7 +1143,7 @@ body:has(.auction-page-head) {
 
 .clear-link {
     font-size: 12px;
-    color: #8b0000;
+    color: #CC1E4A;
     text-decoration: none;
 }
 
@@ -1284,9 +1284,9 @@ body:has(.auction-page-head) {
 .btn-card-outline {
     display: block;
     text-align: center;
-    border: 1px solid #1C2431;
-    color: #1C2431;
-    background: transparent;
+    border: 1px solid #8b0000;
+    color: #fff;
+    background: #8b0000;
     padding: 10px;
     font-size: 12px;
     font-weight: 700;
@@ -1676,13 +1676,12 @@ body.discover-page {
     }
 }
 
-/*** Sell With Us ***/
 .sell-step {
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #8b0000;
+    color: #C1121F;
     margin-bottom: 10px;
 }
 
@@ -2555,7 +2554,7 @@ body.my-artworks-page {
 
 .notif-item {
     padding: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: none;
     transition: background 0.3s;
     position: relative;
 }
@@ -2819,4 +2818,139 @@ body.discover-page {
 .btn-buy-direct:hover {
     background-color: #927546;
     color: #fff;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #1C2431 0%, #223971 100%);
+    color: #ffffff;
+    padding: 80px 0 60px;
+    border-bottom: 3px solid #AB8E5B;
+}
+
+.gold-badge {
+    background-color: #AB8E5B;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.step-card {
+    border: 1px solid #D9D4CE;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border-color: #AB8E5B;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background-color: #1C2431;
+    color: #AB8E5B;
+    font-weight: 800;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #AB8E5B;
+}
+
+.rule-box {
+    background-color: rgba(171, 142, 91, 0.08);
+    border: 1px solid rgba(171, 142, 91, 0.25);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.dark-mode .step-card {
+    background-color: #1E293B !important;
+    border-color: #334155 !important;
+}
+
+.dark-mode .step-number {
+    background-color: #0F172A !important;
+}
+
+.dark-mode .rule-box {
+    background-color: rgba(171, 142, 91, 0.15) !important;
+}
+
+/* How to Bid Premium Style Adjustments (Resolving Glare & Readability) */
+.step-card {
+    background-color: #F8F6F2 !important;
+    /* Soft warm cream instead of glaring white */
+    border: none !important;
+    /* Remove card outline lines */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+.step-card p.text-muted {
+    color: #4A5568 !important;
+    /* High contrast dark gray instead of faint text-muted */
+}
+
+.rule-box {
+    background-color: rgba(171, 142, 91, 0.05) !important;
+    border: none !important;
+    /* Remove rule-box lines */
+}
+
+.rule-box p.text-muted {
+    color: #4A5568 !important;
+}
+
+/* Accordion overrides to completely remove lines/borders and improve contrast */
+#faqAccordion {
+    border: none !important;
+    background: transparent !important;
+}
+
+#faqAccordion .accordion-item {
+    border: none !important;
+    background-color: #F8F6F2 !important;
+    margin-bottom: 12px;
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+#faqAccordion .accordion-button {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #F8F6F2 !important;
+    color: #1C2431 !important;
+}
+
+#faqAccordion .accordion-button:not(.collapsed) {
+    background-color: #EFECE6 !important;
+    color: #8b0000 !important;
+}
+
+#faqAccordion .accordion-body {
+    background-color: #F8F6F2 !important;
+    color: #2D3748 !important;
+}
+
+/* Checkout Page Light Mode Custom Alert Classes */
+.checkout-alert-info {
+    background-color: #fcfbf7 !important;
+    border-left: 4px solid #ab8e5b !important;
+    border-radius: 4px;
+}
+
+.checkout-alert-warning {
+    background-color: #fffdf5 !important;
+    border-left: 4px solid #c69c6d !important;
+    border-radius: 4px;
 }

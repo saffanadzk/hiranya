@@ -51,7 +51,7 @@ include 'config.php';
                 <a href="submit_artwork.php" class="btn-card-solid" style="display:inline-block; padding:14px 32px;">START SUBMISSION</a>
             </div>
             <div class="col-lg-6">
-                <img src="img/artwork1.jpg" class="sell-section-img" alt="Submit Artwork">
+                <img src="assets/img/withus1.webp" class="sell-section-img" alt="Submit Artwork">
             </div>
         </div>
 
@@ -66,7 +66,7 @@ include 'config.php';
                 <a href="#" class="btn-card-outline" style="display:inline-block; padding:14px 32px;">REQUEST VALUATION</a>
             </div>
             <div class="col-lg-6">
-                <img src="img/artwork2.jpg" class="sell-section-img" alt="Request Valuation">
+                <img src="assets/img/withus2.jpg" class="sell-section-img" alt="Request Valuation">
             </div>
         </div>
 
@@ -81,7 +81,7 @@ include 'config.php';
                 <a href="upcoming-auctions.php" class="btn-card-solid" style="display:inline-block; padding:14px 32px;">VIEW UPCOMING SALES</a>
             </div>
             <div class="col-lg-6">
-                <img src="img/artwork3.jpg" class="sell-section-img" alt="Sell at Auction">
+                <img src="assets/img/withus3.jpg" class="sell-section-img" alt="Sell at Auction">
             </div>
         </div>
 

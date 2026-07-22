@@ -28,13 +28,14 @@ $artists_query = mysqli_query($conn, "
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="assets/img/favicon.ico" rel="icon">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/discover.css" rel="stylesheet">
-    <link href="assets/css/buy-privately.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=1.3" rel="stylesheet">
+    <link href="assets/css/discover.css?v=1.3" rel="stylesheet">
+    <link href="assets/css/buy-privately.css?v=1.3" rel="stylesheet">
+    <link href="assets/css/dark_mode.css?v=1.3" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@400;500;700&family=Work+Sans:wght@300;400;500&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="discover-page">
+<body class="discover-page <?= $theme_class; ?>">
 
     <?php include 'partials/navbar.php'; ?>
 

@@ -40,7 +40,7 @@ $artworks_query = mysqli_query($conn, "
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@500&family=Work+Sans&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="<?= $theme_class; ?>">
     <?php include 'partials/navbar.php'; ?>
 
     <div class="profile-hero" style="background-image: url('assets/img/banner-placeholder.jpg'); background-size: cover; background-position: center;"></div>

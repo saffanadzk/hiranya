@@ -75,10 +75,10 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="assets/img/artwork2.jpg" alt="Pharaoh's Throne">
+                    <img src="assets/img/artwork22.jpg" alt="Red Bull RB4 Donington Collection 2012">
                     <div class="carousel-caption-custom">
-                        <span class="eyebrow">LIVE AUCTION &middot; 10 JUNE 2027</span>
-                        <h2>Pharaoh's Throne &mdash; Bali Pavilion</h2>
+                        <span class="eyebrow">ONLINE AUCTION &middot; 10 JUNE 2027</span>
+                        <h2>Red Bull RB4 Donington Collection 2012 &mdash; Bali Pavilion</h2>
                         <a href="#" class="btn-outline-cream">View Lots</a>
                     </div>
                 </div>
@@ -165,7 +165,7 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                         <?php if ($auc_count === 0): ?>
                             <div class="col-12 text-center py-5">
                                 <i class="fa fa-gavel fa-3x text-muted mb-3"></i>
-                                <p class="text-muted">Belum ada lelang mendatang saat ini.</p>
+                                <p class="text-muted">No upcoming auctions at the moment.</p>
                             </div>
                         <?php else: ?>
                             <?php while ($auc = mysqli_fetch_assoc($auc_res)): ?>
@@ -182,12 +182,12 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                                         <div class="auction-card-body d-flex flex-column justify-content-between flex-grow-1">
                                             <div>
                                                 <h5 style="font-family: 'Playfair Display', serif; font-weight: 600; font-size: 16px; margin-bottom: 8px; color: #1C2431;"><?= htmlspecialchars($auc['art_title']); ?></h5>
-                                                <p class="meta" style="font-size: 12px; color: #777;">oleh @<?= htmlspecialchars($auc['artist_name']); ?> &middot; <?= htmlspecialchars($auc['category_name'] ?? 'Uncategorized'); ?></p>
+                                                <p class="meta" style="font-size: 12px; color: #777;">by @<?= htmlspecialchars($auc['artist_name']); ?> &middot; <?= htmlspecialchars($auc['category_name'] ?? 'Uncategorized'); ?></p>
                                                 <p class="meta mb-2" style="font-weight: bold; color: #ab8e5b; font-size: 14px;">
                                                     Starting Price: Rp <?= number_format($auc['start_bid'], 0, ',', '.'); ?>
                                                 </p>
                                                 <p class="small text-danger mb-3" style="font-size: 12px;">
-                                                    <i class="fa fa-clock me-1"></i> Mulai Pada: <span><?= date('d M Y H:i', strtotime($auc['start_time'])); ?></span>
+                                                    <i class="fa fa-clock me-1"></i> Starts: <span><?= date('d M Y H:i', strtotime($auc['start_time'])); ?></span>
                                                 </p>
                                             </div>
                                             <a href="bidding.php?id=<?= $auc['artwork_id']; ?>" class="btn-card-outline w-100 text-center py-2" style="font-size: 12px; font-weight: 600; letter-spacing: 1px;">VIEW LOTS</a>
@@ -216,7 +216,6 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Sidebar Filters
         const typeChecks = document.querySelectorAll(".filter-type-chk");
         const catChecks = document.querySelectorAll(".filter-category-chk");
         const cards = document.querySelectorAll(".auction-item-card");

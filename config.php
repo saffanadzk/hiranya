@@ -1,19 +1,24 @@
 <?php
-// Database Configuration (Local XAMPP / InfinityFree Production)
-$db_host = getenv('DB_HOST') ?: "localhost";
-$db_user = getenv('DB_USER') ?: "root";
-$db_pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : "";
-$db_name = getenv('DB_NAME') ?: "hiranya";
+// Deteksi otomatis apakah dijalankan di localhost komputer atau server online (InfinityFree)
+$is_localhost = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) 
+                || $_SERVER['HTTP_HOST'] === 'localhost' 
+                || strpos($_SERVER['HTTP_HOST'], '192.168.') === 0;
 
-/*
- * CONTOH PENGATURAN UNTUK INFINITYFREE HOSTING:
- * Ubah variabel di bawah jika dideploy ke InfinityFree (tanpa getenv):
- * 
- * $db_host = "sqlXXX.infinityfree.com"; // MySQL Hostname dari InfinityFree
- * $db_user = "if0_38XXXXXX";           // MySQL Username dari InfinityFree
- * $db_pass = "password_vpanel_anda";   // MySQL Password dari InfinityFree
- * $db_name = "if0_38XXXXXX_hiranya";   // Database Name dari InfinityFree
- */
+if ($is_localhost) {
+    // 🖥️ PENGATURAN DATABASE LOKAL (XAMPP KOMPUTER)
+    $db_host = "localhost";
+    $db_user = "root";
+    $db_pass = "";
+    $db_name = "hiranya";
+} else {
+    // 🌐 PENGATURAN DATABASE ONLINE (SERVER INFINITYFREE)
+    $db_host = "sql110.infinityfree.com";
+    $db_user = "if0_42467177";
+    $db_name = "if0_42467177_hiranya";
+    
+    // GANTI TULISAN DI BAWAH INI DENGAN PASSWORD KUNCI VPANEL / HOSTING ANDA
+    $db_pass = "gimanaleee"; 
+}
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 

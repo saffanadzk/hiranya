@@ -15,12 +15,12 @@ if (isset($_GET['action'])) {
         $notif_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if ($notif_id > 0) {
             mysqli_query($conn, "DELETE FROM notifications WHERE id = $notif_id AND user_id = $user_id");
-            $_SESSION['message'] = "Notifikasi berhasil dihapus.";
+            $_SESSION['message'] = "Notification successfully deleted.";
             $_SESSION['message_type'] = "success";
         }
     } elseif ($action === 'clear_all') {
         mysqli_query($conn, "DELETE FROM notifications WHERE user_id = $user_id");
-        $_SESSION['message'] = "Semua notifikasi dibersihkan.";
+        $_SESSION['message'] = "All notification have been cleared.";
         $_SESSION['message_type'] = "success";
     }
     header("Location: notifications.php");
@@ -34,10 +34,10 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="eng">
 <head>
     <meta charset="UTF-8">
-    <title>Notifikasi Saya - Hiranya</title>
+    <title>Notification - Hiranya</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="assets/img/favicon.ico" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -91,7 +91,7 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
         </div>
 
         <div class="text-center mt-4">
-            <a href="profile.php" class="text-decoration-none small text-muted font-monospace"><i class="fa fa-arrow-left me-1"></i> KEMBALI KE AKUN SAYA</a>
+            <a href="profile.php" class="text-decoration-none small text-muted font-monospace"><i class="fa fa-arrow-left me-1"></i> BACK TO ACCOUNT</a>
         </div>
     </div>
 

@@ -30,13 +30,10 @@ include 'config.php';
     <link href="assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="assets/css/style.css?v=<?= time(); ?>" rel="stylesheet">
-    <link href="assets/css/dark_mode.css" rel="stylesheet">
-    <script src="assets/js/theme_toggle.js"></script>
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body class="<?= $theme_class; ?>">
+<body>
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -112,8 +109,6 @@ include 'config.php';
             </div>
         </div>
     </div>    
-</div>
-</div>
 
     <div class="container-fluid service py-5">
         <div class="container">
@@ -270,8 +265,6 @@ include 'config.php';
             </div>
         </div>
     </div>
-    <!-- Gallery End -->
-    <!-- Testimonial Start -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="text-center wow fadeIn" data-wow-delay="0.2s">
@@ -315,8 +308,7 @@ include 'config.php';
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
-     <!-- Blog Start -->
+   
     <div class="container-fluid blog p-0 mt-5">
         <div class="row g-0">
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
@@ -353,20 +345,18 @@ include 'config.php';
             </div>
         </div>
     </div>
-    <!-- Blog End -->
-    <!-- Footer Start -->
+    
     <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.2s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 pe-lg-5">
                     <a href="index.html" class="navbar-brand">
-                        <h1 class="display-5 text-primary mb-0"><i class="bi bi-scissors"></i>Salone</h1>
+                        <h1 class="display-5 text-primary mb-0">Hiranya</h1>
                     </a>
-                    <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam sed
-                        clita dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-2"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope me-2"></i>info@example.com</p>
+                    <p>Celebrating Indonesian art through curated exhibitions, private sales, and exclusive auctions. We connect artists with collectors in a trusted and inspiring marketplace.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-2"></i>123 Street, Surakarta, Indonesia</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-2"></i>+62 851 8317 0492</p>
+                    <p><i class="fa fa-envelope me-2"></i>info@hiranyaarthouse.com</p>
                     <div class="d-flex justify-content-start mt-4">
                         <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -378,17 +368,17 @@ include 'config.php';
                     <div class="row g-4">
                         <div class="col-sm-6">
                             <h5 class="text-primary mb-4">Quick Links</h5>
-                            <a class="btn btn-link" href="">About Us</a>
-                            <a class="btn btn-link" href="">Contact Us</a>
-                            <a class="btn btn-link" href="">Our Services</a>
-                            <a class="btn btn-link" href="">Terms & Condition</a>
+                            <a class="btn btn-link" href="">Home</a>
+                            <a class="btn btn-link" href="">Auctions</a>
+                            <a class="btn btn-link" href="">Artist</a>
+                            <a class="btn btn-link" href="">Private Sales</a>
                         </div>
                         <div class="col-sm-6">
                             <h5 class="text-primary mb-4">Popular Links</h5>
-                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Sell With Us</a>
+                            <a class="btn btn-link" href="">Collector's Guide</a>
+                            <a class="btn btn-link" href="">Upcoming Auctions</a>
                             <a class="btn btn-link" href="">Contact Us</a>
-                            <a class="btn btn-link" href="">Our Services</a>
-                            <a class="btn btn-link" href="">Terms & Condition</a>
                         </div>
                         <div class="col-sm-12">
                             <h5 class="text-primary mb-4">Newsletter</h5>
@@ -398,14 +388,14 @@ include 'config.php';
                                 <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-2 me-2"><i
                                         class="fa fa-paper-plane text-primary fs-4"></i></button>
                             </div>
-                            <p class="mb-0">Diam sed sed dolor stet amet eirmod</p>
+                            <p class="mb-0">Stay Connected with Hiranya</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer End -->
+    
       <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">

@@ -133,12 +133,12 @@ while ($row = mysqli_fetch_assoc($cat_query)) {
                                         <div class="auction-card-body d-flex flex-column justify-content-between flex-grow-1">
                                             <div>
                                                 <h5 style="font-family: 'Playfair Display', serif; font-weight: 600; font-size: 16px; margin-bottom: 8px; color: #1C2431;"><?= htmlspecialchars($auc['art_title']); ?></h5>
-                                                <p class="meta" style="font-size: 12px; color: #777;">oleh @<?= htmlspecialchars($auc['artist_name']); ?> &middot; <?= htmlspecialchars($auc['category_name'] ?? 'Uncategorized'); ?></p>
+                                                <p class="meta" style="font-size: 12px; color: #777;">by @<?= htmlspecialchars($auc['artist_name']); ?> &middot; <?= htmlspecialchars($auc['category_name'] ?? 'Uncategorized'); ?></p>
                                                 <p class="meta mb-2" style="font-weight: bold; color: #ab8e5b; font-size: 14px;">
                                                     Current Bid: Rp <?= number_format($auc['current_bid'], 0, ',', '.'); ?>
                                                 </p>
                                                 <p class="small text-danger mb-3" style="font-size: 12px;">
-                                                    <i class="fa fa-clock me-1"></i> Sisa Waktu: <span class="countdown-timer" data-end="<?= $auc['end_time']; ?>"><?= date('d M H:i', strtotime($auc['end_time'])); ?></span>
+                                                    <i class="fa fa-clock me-1"></i> Time Left: <span class="countdown-timer" data-end="<?= $auc['end_time']; ?>"><?= date('d M H:i', strtotime($auc['end_time'])); ?></span>
                                                 </p>
                                             </div>
                                             <a href="bidding.php?id=<?= $auc['artwork_id']; ?>" class="btn-card-solid w-100 text-center py-2" style="font-size: 12px; font-weight: 600; letter-spacing: 1px;">JOIN AUCTION</a>

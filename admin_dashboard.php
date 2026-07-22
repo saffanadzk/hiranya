@@ -785,8 +785,7 @@ while ($row = mysqli_fetch_assoc($auction_activity_query)) {
                                     <p class="text-muted small mb-0">Export structural SQL snapshot of database tables.</p>
                                 </div>
                             </div>
-                            <hr class="my-2">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto pt-2">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto pt-2 border-top border-light-subtle">
                                 <span class="text-muted small">Target DB: <strong>hiranya</strong></span>
                                 <a href="admin_backup.php" class="btn btn-navy btn-sm"><i class="fa fa-download me-1"></i> Download SQL</a>
                             </div>
@@ -805,13 +804,14 @@ while ($row = mysqli_fetch_assoc($auction_activity_query)) {
                                     <p class="text-muted small mb-0">Upload a `.sql` file to restore database tables.</p>
                                 </div>
                             </div>
-                            <hr class="my-2">
-                            <form action="admin_restore.php" method="POST" enctype="multipart/form-data" class="mt-auto pt-2">
-                                <div class="input-group input-group-sm">
-                                    <input type="file" name="sql_file" class="form-control" accept=".sql" required>
-                                    <button class="btn btn-warning btn-sm" type="submit"><i class="fa fa-upload me-1"></i> Restore</button>
-                                </div>
-                            </form>
+                            <div class="mt-auto pt-2 border-top border-light-subtle">
+                                <form action="admin_restore.php" method="POST" enctype="multipart/form-data">
+                                    <div class="input-group input-group-sm">
+                                        <input type="file" name="sql_file" class="form-control" accept=".sql" required>
+                                        <button class="btn btn-warning btn-sm" type="submit"><i class="fa fa-upload me-1"></i> Restore</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     
@@ -827,8 +827,7 @@ while ($row = mysqli_fetch_assoc($auction_activity_query)) {
                                     <p class="text-muted small mb-0">Download sales, commission, & auction spreadsheets.</p>
                                 </div>
                             </div>
-                            <hr class="my-2">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto pt-2">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto pt-2 border-top border-light-subtle">
                                 <span class="text-muted small">Format: <strong>.xlsx</strong></span>
                                 <a href="admin_export.php" class="btn btn-gold btn-sm"><i class="fa fa-file-excel me-1"></i> Export Excel</a>
                             </div>

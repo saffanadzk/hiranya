@@ -40,16 +40,15 @@ include 'config.php';
         </div>
     </div>
 
-    <!-- Featured story -->
     <div class="container py-5">
         <a href="#" class="story-feature">
             <div class="story-feature-img">
-                <img src="img/artwork1.jpg" alt="Featured Exhibition">
+                <img src="assets/img/exbil1.jpg" alt="Featured Exhibition">
             </div>
             <div class="story-feature-text">
                 <span class="story-tag">EXHIBITION</span>
                 <h2>The Rise of Emerging Indonesian Artists</h2>
-                <p>An inside look at the new generation reshaping the regional art scene, on view through August 2026 at our Jakarta gallery.</p>
+                <p>An inside look at the new generation reshaping the regional art scene, on view through August 2026 at our Surakarta gallery.</p>
                 <span class="story-read-more">READ MORE <i class="bi bi-arrow-right"></i></span>
             </div>
         </a>
@@ -59,7 +58,7 @@ include 'config.php';
             <div class="col-md-6 col-lg-4">
                 <a href="#" class="story-card">
                     <div class="story-card-img">
-                        <img src="img/artwork2.jpg" alt="How to Start Collecting Art">
+                        <img src="assets/img/exbil2.jpg" alt="How to Start Collecting Art">
                         <span class="story-tag-overlay">GUIDE</span>
                     </div>
                     <div class="story-card-body">
@@ -72,7 +71,7 @@ include 'config.php';
             <div class="col-md-6 col-lg-4">
                 <a href="#" class="story-card">
                     <div class="story-card-img">
-                        <img src="img/artwork3.jpg" alt="Inside the Auction Room">
+                        <img src="assets/img/exbil3.jpg" alt="Inside the Auction Room">
                         <span class="story-tag-overlay">AUCTION HOUSE</span>
                     </div>
                     <div class="story-card-body">
@@ -85,7 +84,7 @@ include 'config.php';
             <div class="col-md-6 col-lg-4">
                 <a href="#" class="story-card">
                     <div class="story-card-img">
-                        <img src="img/artwork1.jpg" alt="The Art Market in 2026">
+                        <img src="assets/img/exbil4.jpg" alt="The Art Market in 2026">
                         <span class="story-tag-overlay">MARKET</span>
                     </div>
                     <div class="story-card-body">
@@ -98,7 +97,7 @@ include 'config.php';
             <div class="col-md-6 col-lg-4">
                 <a href="#" class="story-card">
                     <div class="story-card-img">
-                        <img src="img/artwork2.jpg" alt="Conservation Spotlight">
+                        <img src="assets/img/exbil5.jpg" alt="Conservation Spotlight">
                         <span class="story-tag-overlay">EXHIBITION</span>
                     </div>
                     <div class="story-card-body">
@@ -111,7 +110,7 @@ include 'config.php';
             <div class="col-md-6 col-lg-4">
                 <a href="#" class="story-card">
                     <div class="story-card-img">
-                        <img src="img/artwork3.jpg" alt="Meet the Curators">
+                        <img src="assets/img/exbil6.webp" alt="Meet the Curators">
                         <span class="story-tag-overlay">PEOPLE</span>
                     </div>
                     <div class="story-card-body">
@@ -124,7 +123,7 @@ include 'config.php';
             <div class="col-md-6 col-lg-4">
                 <a href="#" class="story-card">
                     <div class="story-card-img">
-                        <img src="img/artwork1.jpg" alt="Video: Behind the Scenes">
+                        <img src="assets/img/exbil7.png" alt="Video: Behind the Scenes">
                         <span class="story-tag-overlay">VIDEO</span>
                     </div>
                     <div class="story-card-body">

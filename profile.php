@@ -60,29 +60,8 @@ if ($role === 'artist') {
     <link href="assets/css/profile.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="container-fluid bg-light sticky-top p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm py-3 px-4" style="background-color: #1C2431;">
-            <a href="dashboard.php" class="navbar-brand me-5">
-                <h1 class="mb-0 text-light">Hiranya</h1>
-            </a>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                
-                <div class="d-flex align-items-center ms-auto">
-                    <form class="d-flex align-items-center me-4">
-                        <input class="form-control me-2" type="search" placeholder="Search..."
-                            style="width:180px;border:none;border-bottom:1px solid #f5f5f5;border-radius:0;box-shadow:none;background:transparent;">
-                        <button type="submit" class="btn p-0" style="background:none;border:none;">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form>
-                    <a href="profile.php" class="text-primary me-3">
-                        <i class="fa fa-user fa-lg"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </div>
+<body class="<?= $theme_class; ?>">
+    <?php include 'partials/navbar.php'; ?>
     <div class="profile-hero"></div>
     <div class="container" style="margin-top: -90px;">
         <div class="profile-card">
@@ -124,21 +103,21 @@ if ($role === 'artist') {
                     </div>
 
                     <?php if ($role === 'artist') : ?>
-                        <div class="section-label mt-4">Rekening Transfer Bank</div>
+                        <div class="section-label mt-4">Bank Account Details</div>
                         <form action="update_bank_details.php" method="POST" class="mt-2">
                             <div class="mb-3">
-                                <label class="form-label small text-muted">Nama Bank</label>
-                                <input type="text" name="bank_name" class="form-control form-control-sm" placeholder="Contoh: BCA, Mandiri" value="<?= htmlspecialchars($bank_name) ?>" required>
+                                <label class="form-label small text-muted">Bank Name</label>
+                                <input type="text" name="bank_name" class="form-control form-control-sm" placeholder="Ex: BCA, Mandiri" value="<?= htmlspecialchars($bank_name) ?>" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label small text-muted">Nomor Rekening</label>
-                                <input type="text" name="bank_account" class="form-control form-control-sm" placeholder="Nomor rekening" value="<?= htmlspecialchars($bank_account) ?>" required>
+                                <label class="form-label small text-muted">Bank Account Number</label>
+                                <input type="text" name="bank_account" class="form-control form-control-sm" placeholder="Account Number" value="<?= htmlspecialchars($bank_account) ?>" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label small text-muted">Nama Pemilik Rekening</label>
-                                <input type="text" name="bank_holder" class="form-control form-control-sm" placeholder="Nama lengkap pemilik" value="<?= htmlspecialchars($bank_holder) ?>" required>
+                                <label class="form-label small text-muted">Account Holder Name</label>
+                                <input type="text" name="bank_holder" class="form-control form-control-sm" placeholder="Account Holder" value="<?= htmlspecialchars($bank_holder) ?>" required>
                             </div>
-                            <button type="submit" class="btn btn-sm w-100" style="background-color: #ab8e5b; color: white;">Simpan Detail Bank</button>
+                            <button type="submit" class="btn btn-sm w-100" style="background-color: #e9981fff; color: white;">Save Bank Details</button>
                         </form>
                     <?php endif; ?>
                 </div>
