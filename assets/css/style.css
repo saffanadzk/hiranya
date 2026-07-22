@@ -470,8 +470,6 @@ input:focus {
     background-size: contain;
 }
 
-
-/*** Service ***/
 @media (max-width: 768px) {
     .service .service-item {
         border: none !important;
@@ -778,10 +776,8 @@ input:focus {
 }
 
 body {
-    background: #6a1f2b !important;
+    background: white !important;
 }
-
-/*** PROFILE PAGE — file terpisah, tidak menyentuh style.css yang sudah ada ***/
 
 .profile-hero {
     background-color: #1C2431;
@@ -2538,33 +2534,40 @@ body.my-artworks-page {
     border: 1px solid rgba(0, 0, 0, 0.05);
     background: #fff;
 }
+
 .checkout-card {
     border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     background: #fff;
 }
+
 .bank-details-box {
     background-color: #fdfbf7;
     border-left: 4px solid #ab8e5b;
     border-radius: 4px;
 }
+
 .notif-card {
-    border: 1px solid rgba(0,0,0,0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     background: #fff;
     border-radius: 8px;
 }
+
 .notif-item {
     padding: 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     transition: background 0.3s;
     position: relative;
 }
+
 .notif-item:hover {
     background-color: #fafbfc;
 }
+
 .notif-item:last-child {
     border-bottom: none;
 }
+
 .btn-clear-all {
     border: 1px solid #ab8e5b;
     color: #ab8e5b;
@@ -2574,10 +2577,12 @@ body.my-artworks-page {
     background: transparent;
     transition: all 0.3s;
 }
+
 .btn-clear-all:hover {
     background: #ab8e5b;
     color: #fff;
 }
+
 .delete-btn {
     color: #ccc;
     background: none;
@@ -2586,16 +2591,21 @@ body.my-artworks-page {
     transition: color 0.2s;
     cursor: pointer;
 }
+
 .delete-btn:hover {
     color: #dc3545;
 }
-body.discover-page { background: #fcfaf7 !important; }
+
+body.discover-page {
+    background: #fcfaf7 !important;
+}
 
 .sg-hero {
     background: #1C2431;
     padding: 70px 0 60px;
     text-align: center;
 }
+
 .sg-hero-eyebrow {
     font-size: 11px;
     font-weight: 700;
@@ -2604,14 +2614,16 @@ body.discover-page { background: #fcfaf7 !important; }
     display: block;
     margin-bottom: 14px;
 }
+
 .sg-hero h1 {
     font-family: 'Playfair Display', serif;
     color: #fff;
     font-size: 42px;
     margin-bottom: 14px;
 }
+
 .sg-hero p {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 16px;
     max-width: 560px;
     margin: 0 auto;
@@ -2626,27 +2638,32 @@ body.discover-page { background: #fcfaf7 !important; }
     align-items: flex-start;
     gap: 18px;
 }
+
 .sg-notice-icon {
     font-size: 24px;
     color: #ab8e5b;
     flex-shrink: 0;
     margin-top: 2px;
 }
+
 .sg-notice h5 {
     font-family: 'Playfair Display', serif;
     color: #1C2431;
     font-size: 18px;
     margin-bottom: 6px;
 }
+
 .sg-notice p {
     color: #555;
     font-size: 14px;
     margin: 0;
 }
+
 .sg-notice a {
     color: #ab8e5b;
     font-weight: 700;
 }
+
 .sg-step {
     display: flex;
     gap: 28px;
@@ -2654,7 +2671,10 @@ body.discover-page { background: #fcfaf7 !important; }
     border-bottom: 1px solid #ece7dc;
     align-items: flex-start;
 }
-.sg-step:last-child { border-bottom: none; }
+
+.sg-step:last-child {
+    border-bottom: none;
+}
 
 .sg-step-num {
     width: 52px;
@@ -2677,12 +2697,14 @@ body.discover-page { background: #fcfaf7 !important; }
     font-size: 20px;
     margin-bottom: 8px;
 }
+
 .sg-step-content p {
     color: #555;
     font-size: 14.5px;
     line-height: 1.7;
     margin-bottom: 10px;
 }
+
 .sg-step-tag {
     display: inline-block;
     font-size: 11px;
@@ -2694,6 +2716,7 @@ body.discover-page { background: #fcfaf7 !important; }
     color: #ab8e5b;
     border: 1px solid rgba(171, 142, 91, 0.3);
 }
+
 .sg-rule-card {
     background: #fff;
     border: 1px solid #ece7dc;
@@ -2701,40 +2724,47 @@ body.discover-page { background: #fcfaf7 !important; }
     padding: 26px;
     height: 100%;
 }
+
 .sg-rule-icon {
     font-size: 22px;
     color: #ab8e5b;
     margin-bottom: 12px;
 }
+
 .sg-rule-card h6 {
     font-family: 'Playfair Display', serif;
     color: #1C2431;
     font-size: 16px;
     margin-bottom: 8px;
 }
+
 .sg-rule-card p {
     color: #666;
     font-size: 13.5px;
     margin: 0;
     line-height: 1.6;
 }
+
 .sg-cta {
     background: #1C2431;
     border-radius: 12px;
     padding: 50px 40px;
     text-align: center;
 }
+
 .sg-cta h3 {
     font-family: 'Playfair Display', serif;
     color: #fff;
     font-size: 26px;
     margin-bottom: 12px;
 }
+
 .sg-cta p {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
     margin-bottom: 24px;
 }
+
 .sg-cta-btn {
     display: inline-block;
     background: #ab8e5b;
@@ -2747,28 +2777,37 @@ body.discover-page { background: #fcfaf7 !important; }
     border-radius: 3px;
     transition: background .25s;
 }
-.sg-cta-btn:hover { background: #927546; color: #fff; }
+
+.sg-cta-btn:hover {
+    background: #927546;
+    color: #fff;
+}
+
 .art-card {
-    border: 1px solid rgba(0,0,0,0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     overflow: hidden;
     background: #fff;
     transition: all 0.3s ease;
 }
+
 .art-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
+
 .art-image-wrapper {
     height: 250px;
     overflow: hidden;
     background-color: #f8f9fa;
 }
+
 .art-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .btn-buy-direct {
     background-color: #ab8e5b;
     color: #fff;
@@ -2776,6 +2815,7 @@ body.discover-page { background: #fcfaf7 !important; }
     letter-spacing: 1px;
     font-weight: 500;
 }
+
 .btn-buy-direct:hover {
     background-color: #927546;
     color: #fff;

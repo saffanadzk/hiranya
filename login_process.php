@@ -14,6 +14,14 @@ $query = mysqli_query($conn, "
 if (mysqli_num_rows($query) == 1) {
     $user = mysqli_fetch_assoc($query);
     if (password_verify($password, $user['password'])) {
+        
+        // Enforce email verification for non-admin users
+        if ($user['role_name'] !== 'admin' && (int)$user['email_verified'] === 0) {
+            $_SESSION['message'] = "Your email address is not verified. Please check your inbox for the verification link.";
+            $_SESSION['message_type'] = "danger";
+            header("Location: login.php");
+            exit();
+        }
 
         $_SESSION['user_id']  = $user['id'];
         $_SESSION['username'] = $user['username'];
@@ -26,9 +34,15 @@ if (mysqli_num_rows($query) == 1) {
         }
         exit();
     } else {
-        echo "Password Denied!";
+        $_SESSION['message'] = "Incorrect password. Please try again.";
+        $_SESSION['message_type'] = "danger";
+        header("Location: login.php");
+        exit();
     }
 } else {
-    echo "Username not found!";
+    $_SESSION['message'] = "Username not found.";
+    $_SESSION['message_type'] = "danger";
+    header("Location: login.php");
+    exit();
 }
 ?>

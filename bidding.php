@@ -128,6 +128,14 @@ if ($auction['winner_id'] > 0) {
                         <p class="text-muted small">by @<?= htmlspecialchars($artwork['artist_name']); ?></p>
                         <hr>
                         <p class="text-secondary small mb-0"><?= nl2br(htmlspecialchars($artwork['description'])); ?></p>
+                        
+                        <div class="d-flex align-items-center gap-3 mt-4 pt-3 border-top">
+                            <div id="artwork-qrcode" style="width: 80px; height: 80px;" class="border p-1 bg-white rounded"></div>
+                            <div>
+                                <h6 class="mb-1 text-dark" style="font-size: 13px; font-weight: 600;">Scan to Share</h6>
+                                <p class="text-muted mb-0" style="font-size: 11px; line-height: 1.4;">Share this artwork detail with other collectors by scanning this QR Code.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -252,6 +260,16 @@ if ($auction['winner_id'] > 0) {
         }
         updateTimers();
         setInterval(updateTimers, 1000);
+    });
+    </script>
+    <script src="assets/js/qrcode_helper.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Generate QR code for current bidding page URL
+        const protocol = window.location.protocol;
+        const host = window.location.host;
+        const currentUrl = protocol + '//' + host + '/hiranya/bidding.php?id=<?= $id; ?>';
+        generateQRCode('artwork-qrcode', currentUrl, 80, 80);
     });
     </script>
 </body>

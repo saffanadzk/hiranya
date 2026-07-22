@@ -46,7 +46,7 @@ while ($row = mysqli_fetch_assoc($notif_query)) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg-light <?= isset($theme_class) ? $theme_class : ''; ?>">
 
     <?php include 'partials/navbar.php'; ?>
 

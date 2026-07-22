@@ -54,6 +54,46 @@ $orders_sql = "
     ORDER BY orders.id DESC
 ";
 $orders_res = mysqli_query($conn, $orders_sql);
+
+// Analytics Queries
+$sales_query = mysqli_query($conn, "
+    SELECT DATE_FORMAT(created_at, '%b %Y') as month, 
+           SUM(amount) as total_sales, 
+           SUM(commission_amount) as total_commission
+    FROM orders 
+    WHERE payment_status = 'verified'
+    GROUP BY YEAR(created_at), MONTH(created_at)
+    ORDER BY YEAR(created_at), MONTH(created_at)
+");
+$sales_data = [];
+while ($row = mysqli_fetch_assoc($sales_query)) {
+    $sales_data[] = $row;
+}
+
+$category_dist_query = mysqli_query($conn, "
+    SELECT categories.name, COUNT(artworks.id) as artwork_count
+    FROM categories
+    LEFT JOIN artworks ON categories.id = artworks.category_id
+    GROUP BY categories.id
+");
+$category_dist = [];
+while ($row = mysqli_fetch_assoc($category_dist_query)) {
+    $category_dist[] = $row;
+}
+
+$auction_activity_query = mysqli_query($conn, "
+    SELECT artworks.title, COUNT(bids.id) as bid_count
+    FROM auctions
+    JOIN artworks ON auctions.artwork_id = artworks.id
+    LEFT JOIN bids ON auctions.id = bids.auction_id
+    WHERE auctions.status = 'active'
+    GROUP BY auctions.id
+    LIMIT 10
+");
+$auction_activity = [];
+while ($row = mysqli_fetch_assoc($auction_activity_query)) {
+    $auction_activity[] = $row;
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -126,6 +166,16 @@ $orders_res = mysqli_query($conn, $orders_sql);
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-pane" type="button" role="tab" aria-controls="orders-pane" aria-selected="false">
                     <i class="fa fa-receipt me-2"></i>Payment Verifications
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics-pane" type="button" role="tab" aria-controls="analytics-pane" aria-selected="false">
+                    <i class="fa fa-chart-line me-2"></i>Analytics & Reports
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="backup-tab" data-bs-toggle="tab" data-bs-target="#backup-pane" type="button" role="tab" aria-controls="backup-pane" aria-selected="false">
+                    <i class="fa fa-database me-2"></i>System Backup
                 </button>
             </li>
         </ul>
@@ -668,6 +718,124 @@ $orders_res = mysqli_query($conn, $orders_sql);
                     </table>
                 </div>
             </div>
+
+            <!-- Analytics Pane -->
+            <div class="tab-pane fade" id="analytics-pane" role="tabpanel" aria-labelledby="analytics-tab">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <h3 class="mb-0 text-dark">Analytics & Interactive Reports</h3>
+                    <a href="admin_export.php" class="btn btn-gold btn-sm"><i class="fa fa-file-excel me-1"></i> Export Complete Sales Report (.xlsx)</a>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm p-4 bg-white chart-container">
+                            <h5 class="mb-3 text-dark fw-bold">Sales & Commissions Trend</h5>
+                            <div style="height: 300px; position: relative;">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card border-0 shadow-sm p-4 bg-white chart-container">
+                            <h5 class="mb-3 text-dark fw-bold">Artwork Distribution</h5>
+                            <div style="height: 300px; position: relative;">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm p-4 bg-white chart-container">
+                            <h5 class="mb-3 text-dark fw-bold">Active Auction Bids Activity</h5>
+                            <div style="height: 250px; position: relative;">
+                                <canvas id="auctionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup Pane -->
+            <div class="tab-pane fade" id="backup-pane" role="tabpanel" aria-labelledby="backup-tab">
+                <h3 class="mb-4 text-dark">System Backup & Utilities</h3>
+                
+                <?php if (isset($_GET['restore_success'])): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fa fa-check-circle me-2"></i> <strong>Success!</strong> Database has been restored successfully from the SQL file.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['restore_error'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-triangle me-2"></i> <strong>Import Error:</strong> <?php echo htmlspecialchars($_GET['restore_error']); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
+                <div class="row g-4">
+                    <!-- Database Backup (Export) -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card border-0 shadow-sm p-4 bg-white h-100">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="bg-primary-subtle p-3 rounded-circle text-primary" style="background-color: rgba(13, 110, 253, 0.1) !important; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-database fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1 text-dark fw-bold" style="font-size: 1rem;">Database Backup</h5>
+                                    <p class="text-muted small mb-0">Export structural SQL snapshot of database tables.</p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto pt-2">
+                                <span class="text-muted small">Target DB: <strong>hiranya</strong></span>
+                                <a href="admin_backup.php" class="btn btn-navy btn-sm"><i class="fa fa-download me-1"></i> Download SQL</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database Restore (Import) -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card border-0 shadow-sm p-4 bg-white h-100">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="bg-warning-subtle p-3 rounded-circle text-warning" style="background-color: rgba(255, 193, 7, 0.15) !important; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-upload fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1 text-dark fw-bold" style="font-size: 1rem;">Import / Restore SQL</h5>
+                                    <p class="text-muted small mb-0">Upload a `.sql` file to restore database tables.</p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <form action="admin_restore.php" method="POST" enctype="multipart/form-data" class="mt-auto pt-2">
+                                <div class="input-group input-group-sm">
+                                    <input type="file" name="sql_file" class="form-control" accept=".sql" required>
+                                    <button class="btn btn-warning btn-sm" type="submit"><i class="fa fa-upload me-1"></i> Restore</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Excel Export -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card border-0 shadow-sm p-4 bg-white h-100">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="bg-success-subtle p-3 rounded-circle text-success" style="background-color: rgba(25, 135, 84, 0.1) !important; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-file-excel fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1 text-dark fw-bold" style="font-size: 1rem;">Export Excel Report</h5>
+                                    <p class="text-muted small mb-0">Download sales, commission, & auction spreadsheets.</p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-auto pt-2">
+                                <span class="text-muted small">Format: <strong>.xlsx</strong></span>
+                                <a href="admin_export.php" class="btn btn-gold btn-sm"><i class="fa fa-file-excel me-1"></i> Export Excel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
         </div>
         
@@ -681,6 +849,7 @@ $orders_res = mysqli_query($conn, $orders_sql);
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
         $(document).ready(function(){
@@ -690,6 +859,105 @@ $orders_res = mysqli_query($conn, $orders_sql);
             var activeTab = localStorage.getItem('activeTab');
             if(activeTab){
                 $('#' + activeTab).tab('show');
+            }
+
+            // Chart.js implementation
+            const salesData = <?php echo json_encode($sales_data); ?>;
+            const catData = <?php echo json_encode($category_dist); ?>;
+            const aucData = <?php echo json_encode($auction_activity); ?>;
+
+            // 1. Sales & Commission Chart
+            const ctxSales = document.getElementById('salesChart');
+            if (ctxSales) {
+                new Chart(ctxSales, {
+                    type: 'line',
+                    data: {
+                        labels: salesData.map(d => d.month),
+                        datasets: [
+                            {
+                                label: 'Total Sales (Rp)',
+                                data: salesData.map(d => d.total_sales),
+                                borderColor: '#ab8e5b',
+                                backgroundColor: 'rgba(171, 142, 91, 0.1)',
+                                fill: true,
+                                tension: 0.3
+                            },
+                            {
+                                label: 'Hiranya Commission (Rp)',
+                                data: salesData.map(d => d.total_commission),
+                                borderColor: '#1c2431',
+                                backgroundColor: 'rgba(28, 36, 49, 0.1)',
+                                fill: true,
+                                tension: 0.3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'Rp ' + value.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Category Distribution Chart
+            const ctxCat = document.getElementById('categoryChart');
+            if (ctxCat) {
+                new Chart(ctxCat, {
+                    type: 'doughnut',
+                    data: {
+                        labels: catData.map(d => d.name),
+                        datasets: [{
+                            data: catData.map(d => d.artwork_count),
+                            backgroundColor: [
+                                '#1c2431', '#ab8e5b', '#475569', '#64748B', '#94A3B8', '#CBD5E1'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // 3. Auction Bid Activity Chart
+            const ctxAuc = document.getElementById('auctionChart');
+            if (ctxAuc) {
+                new Chart(ctxAuc, {
+                    type: 'bar',
+                    data: {
+                        labels: aucData.map(d => d.title),
+                        datasets: [{
+                            label: 'Number of Bids Placed',
+                            data: aucData.map(d => d.bid_count),
+                            backgroundColor: '#ab8e5b',
+                            borderColor: '#ab8e5b',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        }
+                    }
+                });
             }
 
             $(document).on('click', '.btn-delete-swal', function(e) {

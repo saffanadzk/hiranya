@@ -31,147 +31,19 @@ include 'config.php';
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=<?= time(); ?>" rel="stylesheet">
+    <link href="assets/css/dark_mode.css" rel="stylesheet">
+    <script src="assets/js/theme_toggle.js"></script>
 </head>
 
-<body>
+<body class="<?= $theme_class; ?>">
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
 
-    <div class="container-fluid bg-light sticky-top p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm py-3 px-4" style="background-color: #1C2431;">
-            <a href="index.php" class="navbar-brand me-5">
-                <h1 class="mb-0 text-light"></i>Hiranya</h1>
-            </a>
-        
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mx-auto">
-                    <!-- 1. AUCTIONS -->
-                    <li class="nav-item dropdown dropdown-hover">
-                        <a class="nav-link dropdown-toggle" href="#">AUCTIONS</a>
-                            <div class="dropdown-menu border-0 shadow p-4" style="min-width: 700px;">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a class="dropdown-item" href="#">CURRENT AUCTIONS</a>
-                                        <a class="dropdown-item" href="#">UPCOMING AUCTIONS</a>
-                                        <a class="dropdown-item" href="#">AUCTION RESULTS</a>
-                                        <a class="dropdown-item" href="#">HOW TO BID</a>
-                                    </div>
-                                    <div class="col-6 border-start">
-                                        <h6 class="text-danger">FEATURED</h6>
-                                        <p>Featured Auction | Ending Soon | Most Viewed</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                    <!-- 2. PRIVATE SALES -->
-                    <li class="nav-item dropdown dropdown-hover">
-                        <a class="nav-link dropdown-toggle" href="#">PRIVATE SALES</a>
-                            <div class="dropdown-menu border-0 shadow p-4" style="min-width: 700px;">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <h6 class="text-danger">AVAILABLE</h6>
-                                        <a class="dropdown-item" href="#">AVAILABLE WORKS</a>
-                                        <a class="dropdown-item" href="#">FEATURED COLLECTIONS</a>
-                                    </div>
-                                    <div class="col-4">
-                                        <h6 class="text-danger">BUY/SELL</h6>
-                                        <a class="dropdown-item" href="#">BUY PRIVATELY</a>
-                                    </div>
-                                    <div class="col-4 border-start">
-                                        <h6 class="text-danger">HIGHLIGHTS</h6>
-                                        <p>Featured Works | Curator Collections | New Arrivals</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                    <li class="nav-item dropdown dropdown-hover">
-                        <a class="nav-link dropdown-toggle" href="#">ARTISTS</a>
-                            <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a class="dropdown-item" href="#">FEATURED ARTISTS</a>
-                                        <a class="dropdown-item" href="#">EMERGING ARTISTS</a>
-                                        <a class="dropdown-item" href="#">ALL ARTISTS</a>
-                                        <a class="dropdown-item" href="#">BECOME AN ARTIST</a>
-                                    </div>
-                                    <div class="col-6 border-start">
-                                        <h6 class="text-danger">HIGHLIGHTS</h6>
-                                        <p>Featured Artists | Their Latest Works</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                    <li class="nav-item dropdown dropdown-hover">
-                        <a class="nav-link dropdown-toggle" href="#">DISCOVER</a>
-                            <div class="dropdown-menu border-0 shadow p-4" style="min-width: 800px;">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <h6 class="text-danger">EXPLORE</h6>
-                                        <a class="dropdown-item" href="#">EXHIBITIONS</a>
-                                        <a class="dropdown-item" href="#">ART STORIES</a>
-                                        <a class="dropdown-item" href="#">ART MARKET</a>
-                                    </div>
-                                    <div class="col-4">
-                                        <h6 class="text-danger">RESOURCES</h6>
-                                        <a class="dropdown-item" href="#">COLLECTOR'S GUIDE</a>
-                                        <a class="dropdown-item" href="#">NEWS</a>
-                                        <a class="dropdown-item" href="#">VIDEOS</a>
-                                    </div>
-                                    <div class="col-4 border-start">
-                                        <h6 class="text-danger">LATEST STORIES</h6>
-                                        <small>The Rise of Emerging Indonesian Artists</small><br>
-                                        <small>How to Start Collecting Art</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                    <li class="nav-item dropdown dropdown-hover">
-                        <a class="nav-link dropdown-toggle" href="#">SELL WITH US</a>
-                            <div class="dropdown-menu border-0 shadow p-4" style="min-width: 600px;">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a class="dropdown-item" href="#">SUBMIT ARTWORK</a>
-                                        <a class="dropdown-item" href="#">REQUEST VALUATION</a>
-                                        <a class="dropdown-item" href="#">SELL AT AUCTION</a>
-                                        <a class="dropdown-item" href="#">SELL VIA PRIVATE SALES</a>
-                                        <a class="dropdown-item" href="#">SELLING GUIDE</a>
-                                    </div>
-                                    <div class="col-6 border-start">
-                                        <h6 class="text-danger">GUIDANCE</h6>
-                                        <p>Get an estimate | How Hiranya House works | Success stories</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <!-- KANAN NAVBAR -->
-                    <div class="d-flex align-items-center ms-auto">
-                        <form class="d-flex align-items-center me-4">
-                            <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search"
-                                style="width:180px;border:none;border-bottom:1px solid #f5f5f5;border-radius:0;box-shadow:none;background:transparent;">
-
-                            <button type="submit" class="btn p-0" style="background:none;border:none;">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
-                            
-                        
-                             <a href="login.php" class="btn btn-outline-light ms-2 px-4" 
-                                style="white-space:nowrap; text-decoration:none;">
-                                SIGN IN
-                            </a>
-                    </div>
-                </div>
-            </nav>
+    <?php include 'partials/navbar.php'; ?>
         
         <div class="container-fluid p-0 hero-header bg-light mb-5">
             <div class="container p-0">
@@ -240,6 +112,8 @@ include 'config.php';
             </div>
         </div>
     </div>    
+</div>
+</div>
 
     <div class="container-fluid service py-5">
         <div class="container">
@@ -331,8 +205,208 @@ include 'config.php';
             </div>
         </div>
     </div>
-
-        <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.1s">
+    <!-- Gallery Start -->
+    <div class="container-fluid gallery py-5">
+        <div class="container">
+            <div class="text-center wow fadeIn" data-wow-delay="0.2s">
+                <h1 class="font-dancing-script text-primary">Gallery</h1>
+                <h1 class="mb-5">Explore Our Collection</h1>
+            </div>
+            <div class="row g-0">
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
+                    <div class="gallery-item h-100">
+                        <img src="assets/img/collection-1.jpg" class="img-fluid w-100 h-100" alt="">
+                        <div class="gallery-icon">
+                            <a href="assets/img/collection-1.jpg" class="btn btn-primary btn-lg-square"
+                                data-lightbox="Collection-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 wow fadeIn" data-wow-delay="0.4s">
+                    <div class="gallery-item h-100">
+                        <img src="assets/img/collection-2.jpg" class="img-fluid w-100 h-100" alt="">
+                        <div class="gallery-icon">
+                            <a href="assets/img/collection-2.jpg" class="btn btn-primary btn-lg-square"
+                                data-lightbox="Collection-2"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 wow fadeIn" data-wow-delay="0.6s">
+                    <div class="gallery-item h-100">
+                        <img src="assets/img/collection-3.jpg" class="img-fluid w-100 h-100" alt="">
+                        <div class="gallery-icon">
+                            <a href="assets/img/collection-3.jpg" class="btn btn-primary btn-lg-square"
+                                data-lightbox="Collection-3"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 wow fadeIn" data-wow-delay="0.2s">
+                    <div class="gallery-item h-100">
+                        <img src="assets/img/collection-4.jpg" class="img-fluid w-100 h-100" alt="">
+                        <div class="gallery-icon">
+                            <a href="assets/img/collection-4.jpg" class="btn btn-primary btn-lg-square"
+                                data-lightbox="Collection-4"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 wow fadeIn" data-wow-delay="0.4s">
+                    <div class="gallery-item h-100">
+                        <img src="assets/img/collection-5.jpg" class="img-fluid w-100 h-100" alt="">
+                        <div class="gallery-icon">
+                            <a href="assets/img/collection-5.jpg" class="btn btn-primary btn-lg-square"
+                                data-lightbox="Collection-5"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.6s">
+                    <div class="gallery-item h-100">
+                        <img src="assets/img/collection-6.jpg" class="img-fluid w-100 h-100" alt="">
+                        <div class="gallery-icon">
+                            <a href="assets/img/collection-6.jpg" class="btn btn-primary btn-lg-square"
+                                data-lightbox="Collection-6"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gallery End -->
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center wow fadeIn" data-wow-delay="0.2s">
+                <h1 class="mb-5">Meet Our Experts</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.3s">
+                <div class="text-center bg-light p-4">
+                    <i class="fa fa-quote-left fa-3x mb-3"></i>
+                    <p>Accompanying every collector in discovering the piece that truly speaks to them.
+                        Over 15 years spent reading the story behind every brushstroke.</p>
+                    <img class="img-fluid mx-auto border p-1 mb-3" src="assets/img/testimonial-1.jpg" alt="">
+                    <h4 class="mb-1">Laut Wibisana</h4>
+                    <span>Classic Art Collection Companion</span>
+                </div>
+                <div class="text-center bg-light p-4">
+                    <i class="fa fa-quote-left fa-3x mb-3"></i>
+                    <p>Guiding you to understand the value and history behind every antique piece of jewelry.
+                        Because of us, every gemstone holds a story of its own.</p>
+                    <img class="img-fluid mx-auto border p-1 mb-3" src="assets/img/testimonial-2.jpg" alt="">
+                    <h4 class="mb-1">Kirana</h4>
+                    <span>Antique Jewelry Specialist</span>
+                </div>
+                <div class="text-center bg-light p-4">
+                    <i class="fa fa-quote-left fa-3x mb-3"></i>
+                    <p>Helping you preserve the legacy of time, one second at a time. 
+                        Every mechanism has a soul, and we're here to keep it alive. 
+                    </p>
+                    <img class="img-fluid mx-auto border p-1 mb-3" src="assets/img/testimonial-3.jpg" alt="">
+                    <h4 class="mb-1">Acil</h4>
+                    <span>Horology Expert</span>
+                </div>
+                <div class="text-center bg-light p-4">
+                    <i class="fa fa-quote-left fa-3x mb-3"></i>
+                    <p>Connection collectors with history worth preserving. To us, a collection isn't just an 
+                        object - it's a memory kept aalive.
+                    </p>
+                    <img class="img-fluid mx-auto border p-1 mb-3" src="assets/img/testimonial-4.jpg" alt="">
+                    <h4 class="mb-1">Eko Isna</h4>
+                    <span>Art History Enthusiast</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+     <!-- Blog Start -->
+    <div class="container-fluid blog p-0 mt-5">
+        <div class="row g-0">
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="h-100 d-flex flex-column justify-content-center bg-primary py-5 px-4">
+                    <p 
+                        class="fa fa-folder-open text-dark me-1"></i>Collector's Guide</p>
+                    <h3 class="mb-3">How to Keep Your Antique Jewelry Shinning</h3>
+                    <p>Antique jewelry holds priceless historical value. Learn how to clean and store 
+                        your collection so its beauty and value stay preserves for years to come.</p>
+                    <a class="btn btn-dark align-self-start text-uppercase" href="">Read More <i
+                            class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="h-100">
+                    <img class="img-fluid w-100 h-100" src="assets/img/artikel-1.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                <div class="h-100 d-flex flex-column justify-content-center bg-primary py-5 px-4">
+                    <p class="mb-2"><i class="fa fa-calendar-alt text-dark me-1"></i>Jan 01, 2045 | <i
+                            class="fa fa-folder-open text-dark me-1"></i>Auction Trends</p>
+                    <h3 class="mb-3">The Most Sought-After Artwork of 2026</h3>
+                    <p>From expressionist painting to contemporary installations, discover the types of
+                        artwork collectors and investors are chasing most this year.</p>
+                    <a class="btn btn-dark align-self-start text-uppercase" href="">Read More <i
+                            class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                <div class="h-100">
+                    <img class="img-fluid w-100 h-100" src="assets/img/artikel-2.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+    <!-- Footer Start -->
+    <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6 pe-lg-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="display-5 text-primary mb-0"><i class="bi bi-scissors"></i>Salone</h1>
+                    </a>
+                    <p>Aliquyam sed elitr elitr erat sed diam ipsum eirmod eos lorem nonumy. Tempor sea ipsum diam sed
+                        clita dolore eos dolores magna erat dolore sed stet justo et dolor.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-2"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope me-2"></i>info@example.com</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-sm-square btn-primary me-3" href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <div class="row g-4">
+                        <div class="col-sm-6">
+                            <h5 class="text-primary mb-4">Quick Links</h5>
+                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Contact Us</a>
+                            <a class="btn btn-link" href="">Our Services</a>
+                            <a class="btn btn-link" href="">Terms & Condition</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5 class="text-primary mb-4">Popular Links</h5>
+                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Contact Us</a>
+                            <a class="btn btn-link" href="">Our Services</a>
+                            <a class="btn btn-link" href="">Terms & Condition</a>
+                        </div>
+                        <div class="col-sm-12">
+                            <h5 class="text-primary mb-4">Newsletter</h5>
+                            <div class="position-relative w-100 mb-2">
+                                <input class="form-control bg-secondary border-0 w-100 ps-4 pe-5" type="text"
+                                    placeholder="Enter Your Email" style="height: 60px;">
+                                <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-2 me-2"><i
+                                        class="fa fa-paper-plane text-primary fs-4"></i></button>
+                            </div>
+                            <p class="mb-0">Diam sed sed dolor stet amet eirmod</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+      <div class="container-fluid footer position-relative bg-dark text-white-50 py-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-12 text-center">

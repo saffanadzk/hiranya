@@ -306,6 +306,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </tr>
                                         </table>
                                     </div>
+                                    <div class="bank-details-box p-3 mb-4 text-center">
+                                        <h6 class="mb-2 text-dark fw-bold text-start"><i class="fa fa-qrcode me-2 text-warning"></i>3. Instant QR Payment Reference</h6>
+                                        <p class="text-muted small text-start">Scan this QR Code using your banking app to verify order details and total transfer amount instantly.</p>
+                                        <div id="checkout-qrcode" class="d-inline-block border p-2 bg-white rounded my-2"></div>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                             <form method="POST" enctype="multipart/form-data" class="mt-3">
@@ -345,6 +350,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
         }
+    });
+    </script>
+    <script src="assets/js/qrcode_helper.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Generate QR code with transfer details
+        const orderId = <?= $order_id; ?>;
+        const amount = <?= $amount; ?>;
+        const qrText = `HIRANYA_ORDER_${orderId}_AMT_${amount}`;
+        generateQRCode('checkout-qrcode', qrText, 140, 140);
     });
     </script>
 </body>

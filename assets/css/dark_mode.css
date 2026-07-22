@@ -1,0 +1,212 @@
+/* Premium Dark Mode Overrides for Hiranya Art House */
+
+/* Base Body & Root Dark Mode Styling */
+.dark-mode, 
+.dark-mode body {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+}
+
+/* Background Overrides for Cards, Containers, Modals and Utility Classes */
+.dark-mode .bg-white,
+.dark-mode .bg-light,
+.dark-mode .bg-body,
+.dark-mode .card,
+.dark-mode .info-card,
+.dark-mode .secure-payment-portal,
+.dark-mode .login-container,
+.dark-mode .notif-card,
+.dark-mode .modal-content,
+.dark-mode .tab-content,
+.dark-mode .accordion-item,
+.dark-mode .list-group-item,
+.dark-mode .shadow-sm,
+.dark-mode .shadow {
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
+}
+
+/* Headings & General Elements in Dark Mode */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode .h1,
+.dark-mode .h2,
+.dark-mode .h3,
+.dark-mode .h4,
+.dark-mode .h5,
+.dark-mode .h6,
+.dark-mode label,
+.dark-mode li,
+.dark-mode th,
+.dark-mode td {
+    color: #F1F5F9 !important;
+}
+
+/* Transform dark/black text to crisp readable light text in dark mode */
+.dark-mode .text-dark,
+.dark-mode .text-body,
+.dark-mode .text-black,
+.dark-mode [style*="color: black"],
+.dark-mode [style*="color:#000"],
+.dark-mode [style*="color: #000"],
+.dark-mode [style*="color: #1C2431"],
+.dark-mode [style*="color:#1C2431"],
+.dark-mode [style*="color: #1c2431"],
+.dark-mode [style*="color:#1c2431"] {
+    color: #F8FAFC !important;
+}
+
+/* Preserve original white & light text elements so they NEVER turn dark */
+.dark-mode .text-white,
+.dark-mode .text-light,
+.dark-mode .text-white-50,
+.dark-mode .text-light-50,
+.dark-mode .navbar-brand h1,
+.dark-mode [class*="text-white"],
+.dark-mode [class*="text-light"],
+.dark-mode [style*="color: white"],
+.dark-mode [style*="color:#fff"],
+.dark-mode [style*="color: #fff"],
+.dark-mode [style*="color: #FFFFFF"],
+.dark-mode [style*="color:#FFFFFF"] {
+    color: #FFFFFF !important;
+}
+
+/* Paragraphs, Secondary & Muted Text Fix */
+.dark-mode p,
+.dark-mode small,
+.dark-mode .text-secondary,
+.dark-mode .text-muted,
+.dark-mode .text-black-50 {
+    color: #CBD5E1 !important;
+}
+
+/* Form Controls & Inputs */
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea,
+.dark-mode .form-control,
+.dark-mode .form-select {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #475569 !important;
+}
+
+.dark-mode input:focus,
+.dark-mode select:focus,
+.dark-mode textarea:focus,
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus {
+    border-color: #AB8E5B !important;
+    background-color: #0F172A !important;
+    color: #FFFFFF !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+    color: #64748B !important;
+}
+
+/* Tables Styling */
+.dark-mode table,
+.dark-mode .table,
+.dark-mode .table-light,
+.dark-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
+}
+
+.dark-mode thead th {
+    background-color: #0F172A !important;
+    color: #E2E8F0 !important;
+    border-bottom: 2px solid #334155 !important;
+}
+
+/* Dropdowns & Navigation */
+.dark-mode .dropdown-menu {
+    background-color: #1E293B !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+}
+
+.dark-mode .dropdown-item {
+    color: #E2E8F0 !important;
+}
+
+.dark-mode .dropdown-item:hover,
+.dark-mode .dropdown-item:focus {
+    background-color: #334155 !important;
+    color: #FFFFFF !important;
+}
+
+/* Modals */
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+    border-color: #334155 !important;
+}
+
+/* Navigation Tabs */
+.dark-mode .nav-tabs .nav-link {
+    color: #94A3B8 !important;
+}
+
+.dark-mode .nav-tabs .nav-link.active {
+    background-color: #1E293B !important;
+    color: #AB8E5B !important;
+    border-color: #334155 #334155 #1E293B !important;
+}
+
+/* Alerts & Badges */
+.dark-mode .alert-info,
+.dark-mode .alert-warning,
+.dark-mode .alert-light {
+    background-color: #1E293B !important;
+    border-color: #AB8E5B !important;
+    color: #F8FAFC !important;
+}
+
+.dark-mode .badge-status {
+    border: 1px solid currentColor;
+}
+
+.dark-mode .bank-details-box {
+    background-color: #0F172A !important;
+    border: 1px solid #334155 !important;
+}
+
+.dark-mode hr {
+    border-color: #334155 !important;
+    opacity: 0.8;
+}
+
+.dark-mode .notif-item {
+    border-bottom: 1px solid #334155 !important;
+}
+
+/* Spinners & Charts */
+.dark-mode #spinner {
+    background-color: #0F172A !important;
+}
+
+.dark-mode .chart-container {
+    background-color: #1E293B !important;
+    border: 1px solid #334155 !important;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Theme Toggle Button Styling */
+#theme-toggle-icon {
+    color: #FBBF24 !important;
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle-btn:hover #theme-toggle-icon {
+    transform: scale(1.15) rotate(15deg);
+}

@@ -129,7 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $upd_query = "UPDATE artworks SET is_purchased_by_hiranya = 1, hiranya_price = ?, price = ? WHERE id = ?";
                 $stmt = mysqli_prepare($conn, $upd_query);
-                mysqli_stmt_bind_param($stmt, "ddi", $hiranya_price, $hiranya_price, $artwork_id);
+                $stmt_params = [$hiranya_price, $hiranya_price, $artwork_id];
+                mysqli_stmt_bind_param($stmt, "ddi", ...$stmt_params);
                 mysqli_stmt_execute($stmt);
 
                 $message = "Hiranya membeli karya Anda yang berjudul '$title' seharga Rp " . number_format($artist_price, 0, ',', '.') . "! Karya Anda kini masuk ke listing Hiranya dengan harga jual Rp " . number_format($hiranya_price, 0, ',', '.') . ".";
@@ -139,6 +140,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_stmt_execute($notif_stmt);
 
                 mysqli_commit($conn);
+
+                // Send email notification to artist
+                $artist_email_query = mysqli_query($conn, "SELECT email, username FROM users WHERE id = $artist_id");
+                if (mysqli_num_rows($artist_email_query) > 0) {
+                    $artist_data = mysqli_fetch_assoc($artist_email_query);
+                    require_once 'mail_helper.php';
+                    $subject = "Your Artwork Purchased by Hiranya Art House!";
+                    $body = "
+                        <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                            <h2 style='color: #ab8e5b; text-align: center;'>Artwork Purchased!</h2>
+                            <p>Dear @{$artist_data['username']},</p>
+                            <p>We are excited to inform you that <strong>Hiranya Art House</strong> has purchased your artwork <strong>'{$title}'</strong> for <strong>Rp " . number_format($artist_price, 0, ',', '.') . "</strong>.</p>
+                            <p>This artwork is now owned by Hiranya and will be featured in our collections. The funds will be processed to your registered bank account shortly.</p>
+                            <br>
+                            <p>Best regards,<br>Hiranya Art House Team</p>
+                        </div>
+                    ";
+                    send_email($artist_data['email'], $subject, $body);
+                }
+
                 $_SESSION['message'] = "Artwork successfully bought by Hiranya!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
@@ -160,6 +181,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_stmt_bind_param($stmt, "si", $status, $order_id);
                 mysqli_stmt_execute($stmt);
 
+                // Fetch details for email notification
+                $order_info_query = mysqli_query($conn, "
+                    SELECT orders.amount, artworks.title AS art_title, users.email, users.username
+                    FROM orders
+                    JOIN artworks ON orders.artwork_id = artworks.id
+                    JOIN users ON orders.buyer_id = users.id
+                    WHERE orders.id = $order_id
+                ");
+                $order_info = mysqli_fetch_assoc($order_info_query);
+
                 if ($status === 'verified') {
                     $order_query = mysqli_query($conn, "SELECT artwork_id FROM orders WHERE id = $order_id");
                     $order_data = mysqli_fetch_assoc($order_query);
@@ -171,9 +202,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     mysqli_stmt_execute($art_stmt);
 
                     mysqli_query($conn, "UPDATE auctions SET status = 'ended' WHERE artwork_id = $artwork_id");
+
+                    // In-app Notification for Buyer
+                    $buyer_id_query = mysqli_query($conn, "SELECT buyer_id FROM orders WHERE id = $order_id");
+                    $buyer_row = mysqli_fetch_assoc($buyer_id_query);
+                    $buyer_id = $buyer_row['buyer_id'];
+                    $msg_buyer = "Pembayaran Anda untuk karya '" . $order_info['art_title'] . "' telah diverifikasi oleh admin. Terima kasih atas pembelian Anda!";
+                    mysqli_query($conn, "INSERT INTO notifications (user_id, message) VALUES ($buyer_id, '$msg_buyer')");
+                } else {
+                    // Rejected
+                    $buyer_id_query = mysqli_query($conn, "SELECT buyer_id FROM orders WHERE id = $order_id");
+                    $buyer_row = mysqli_fetch_assoc($buyer_id_query);
+                    $buyer_id = $buyer_row['buyer_id'];
+                    $msg_buyer = "Pembayaran Anda untuk karya '" . $order_info['art_title'] . "' ditolak oleh admin. Silakan unggah bukti transfer yang valid.";
+                    mysqli_query($conn, "INSERT INTO notifications (user_id, message) VALUES ($buyer_id, '$msg_buyer')");
                 }
 
                 mysqli_commit($conn);
+
+                // Send email notification to buyer
+                if ($order_info) {
+                    require_once 'mail_helper.php';
+                    $subject = $status === 'verified' ? "Payment Verified! - Hiranya Art House" : "Payment Rejected - Hiranya Art House";
+                    
+                    if ($status === 'verified') {
+                        $body = "
+                            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                                <h2 style='color: #28a745; text-align: center;'>Payment Verified Successfully!</h2>
+                                <p>Dear @{$order_info['username']},</p>
+                                <p>We are pleased to inform you that your payment of <strong>Rp " . number_format($order_info['amount'], 0, ',', '.') . "</strong> for the artwork <strong>'{$order_info['art_title']}'</strong> has been verified by our administrator.</p>
+                                <p>The artwork is now officially yours. You can view your purchase details in your profile dashboard.</p>
+                                <br>
+                                <p>Thank you for bidding/purchasing with Hiranya!<br>Hiranya Art House Team</p>
+                            </div>
+                        ";
+                    } else {
+                        $body = "
+                            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                                <h2 style='color: #dc3545; text-align: center;'>Payment Proof Rejected</h2>
+                                <p>Dear @{$order_info['username']},</p>
+                                <p>Unfortunately, the proof of transfer you uploaded for the artwork <strong>'{$order_info['art_title']}'</strong> has been rejected by our administrator.</p>
+                                <p>Please double-check your transfer reference and upload a clear receipt of payment by visiting the order details/checkout page again.</p>
+                                <br>
+                                <p>Best regards,<br>Hiranya Art House Team</p>
+                            </div>
+                        ";
+                    }
+                    send_email($order_info['email'], $subject, $body);
+                }
+
                 $_SESSION['message'] = "Payment successfully verified (" . ucfirst($status) . ")!";
                 $_SESSION['message_type'] = "success";
             } catch (Exception $e) {
